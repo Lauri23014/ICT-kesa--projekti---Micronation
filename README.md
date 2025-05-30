@@ -1,1 +1,1 @@
-# ICT-kes-projekti---Micronation
+# ICT-kesä-projekti---Micronation
