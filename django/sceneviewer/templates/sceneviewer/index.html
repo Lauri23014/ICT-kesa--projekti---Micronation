@@ -1,9 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>sceneviewer</title> <!--change title-->
+		<!-- for optimal display on high DPI devices -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
 	</head>
 	<body>
-		<p>hello world</p>
+		<!-- the viewer container must have a defined size -->
+		<div id="viewer" style="width: 100vw; height: 100vh;"></div>
 	</body>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+				"@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.module.js"
+			}
+		}
+	</script>
+
+	<script type="module">
+		import { Viewer } from '@photo-sphere-viewer/core';
+
+		const viewer = new Viewer({
+			container: document.querySelector('#viewer'),
+			panorama: '{% static "sceneviewer/test-image.jpg" %}',
+		});
+	</script>
 </html>
