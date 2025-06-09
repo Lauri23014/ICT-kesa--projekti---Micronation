@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+@property --main-text-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #dddddd;
+}
+
+@property --link-text-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #6681da;
+}
+
+@property --linkvisited-text-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #a266da;
+}
+
+@property --sub-text-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #c0c0c0;
+}
+
+@property --highlight-text-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #ffffff;
+}
+
+@property --main-bg-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #0f0f0f;
+}
+
+@property --sub-bg-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #000000;
+}
+
+@property --highlight-bg-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #dddddd4d;
+}
+
+@property --overlay-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #c0c0c069;
+}
+
+body {
+	background-color: var(--sub-bg-color);
+	color: var(--main-text-color);
+	font-family: Lora, Verdana;
+}
+
+#navbar {
+	display: flex;
+	flex-direction: row;
+	width: calc(90% + 2em);
+	height: 8em;
+	margin: auto;
+
+	#homepagebanner {
+		text-align: center;
+		margin: auto;
+		padding: 1.5rem 0;
+		height: 2rem;
+		width: 20%;
+		background-color: var(--main-bg-color);
+		border-radius: 1em;
+		border: var(--highlight-text-color) 2px dashed;
+
+		a {
+			margin: 0;
+		}
+	}
+}
+
+#navbarpad {
+	flex: 30%;
+}
+
+#navlinks {
+	display: block;
+	flex: 50%;
+	
+	ul {
+		display: flex;
+		flex-direction: row;
+		list-style: none;
+		height: 8em;
+		margin: auto;
+	}
+		
+	li {
+		width: 22.5%;
+		margin: 1.5em 0 1.5em 1.5em;
+		height: 5rem;
+		background-color: var(--main-bg-color);
+		border-radius: 1em;
+		border: var(--highlight-text-color) 2px dashed;
+		
+		a {
+			display: block;
+			text-align: center;
+			line-height: 5rem; /* height of parent container */ 
+			margin: auto;
+		}
+	}
+}
+
+#content {
+	width: 90%;
+	margin: auto;
+	overflow: hidden;
+	padding: 1em;
+	background-color: var(--sub-bg-color);
+	border-radius: 1em;
+	border: var(--highlight-text-color) 2px dashed;
+}
+
+#enddiv {
+	display: flex;
+	width: 100%;
+	height: 8em;
+}
+
+#copyrightnotice {
+	margin: auto;
+	text-align: center;
+}
+
+/* text */
+
+h1, h2, h3, p {
+	color: var(--main-text-color);
+}
+
+a {
+	color: var(--link-text-color);
+}
+
+a:visited {
+	color: var(--linkvisited-text-color);
+}

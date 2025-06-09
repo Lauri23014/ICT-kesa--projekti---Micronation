@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    {% load static %}
-    <link rel="stylesheet" href='{% static "style.css" %}'/>
-    <title>{% block title %}My amazing site{% endblock %}</title>
-	{% block head %}{% endblock %}
-</head>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href='{% static "style.css" %}'/>
+        <title>{% block title %}My amazing site{% endblock %}</title>
+        {% block head %}{% endblock %}
+    </head>
 
-<body>
-    <div id="navbar">
-		<h1>hello world!</h1>
-    </div>
+    <body>
+        <nav id="navbar">
+            <div id="navlogo"></div>
+            <h1 id="homepagebanner"><a href="/">link to home</a></h1>
+            <div id="navbarpad"></div>
+            <div id="navlinks">
+                <ul>
+                    <li><a href="/view">view</a></li>
+                    <li><a>link2</a></li>
+                    <li><a>link3</a></li>
+                    <li><a>link4</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
 
-	<div>
-		<p>end of site</p>
-	</div>
-</body>
+        <div id="enddiv">
+            <p id="copyrightnotice">© micronation ryhmä en tiiä mitä pitäis tarkemmin laittaa 2025</p>
+        </div>
+    </body>
 </html>
