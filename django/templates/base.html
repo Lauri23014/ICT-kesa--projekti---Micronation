@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>{% block title %}My amazing site{% endblock %}</title>
+	{% block head %}{% endblock %}
+</head>
+
+<body>
+    <div id="navbar">
+		<h1>hello world!</h1>
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+	<div>
+		<p>end of site</p>
+	</div>
+</body>
+</html>

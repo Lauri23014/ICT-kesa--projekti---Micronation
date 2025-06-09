@@ -1,34 +1,33 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-	<head>
-		<!-- for optimal display on high DPI devices -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="stylesheet" href='{% static "sceneviewer/style.css" %}'/>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
-		<!--Photo Sphere Viewer imports-->
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
-					"@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.module.js"
-				}
+{% block head %}
+	<!-- for optimal display on high DPI devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" href='{% static "sceneviewer/style.css" %}'/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
+{% endblock %}
+{% block content %}
+	<!-- the viewer container must have a defined size -->
+	<div id="viewer"></div>
+	<!--Photo Sphere Viewer imports-->
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+				"@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.module.js"
 			}
-		</script>
-		<!--Photo Sphere Viewer main script, creates viewer as a child of #viewer-->
-		<script type="module">
-			import { Viewer } from '@photo-sphere-viewer/core';
+		}
+	</script>
+	<!--Photo Sphere Viewer main script, creates viewer as a child of #viewer-->
+	<script type="module">
+		import { Viewer } from '@photo-sphere-viewer/core';
 
-			const viewer = new Viewer({
-				container: document.querySelector('#viewer'),
-				panorama: '{% static "sceneviewer/test-image.jpg" %}',
-				defaultZoomLvl: 0,
-			});
-		</script>
-	</head>
-	<body>
-		<!-- the viewer container must have a defined size -->
-		<div id="viewer"></div>
-	</body>
-</html>
+		const viewer = new Viewer({
+			container: document.querySelector('#viewer'),
+			panorama: '{% static "sceneviewer/test-image.jpg" %}',
+			defaultZoomLvl: 0,
+		});
+	</script>
+{% endblock %}
