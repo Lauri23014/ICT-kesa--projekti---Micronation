@@ -5,4 +5,4 @@ from sceneviewer.models import Scene
 class SceneForm(ModelForm):
 	class Meta:
 		model = Scene
-		fields = ["text_file", "image_file"]
+		fields = ["title", "description", "image_file"]

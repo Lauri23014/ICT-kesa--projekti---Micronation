@@ -1,10 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 def user_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/scenes/<filename>
-    return "scenes/{0}".format(filename)
+	# file will be uploaded to MEDIA_ROOT/scenes/<filename>
+	return "scenes/{0}".format(filename)
 
 class Scene(models.Model):
-	text_file = models.FileField(upload_to=user_directory_path)
+	title = models.CharField(max_length=255)
+	description = models.TextField()
+	upload_datetime = models.DateTimeField(auto_now_add=True)
+	update_datetime = models.DateTimeField(auto_now=True)
 	image_file = models.ImageField(upload_to=user_directory_path)
+	def __str__(self):
+		return self.title
