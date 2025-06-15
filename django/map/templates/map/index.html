@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Front Page{% endblock %}
+{% block head %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% endblock %}
+
+{% block content %}
+    <h1>Welcome to *name here*</h1>
+    <p>Here's some introductory text. And here's some more.</p>
+    <h2>Map</h2>
+    <div>
+        <img src="{% static "map.png" %}" , alt="map of Riihimäki" width="100%" usemap="#testmap">
+        <map name="testmap">
+            <area shape="circle" coords="600,600,500" alt="scene" href="/view">
+        </map>
+    </div>
+{% endblock %}
