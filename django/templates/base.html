@@ -16,8 +16,13 @@
                 <ul>
                     <li><a href="/view" aria-label="views">view</a></li>
                     <li><a href="/users/register" aria-label="User Registration">registeration</a></li>
-                    <li><a>link3</a></li>
-                    <li><a>link4</a></li>
+                    <li><a href="/users/login" aria-label="User Login">Login</a></li>
+                    <li>
+                        <form action="/users/logout/" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </nav>
