@@ -14,15 +14,36 @@
             <div id="navbarpad"></div>
             <div id="navlinks">
                 <ul>
-                    <li><a href="/view">view</a></li>
-                    <li><a>link2</a></li>
-                    <li><a>link3</a></li>
-                    <li><a>link4</a></li>
+                    <li><a href="/view" aria-label="views">view</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li>
+                            <form action="/users/logout/" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
+                            </form>
+                        </li>
+                    {%else%}
+                        <li><a href="/users/register" aria-label="User Registration">registeration</a></li>
+                        <li><a href="/users/login" aria-label="User Login">Login</a></li>
+                    {%endif%}
                 </ul>
             </div>
         </nav>
 
         <div id="content">
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        <img src="{% static 'users/images/welcomecat-test.jpg' %}" alt="cat" class="cat-icon"/>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
             {% block content %}{% endblock %}
         </div>
 
