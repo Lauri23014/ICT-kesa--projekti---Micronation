@@ -1,8 +1,11 @@
 from django.db import models
+from django.contrib import auth
 from django.contrib.auth.models import User
 
+#TODO: retain/archive post/comment content on deletion?
+
 def user_directory_path(instance, filename):
-	# file will be uploaded to MEDIA_ROOT/posts/username/<filename>
+	#file will be uploaded to MEDIA_ROOT/posts/username/<filename>
 	return "posts/{0}/{1}".format(instance.user.username, filename)
 
 class Post(models.Model):
@@ -12,6 +15,7 @@ class Post(models.Model):
 	upload_datetime = models.DateTimeField(auto_now_add=True)
 	update_datetime = models.DateTimeField(auto_now=True)
 	image_file = models.ImageField(blank=True, null=True, upload_to=user_directory_path) #maybe add django-cleanup to project to clean unused user files?
+	active = models.BooleanField(default=False) #only active posts should be visible on site, posts default to inactive and are either automatically approved or checked by admin
 	def __str__(self):
 		return self.user.username+": "+self.title
 	
@@ -21,5 +25,6 @@ class Comment(models.Model):
 	text_content = models.TextField()
 	upload_datetime = models.DateTimeField(auto_now_add=True)
 	update_datetime = models.DateTimeField(auto_now=True)
+	active = models.BooleanField(default=False) #only active posts should be visible on site, posts default to inactive and are either automatically approved or checked by admin
 	def __str__(self):
 		return self.user.username+": "+self.text_content+" ("+self.post.__str__()+")"
