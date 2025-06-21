@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import Post, Comment
-from django.contrib.auth.models import User
 
-# Register your models here.
+#TODO: create custom user model extending AbstractUser
+#TODO: add GetPosts(User) and GetComments(User) methods to User model
 
 #admin.site.register(Post)
 @admin.register(Post)
