@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "users",
-    "authentication",
+	'django_cleanup.apps.CleanupConfig',
+    'users',
+    'authentication',
 	'sceneviewer',
 	'userposts',
 ]
