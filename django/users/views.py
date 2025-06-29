@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
@@ -34,3 +35,16 @@ def logout_view(request):
     if request.method == "POST":
         logout(request)
         return redirect("index") #should be later changed to another page
+    
+@login_required    
+def edit_view(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = UserChangeForm(instance=request.user) #Editt the currently logged-in user
+    return render(request, 'users/edit_user.html', {'form': form})
+
+

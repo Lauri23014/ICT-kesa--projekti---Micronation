@@ -23,9 +23,13 @@
                                 <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
                             </form>
                         </li>
+                         <li>
+                            <a href="/users/edit/" class="logout-button" aria-label="Edit Profile">Edit Profile</a>
+                         </li>
                     {%else%}
                         <li><a href="/users/register" aria-label="User Registration">registeration</a></li>
                         <li><a href="/users/login" aria-label="User Login">Login</a></li>
+                        
                     {%endif%}
                 </ul>
             </div>
