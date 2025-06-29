@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from userposts.models import Post
+
 # Create your views here.
 
 
@@ -13,5 +15,20 @@ from django.shortcuts import render
 # post			replying to post-mini2
 # (post-mini3) 	reply to post
 def post(request, username, post):
-	return HttpResponse(username+" - "+post)
-	#return render(request, "userposts/post.html")
+	if Post.objects.get(id=post).user.username == username:
+		thread = []
+		p = Post.objects.get(id=post)
+		while p.replying_to is not None:
+			np = Post.objects.get(id=p)
+			thread.insert(0, np)
+			p = np.replying_to
+		context = {
+			"username" : username,
+			"post" : Post.objects.get(id=post),
+			"replies" : Post.objects.filter(replying_to=post),
+			"thread" : thread
+		}
+		return render(request, "userposts/post.html", context=context)
+	else:
+		# TODO: 404 redirect
+		return HttpResponse("teehee")
