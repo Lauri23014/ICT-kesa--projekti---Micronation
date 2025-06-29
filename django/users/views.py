@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
+from .bootstrap_forms import EditProfileForm
 from django.contrib import messages
 
 
@@ -39,12 +40,12 @@ def logout_view(request):
 @login_required    
 def edit_view(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        form = EditProfileForm(request.POST, instance=request.user) #changing from django's default form to EditProfileForm
         if form.is_valid():
             form.save()
             return redirect('index')
     else:
-        form = UserChangeForm(instance=request.user) #Editt the currently logged-in user
+        form = EditProfileForm(instance=request.user) #Editt the currently logged-in user
     return render(request, 'users/edit_user.html', {'form': form})
 
 
