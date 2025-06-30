@@ -139,7 +139,7 @@ body {
 
 /* post stylings */
 
-.thread {
+.mini-post-indent {
 	border-left: 2px solid var(--sub-text-color);
 	margin-left: 0.5em;
 	padding-left: 1em;
@@ -153,6 +153,22 @@ body {
 .post-block-mini {
 	margin-left: calc(0.5em + 2px);
 	padding-left: 1em;
+	max-width: 25em;
+
+	.post-content {
+		cursor: pointer;
+	}
+}
+
+.post-block {
+	max-width: calc(26.5em + 2px);
+}
+
+.post-content {
+	img {
+		width: 25em;
+		border-radius: 1em;
+	}
 }
 
 .profile-mini {
@@ -160,6 +176,7 @@ body {
 	flex-direction: row;
 	height: 3em;
 	line-height: 3em;
+	cursor: pointer;
 	h3 {
 		margin: 0;
 		padding-left: 0.25em;

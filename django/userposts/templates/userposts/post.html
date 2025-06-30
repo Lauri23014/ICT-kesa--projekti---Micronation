@@ -3,7 +3,7 @@
 {% block content %}
 	{% comment %} TODO: make dynamic html for post pages {% endcomment %}
 	{% if thread %}
-	<div class="thread">
+	<div class="mini-post-indent">
 		{% for reply in thread %}	{% comment %}thread before post {% endcomment %}
 			{% include "userposts/post_block_mini.html" with post=reply %}
 		{% endfor %}
@@ -16,6 +16,8 @@
 
 	{% comment %} comments replying to post {% endcomment %}
 	{% for reply in replies %}	{% comment %} thread before post {% endcomment %}
-		{% include "userposts/post_block_mini.html" with post=reply %}
+		<div class="mini-post-indent">
+			{% include "userposts/post_block_mini.html" with post=reply %}
+		</div>
 	{% endfor %}
 {% endblock content %}
