@@ -155,6 +155,24 @@ body {
 	padding-left: 1em;
 }
 
+.profile-mini {
+	display: flex;
+	flex-direction: row;
+	height: 3em;
+	line-height: 3em;
+	h3 {
+		margin: 0;
+		padding-left: 0.25em;
+	}
+}
+
+.profile-picture {
+	border-radius: 50%;
+	margin: 0.25em;
+	width: 2.5em;
+	height: 2.5em;
+}
+
 /* text */
 
 h1, h2, h3, p {
