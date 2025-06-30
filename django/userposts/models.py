@@ -2,13 +2,13 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-#TODO: retain/archive post/comment content on deletion?
+# TODO: retain/archive post/comment content on deletion?
 
-#TODO: create custom user model extending AbstractUser?
-#TODO: add GetPosts(User) and GetComments(User) methods to User model?
+# TODO: add likes(?)
+# TODO: fields for storing amount of comments, likes(?)
 
 def user_directory_path(instance, filename):
-	#file will be uploaded to MEDIA_ROOT/posts/username/<filename>
+	# file will be uploaded to MEDIA_ROOT/posts/username/<filename>
 	return "posts/{0}/{1}".format(instance.user.username, filename)
 
 def image_attached(self):

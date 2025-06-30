@@ -137,6 +137,24 @@ body {
 	text-align: center;
 }
 
+/* post stylings */
+
+.thread {
+	border-left: 2px solid var(--sub-text-color);
+	margin-left: 0.5em;
+	padding-left: 1em;
+
+	.post-block-mini {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.post-block-mini {
+	margin-left: calc(0.5em + 2px);
+	padding-left: 1em;
+}
+
 /* text */
 
 h1, h2, h3, p {
@@ -150,5 +168,3 @@ a {
 a:visited {
 	color: var(--linkvisited-text-color);
 }
-
-

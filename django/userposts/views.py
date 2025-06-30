@@ -19,9 +19,9 @@ def post(request, username, post):
 		thread = []
 		p = Post.objects.get(id=post)
 		while p.replying_to is not None:
-			np = Post.objects.get(id=p)
+			np = Post.objects.get(id=p.replying_to.id)
 			thread.insert(0, np)
-			p = np.replying_to
+			p = np
 		context = {
 			"username" : username,
 			"post" : Post.objects.get(id=post),
