@@ -24,9 +24,7 @@ urlpatterns = [
 	path("view/", include("sceneviewer.urls")),
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
-    
-    
-   
+    path("", include("userposts.urls"))
 ]
 
 # Serves media files if in debug mode
