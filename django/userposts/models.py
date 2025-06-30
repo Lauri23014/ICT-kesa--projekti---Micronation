@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # TODO: retain/archive post/comment content on deletion?
 
 # TODO: add likes(?)
-# TODO: fields for storing amount of comments, likes(?)
+# TODO: fields for storing amount of likes(?)
 
 def user_directory_path(instance, filename):
 	# file will be uploaded to MEDIA_ROOT/posts/username/<filename>
@@ -21,9 +21,11 @@ class Post(models.Model):
 	replying_to = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
 	text_content = models.TextField(blank=True, null=True, max_length=255)
 	upload_datetime = models.DateTimeField(auto_now_add=True)
-	update_datetime = models.DateTimeField(auto_now=True)
-	image_file = models.ImageField(blank=True, null=True, upload_to=user_directory_path) #maybe add django-cleanup to project to clean unused user files?
-	active = models.BooleanField(default=False) #only active posts should be visible on site, posts default to inactive and are either automatically approved or checked by admin
+	image_file = models.ImageField(blank=True, null=True, upload_to=user_directory_path) # maybe add django-cleanup to project to clean unused user files?
+	active = models.BooleanField(default=False) # only active posts should be visible on site, posts default to inactive and are either automatically approved or checked by admin
+	@property
+	def comment_count(self):
+		return len(Post.objects.filter(replying_to=self.id))
 	def __str__(self):
 		return self.user.username+": "+self.text_content+image_attached(self)
 	def clean(self):
