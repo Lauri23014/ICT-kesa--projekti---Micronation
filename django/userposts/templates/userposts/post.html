@@ -1,4 +1,21 @@
 {% extends "base.html" %}
+{% block title %}{{ username }}: {{ post.text_content }} - Velvelland{% endblock title %}
 {% block content %}
 	{% comment %} TODO: make dynamic html for post pages {% endcomment %}
+	{% if thread %}
+	<div class="thread">
+		{% for reply in thread %}	{% comment %}thread before post {% endcomment %}
+			{% include "userposts/post_block_mini.html" with post=reply %}
+		{% endfor %}
+	</div>
+	{% endif %}
+	
+
+	{% comment %} actual post {% endcomment %}
+	{% include "userposts/post_block.html" with post=post %}
+
+	{% comment %} comments replying to post {% endcomment %}
+	{% for reply in replies %}	{% comment %} thread before post {% endcomment %}
+		{% include "userposts/post_block_mini.html" with post=reply %}
+	{% endfor %}
 {% endblock content %}

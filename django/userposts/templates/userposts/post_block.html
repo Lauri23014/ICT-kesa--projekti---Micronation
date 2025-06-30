@@ -1,0 +1,6 @@
+<div class="post-block">
+	<h3>{{ post.user.username }}</h3>
+	<p>{{post.text_content|linebreaksbr}}</p>
+	{% if post.image_file.url != None %}<img src="{{ post.image_file.url }}">{% endif %}
+	<p>{{ post.upload_datetime }}{% if post.upload_datetime != post.update_datetime %} (last updated {{ post.update_datetime }}){% endif %}</p>
+</div>
