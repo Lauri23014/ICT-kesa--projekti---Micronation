@@ -13,7 +13,7 @@ def user_directory_path(instance, filename):
 
 def image_attached(self):
 		if self.image_file:
-			return "[image attached]"
+			return " [image attached]"
 		return ""
 
 class Post(models.Model):
@@ -25,7 +25,7 @@ class Post(models.Model):
 	image_file = models.ImageField(blank=True, null=True, upload_to=user_directory_path) #maybe add django-cleanup to project to clean unused user files?
 	active = models.BooleanField(default=False) #only active posts should be visible on site, posts default to inactive and are either automatically approved or checked by admin
 	def __str__(self):
-		return self.user.username+": "+self.text_content+" "+image_attached(self)
+		return self.user.username+": "+self.text_content+image_attached(self)
 	def clean(self):
 		if not self.text_content and not self.image_file:  # This will check for None or Empty
 			raise ValidationError({'text_content': 'One of text_content or image_file should be filled.'})
