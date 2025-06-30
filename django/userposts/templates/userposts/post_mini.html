@@ -1,0 +1,18 @@
+{% if post.replying_to != None %}
+{% comment %} show reply one level up if there is one {% endcomment %}
+	<div class="mini-post-indent">
+		<div class="post-block-mini">
+			{% include "userposts/profile_mini.html" with user=post.replying_to.user %}
+			<div class="post-content" onClick="window.location.href = '/profile/{{ post.replying_to.user.username }}/post/{{ post.replying_to.id }}'">
+				<p>{{post.text_content|linebreaksbr}}</p>
+				{% if post.replying_to.image_file.url != None %}<img src="{{ post.replying_to.image_file.url }}">{% endif %}
+			</div>
+			<p>{{ post.replying_to.upload_datetime }}</p>
+		</div>
+	</div>
+{% endif %}
+{% comment %} main post {% endcomment %}
+<div class="post-block-mini">
+	{% include "userposts/profile_mini.html" with user=post.user %}
+	{% include "userposts/post_content.html" with post=post %}
+</div>

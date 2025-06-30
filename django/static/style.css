@@ -145,15 +145,15 @@ body {
 	padding-left: 1em;
 
 	.post-block-mini {
+		width: 25em;
 		margin: 0;
 		padding: 0;
 	}
 }
 
 .post-block-mini {
-	margin-left: calc(0.5em + 2px);
-	padding-left: 1em;
-	max-width: 25em;
+	width: 28em;
+	margin: auto;
 
 	.post-content {
 		cursor: pointer;
@@ -166,7 +166,7 @@ body {
 
 .post-content {
 	img {
-		width: 25em;
+		width: 100%;
 		border-radius: 1em;
 	}
 }
@@ -188,6 +188,15 @@ body {
 	margin: 0.25em;
 	width: 2.5em;
 	height: 2.5em;
+}
+
+.post-segment {
+	width: fit-content;
+	min-width: calc(26.5em + 2px);
+	background-color: var(--main-bg-color);
+	border-radius: 1em;
+	margin: 0.5em;
+	padding: 1em;
 }
 
 /* text */

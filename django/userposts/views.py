@@ -25,3 +25,13 @@ def post(request, username, post):
 	else:
 		# TODO: 404 redirect
 		return HttpResponse("teehee")
+
+def postlist(request):
+	posts = Post.objects.order_by("-upload_datetime").all()
+	context = {
+		"posts" : posts
+	}
+	return render(request, "userposts/post_list.html", context=context)
+
+def get_post_date(obj : Post):
+	return obj.upload_datetime

@@ -1,8 +1,4 @@
 <div class="post-block-mini">
-	{% include "userposts/profile_mini.html" with user=user %}
-	<div class="post-content" onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}'">
-		<p>{{post.text_content|linebreaksbr}}</p>
-		{% if post.image_file.url != None %}<img src="{{ post.image_file.url }}">{% endif %}
-	</div>
-	<p>{{ post.upload_datetime }}</p>
+	{% include "userposts/profile_mini.html" with user=post.user %}
+	{% include "userposts/post_content.html" with post=post %}
 </div>
