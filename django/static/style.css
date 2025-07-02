@@ -137,6 +137,66 @@ body {
 	text-align: center;
 }
 
+/* post stylings */
+
+.mini-post-indent {
+	border-left: 2px solid var(--sub-text-color);
+	margin-left: 0.5em;
+	padding-left: 1em;
+
+	.post-block-mini {
+		width: 25em;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.post-block-mini {
+	width: 28em;
+	margin: auto;
+
+	.post-content {
+		cursor: pointer;
+	}
+}
+
+.post-block {
+	max-width: calc(26.5em + 2px);
+}
+
+.post-image {
+	width: 100%;
+	border-radius: 1em;
+}
+
+.profile-mini {
+	display: flex;
+	flex-direction: row;
+	height: 3em;
+	line-height: 3em;
+	cursor: pointer;
+	h3 {
+		margin: 0;
+		padding-left: 0.25em;
+	}
+}
+
+.profile-picture {
+	border-radius: 50%;
+	margin: 0.25em;
+	width: 2.5em;
+	height: 2.5em;
+}
+
+.post-segment {
+	width: fit-content;
+	min-width: calc(26.5em + 2px);
+	background-color: var(--main-bg-color);
+	border-radius: 1em;
+	margin: 0.5em;
+	padding: 1em;
+}
+
 /* text */
 
 h1, h2, h3, p {
@@ -150,5 +210,3 @@ a {
 a:visited {
 	color: var(--linkvisited-text-color);
 }
-
-

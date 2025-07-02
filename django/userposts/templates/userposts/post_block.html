@@ -1,0 +1,4 @@
+<div class="post-block">
+	{% include "userposts/profile_mini.html" with user=post.user %}
+	{% include "userposts/post_content.html" with post=post selected=True %}
+</div>

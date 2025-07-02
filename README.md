@@ -3,3 +3,7 @@
 # API licenses
 - Photo Sphere Viewer [(link)](https://github.com/mistic100/Photo-Sphere-Viewer?tab=MIT-1-ov-file)
 	- MIT License
+
+# Prerequisites
+- Django v5.2.1 [(link)](https://www.djangoproject.com/)
+- django-cleanup [(link)](https://pypi.org/project/django-cleanup/)
