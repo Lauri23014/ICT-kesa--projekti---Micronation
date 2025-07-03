@@ -10,11 +10,11 @@ def post(request, username, post):
 		thread = []
 		mainpost = Post.objects.get(id=post)
 		p = mainpost
-		while p.replying_to is not None:
-			np = Post.objects.get(id=p.replying_to.id)
+		while p.linked_post is not None:
+			np = Post.objects.get(id=p.linked_post.id)
 			thread.insert(0, np)
 			p = np
-		comments = Post.objects.filter(replying_to=post)
+		comments = Post.objects.filter(linked_post=post)
 		context = {
 			"username" : username,
 			"post" : mainpost,
@@ -27,11 +27,11 @@ def post(request, username, post):
 		return HttpResponse("teehee")
 
 def postlist(request):
-	posts = Post.objects.order_by("-upload_datetime").all()
+	posts = Post.objects.order_by("-datetime").all()
 	context = {
 		"posts" : posts
 	}
 	return render(request, "userposts/post_list.html", context=context)
 
 def get_post_date(obj : Post):
-	return obj.upload_datetime
+	return obj.datetime
