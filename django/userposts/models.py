@@ -33,6 +33,8 @@ class Post(models.Model):
 	def __str__(self):
 		return self.user.username+": "+self.text_content+image_attached(self)
 	def clean(self):
+		if not self.linked_post and not self.title:
+			raise ValidationError({'title': 'Independant posts must have titles'})
 		if self.linked_post and self.title:
 			raise ValidationError({'title': 'Comments cannot have titles'})
 		if not self.text_content and not self.image_file:  # This will check for None or Empty
