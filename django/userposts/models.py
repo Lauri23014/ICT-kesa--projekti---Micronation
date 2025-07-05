@@ -19,7 +19,7 @@ def image_attached(self):
 class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	linked_post = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
-	title = models.CharField(max_length=127)
+	title = models.CharField(blank=True, null=True, max_length=127)
 	text_content = models.TextField(blank=True, null=True, max_length=255)
 	datetime = models.DateTimeField(auto_now_add=True)
 	image_file = models.ImageField(blank=True, null=True, upload_to=user_directory_path) # maybe add django-cleanup to project to clean unused user files?
@@ -40,5 +40,7 @@ class Post(models.Model):
 		
 class Like(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	linked_post = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
+	linked_post = models.ForeignKey(Post, blank=True, null=True, on_delete=models.SET_NULL)
 	datetime = models.DateTimeField(auto_now_add=True)
+	def __str__(self):
+		return self.user.username+" likes ["+self.linked_post.__str__()+"]"
