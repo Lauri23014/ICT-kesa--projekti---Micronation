@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
@@ -37,13 +38,12 @@ class Post(models.Model):
 		return len(Like.objects.filter(linked_post=self.id))
 	def __str__(self):
 		return self.user.username+": "+self.text_content+image_attached(self)
-	def clean(self):
-		if not self.linked_post and not self.title:
-			raise ValidationError({'title': 'Independant posts must have titles'})
-		if self.linked_post and self.title:
-			raise ValidationError({'title': 'Comments cannot have titles'})
-		if not self.text_content and not self.image_file:  # This will check for None or Empty
-			raise ValidationError({'text_content': 'One of text_content or image_file should be filled.'})
+	
+	class Meta:
+		constraints = [
+			models.CheckConstraint(condition=Q(title__isnull=True) ^ Q(linked_post__isnull=True), name="post-title-constraint"),
+			models.CheckConstraint(condition=Q(text_content__isnull=False) | Q(image_file__isnull=False), name="post-content-constraint"),
+		]
 		
 class Like(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -51,3 +51,8 @@ class Like(models.Model):
 	datetime = models.DateTimeField(auto_now_add=True)
 	def __str__(self):
 		return self.user.username+" likes ["+self.linked_post.__str__()+"]"
+	
+	class Meta:
+		constraints = [
+			models.UniqueConstraint(fields=["user", "linked_post"], name="unique_like_constraint")
+		]
