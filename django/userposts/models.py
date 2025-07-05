@@ -26,7 +26,12 @@ class Post(models.Model):
 	active = models.BooleanField(default=False) # only active posts should be visible on site, posts default to inactive and are either automatically approved or checked by admin
 	@property
 	def comment_count(self):
-		return len(Post.objects.filter(linked_post=self.id))
+		count = 0
+		comments = Post.objects.filter(linked_post=self.id)
+		count += len(comments)
+		for comment in comments:
+			count +=comment.comment_count
+		return count
 	@property
 	def like_count(self):
 		return len(Like.objects.filter(linked_post=self.id))
