@@ -160,6 +160,10 @@ body {
 	}
 }
 
+.post-title-block {
+	cursor: pointer;
+}
+
 .post-block {
 	max-width: calc(26.5em + 2px);
 }

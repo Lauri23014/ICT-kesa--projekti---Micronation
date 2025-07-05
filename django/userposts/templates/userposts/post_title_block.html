@@ -1,1 +1,7 @@
 {% comment %} TODO: make title based post block for list view {% endcomment %}
+<article class="post-title-block" onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'">
+	<h3>{{ post.title }}</h3>
+	<p>{{ post.user.username }}</p>
+	<p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p>
+	<p>{{ post.like_count }} like{% if post.like_count != 1 %}s{% endif %}</p>
+</article>

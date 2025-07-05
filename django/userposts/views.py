@@ -27,7 +27,7 @@ def post(request, username, post):
 		return HttpResponse("teehee")
 
 def postlist(request):
-	posts = Post.objects.order_by("-datetime").all()
+	posts = Post.objects.order_by("-datetime").exclude(title=None)
 	context = {
 		"posts" : posts
 	}
