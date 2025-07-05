@@ -21,7 +21,7 @@ def post(request, username, post):
 			"replies" : comments,
 			"thread" : thread
 		}
-		return render(request, "userposts/post.html", context=context)
+		return render(request, "userposts/post_detail_view.html", context=context)
 	else:
 		# TODO: 404 redirect
 		return HttpResponse("teehee")
@@ -31,7 +31,7 @@ def postlist(request):
 	context = {
 		"posts" : posts
 	}
-	return render(request, "userposts/post_list.html", context=context)
+	return render(request, "userposts/post_list_view.html", context=context)
 
 def get_post_date(obj : Post):
 	return obj.datetime

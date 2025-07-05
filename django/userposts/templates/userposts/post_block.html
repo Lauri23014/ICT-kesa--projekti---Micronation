@@ -1,4 +1,11 @@
 <div class="post-block">
-	{% include "userposts/profile_mini.html" with user=post.user %}
+	{% if post.title %}
+		{% comment %} if post has a title (main post) {% endcomment %}
+		{% include "userposts/title_mini.html" with user=post.user %}
+	{% else %}
+		{% comment %} if post doesn't have a title (comment) {% endcomment %}
+		{% include "userposts/profile_mini.html" with user=post.user %}
+	{% endif %}
+	
 	{% include "userposts/post_content.html" with post=post selected=True %}
 </div>
