@@ -201,6 +201,22 @@ body {
 	padding: 1em;
 }
 
+.title-block-h-flex {
+	display: flex;
+	flex-direction: row;
+}
+
+.title-block-v-flex {
+	display: flex;
+	flex-direction: column;
+	width: 20em;
+}
+
+.title-block-like-div {
+	width: 5em;
+	height: 100%;
+}
+
 /* text */
 
 h1, h2, h3, p {
