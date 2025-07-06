@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .bootstrap_forms import PasswordChangingForm
@@ -7,6 +7,18 @@ from django.contrib.auth import login, logout
 
 from .bootstrap_forms import EditProfileForm
 from django.contrib import messages
+
+from django.views.generic import DetailView
+from .models import Profile
+from django.contrib.auth.models import User
+
+class ProfilePageView(DetailView):
+    model = Profile
+    template_name = 'users/user_profile.html'
+    context_object_name = 'page_user'
+
+    def get_object(self):
+        return get_object_or_404(Profile, user__username=self.kwargs['username'])
 
 
 def profile(request):
@@ -65,4 +77,15 @@ def password_change(request):
     else:
         form = PasswordChangingForm(user=request.user)
     return render(request, 'users/change_password.html', {'form': form})
+
+class ProfilePageView(DetailView):
+    model = Profile
+    template_name = 'users/user_profile.html'
+    context_object_name = 'page_user'
+
+    def get_object(self):
+        return get_object_or_404(Profile, user__username=self.kwargs['username'])
+    
+#will use get_context_data() if we want to show users posts etc in user profile 
+
 

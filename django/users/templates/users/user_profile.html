@@ -1,9 +1,15 @@
-<div class="profile-mini" onClick="window.location.href = '{% url 'profile_page' user.username %}'">
-	{% load static %}
+{% extends "base.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<h2>{{ page_user.user.username }}</h2>
+{% load static %}
 	{% if user.profile.profile_pic %}
         <img class="profile-picture" src="/media/{{ user.profile.profile_pic }}" alt="Profile Picture">
     {% else %}
         <img class="profile-picture" src="{% static 'users/images/default-avatar.jpg' %}" alt="Default Picture">
     {% endif %} 
-	<h3>{{ user.username }}</h3>
-</div>
+<p>{{ page_user.bio }}</p>
+
+{% endblock %}
