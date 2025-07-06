@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from .bootstrap_forms import PasswordChangingForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
+
 from .bootstrap_forms import EditProfileForm
 from django.contrib import messages
 
@@ -48,4 +51,18 @@ def edit_view(request):
         form = EditProfileForm(instance=request.user) #Editt the currently logged-in user
     return render(request, 'users/edit_user.html', {'form': form})
 
+@login_required
+def password_change(request):
+    if request.method == 'POST':
+        form = PasswordChangingForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  #Prevents logout
+            messages.success(request, "Password changed successfully.")
+            return redirect('index') 
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = PasswordChangingForm(user=request.user)
+    return render(request, 'users/change_password.html', {'form': form})
 
