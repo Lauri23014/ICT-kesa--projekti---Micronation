@@ -37,14 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "map",
-    "users",
-    "authentication",
-	'django_cleanup.apps.CleanupConfig',
+    'map',
     'users',
     'authentication',
 	'sceneviewer',
 	'userposts',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
