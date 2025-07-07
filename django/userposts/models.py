@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from sceneviewer.models import Scene
 
 # TODO: retain/archive post/comment content on deletion?
 
@@ -20,6 +21,7 @@ def image_attached(self):
 class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	linked_post = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
+	linked_scene = models.ForeignKey(Scene, blank=True, null=True, on_delete=models.SET_NULL)
 	title = models.CharField(blank=True, null=True, max_length=127)
 	text_content = models.TextField(blank=True, null=True, max_length=255)
 	datetime = models.DateTimeField(auto_now_add=True)
@@ -42,6 +44,6 @@ class Post(models.Model):
 	
 	class Meta:
 		constraints = [
-			models.CheckConstraint(condition=Q(title__isnull=True) ^ Q(linked_post__isnull=True), name="post-title-constraint"),
+			models.CheckConstraint(condition=Q(title__isnull=False) ^ Q(linked_post__isnull=False) ^ Q(linked_scene__isnull=False), name="post-title-comment-constraint"),
 			models.CheckConstraint(condition=Q(text_content__isnull=False) | Q(image_file__isnull=False), name="post-content-constraint"),
 		]
