@@ -25,8 +25,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("map/", include("map.urls")),
     path("users/", include("users.urls")),
-    
-   
+    path("", include("userposts.urls"))
 ]
 
 # Serves media files if in debug mode

@@ -1,7 +1,24 @@
-from django.shortcuts import render, redirect 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.decorators import login_required
+from .bootstrap_forms import PasswordChangingForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
+
+from .bootstrap_forms import EditProfileForm
 from django.contrib import messages
+
+from django.views.generic import DetailView
+from .models import Profile
+from django.contrib.auth.models import User
+
+class ProfilePageView(DetailView):
+    model = Profile
+    template_name = 'users/user_profile.html'
+    context_object_name = 'page_user'
+
+    def get_object(self):
+        return get_object_or_404(Profile, user__username=self.kwargs['username'])
 
 
 def profile(request):
@@ -34,3 +51,41 @@ def logout_view(request):
     if request.method == "POST":
         logout(request)
         return redirect("index") #should be later changed to another page
+    
+@login_required    
+def edit_view(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user) #changing from django's default form to EditProfileForm
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = EditProfileForm(instance=request.user) #Editt the currently logged-in user
+    return render(request, 'users/edit_user.html', {'form': form})
+
+@login_required
+def password_change(request):
+    if request.method == 'POST':
+        form = PasswordChangingForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  #Prevents logout
+            messages.success(request, "Password changed successfully.")
+            return redirect('index') 
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = PasswordChangingForm(user=request.user)
+    return render(request, 'users/change_password.html', {'form': form})
+
+class ProfilePageView(DetailView):
+    model = Profile
+    template_name = 'users/user_profile.html'
+    context_object_name = 'page_user'
+
+    def get_object(self):
+        return get_object_or_404(Profile, user__username=self.kwargs['username'])
+    
+#will use get_context_data() if we want to show users posts etc in user profile 
+
+

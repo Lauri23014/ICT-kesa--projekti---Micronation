@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-	'sceneviewer.apps.SceneviewerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +40,11 @@ INSTALLED_APPS = [
     "map",
     "users",
     "authentication",
+	'django_cleanup.apps.CleanupConfig',
+    'users',
+    'authentication',
+	'sceneviewer',
+	'userposts',
 ]
 
 MIDDLEWARE = [

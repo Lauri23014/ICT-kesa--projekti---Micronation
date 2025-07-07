@@ -5,3 +5,7 @@
 	- MIT License
 - Leaflet [(link)](https://github.com/Leaflet/Leaflet?tab=BSD-2-Clause-1-ov-file)
 	- BSD 2-Clause License
+
+# Prerequisites
+- Django v5.2.1 [(link)](https://www.djangoproject.com/)
+- django-cleanup [(link)](https://pypi.org/project/django-cleanup/)

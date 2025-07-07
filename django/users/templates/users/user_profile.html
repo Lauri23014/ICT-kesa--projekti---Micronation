@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_user.user.username }}'s Profile{% endblock %}
+
+{% block content %}
+<style>
+  .profile-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #1a1a1a;
+    border-radius: 1em;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: #eee;
+    position: relative;
+  }
+
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    margin-bottom: 1rem;
+  }
+
+  .username {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .bio-box {
+    background-color: #2a2a2a;
+    padding: 1rem;
+    border-radius: 0.5em;
+    border: 1px solid #444;
+    color: #ccc;
+    font-style: italic;
+  }
+
+  .paw {
+    font-size: 2rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .background-paws {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2rem;
+    opacity: 0.2;
+  }
+</style>
+
+<div class="profile-container">
+  
+
+  {% if page_user.profile_pic %}
+    <img class="profile-picture" src="/media/{{ page_user.profile_pic }}" alt="Profile Picture">
+  {% else %}
+    <img class="profile-picture" src="{% static 'users/images/default-avatar.jpg' %}" alt="Default Picture">
+  {% endif %}
+
+  <div class="username">{{ page_user.user.username }}</div>
+
+
+  <div class="bio-box">
+    {{ page_user.bio|linebreaks }}
+  </div>
+</div>
+{% endblock %}
