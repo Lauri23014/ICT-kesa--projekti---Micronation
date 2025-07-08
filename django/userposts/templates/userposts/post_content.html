@@ -1,7 +1,52 @@
-<div {% if selected != True %}class="post-content" onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'"{% else %}id="selected-post"{% endif %}>
-	<p>{{post.text_content|linebreaksbr}}</p>
-	{% if post.image_file.url != None %}<img class="post-image" src="{{ post.image_file.url }}">{% endif %}
-	<p>{{ post.datetime }}</p>
-	<p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p>
-	<p>{{ post.like_count }} like{% if post.like_count != 1 %}s{% endif %}</p>
+<article class="post-content" {% if selected != True %}onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'"{% else %}id="selected-post"{% endif %}>
+	<div class="post-content-div">
+		<p>{{post.text_content|linebreaksbr}}</p>
+		{% if post.image_file.url != None %}<img class="post-image" src="{{ post.image_file.url }}">{% endif %}
+		<p>{{ post.datetime }}</p>
+	</div>
+</article>
+<div class="post-content-like-div">
+	{% load static %}
+	<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="#like-form{{ post.id }}">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ request.path }}">
+		<button type="submit">
+			<img src={% if request.user in post.likes.all %}"{% static 'icons/heart-solid.svg' %}"{% else %}"{% static 'icons/heart.svg' %}"{% endif %} id="like-image-{{ post.id }}">
+		</button>
+	</form>
+	<p id="like-counter-{{ post.id }}">{{ post.like_count }} like{% if post.like_count != 1 %}s{% endif %}</p>
 </div>
+
+<script defer>
+	var form = document.getElementById("#like-form{{ post.id }}");
+	form.onsubmit = function(e) {
+		e.preventDefault();
+		let url = form.action;
+		let formdata = new FormData(form);
+		let counter = document.getElementById("like-counter-{{ post.id }}");
+
+		let options = {
+			method: 'POST',      
+			body: formdata
+		};
+
+		fetch(url, options)
+		.then(response => response.json())
+		.then((response) => {
+			let img = document.getElementById("like-image-{{ post.id }}");
+
+			if (response.liked) {
+				img.src = "{% static 'icons/heart-solid.svg' %}";
+			} else {
+				img.src = "{% static 'icons/heart.svg' %}";
+			}
+
+			counter.innerText = response.count+" like";
+			if (response.count != 1) {
+				counter.innerText += "s";
+			}
+		})
+	}
+</script>
+
+<p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p>
