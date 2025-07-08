@@ -29,7 +29,7 @@
 
 			const viewer = new Viewer({
 				container: document.querySelector('#viewer'),
-				panorama: '{% static "sceneviewer/test-image.jpg" %}',
+				panorama: '{{ scene.image_file.url }}',
 				defaultZoomLvl: 0,
 			});
 		</script>
