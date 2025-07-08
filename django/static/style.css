@@ -217,6 +217,13 @@ body {
 	height: 100%;
 }
 
+/* viewer stylings */
+
+#viewer-container {
+	display: flex;
+	flex-direction: row;
+}
+
 /* text */
 
 h1, h2, h3, p {
