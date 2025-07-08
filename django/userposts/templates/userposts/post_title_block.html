@@ -13,7 +13,7 @@
 			<p id="like-counter-{{ post.id }}">{{ post.like_count }} like{% if post.like_count != 1 %}s{% endif %}</p>
 		</div>
 		<div class="title-block-v-flex" onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'">
-			<h3>{{ post.title }}</h3>
+			<h2>{{ post.title }}</h2>
 			<p>{{ post.user.username }}</p>
 			<p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p>
 		</div>

@@ -41,7 +41,7 @@
 				{% comment %} comments replying to post {% endcomment %}
 				{% for comment in comments %}	{% comment %} thread before post {% endcomment %}
 					<div class="mini-post-indent">
-						{% include "userposts/post_block_mini.html" with post=comment %}
+						{% include "userposts/post_block.html" with post=comment selected=False %}
 					</div>
 				{% endfor %}
 			</div>

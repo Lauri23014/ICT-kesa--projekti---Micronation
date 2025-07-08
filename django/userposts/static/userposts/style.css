@@ -12,9 +12,8 @@
 	}
 }
 
-.post-block-mini {
+.post-block {
 	width: 28em;
-	margin: auto;
 
 	.post-content {
 		cursor: pointer;
