@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}{{ username }}: {{ post.text_content }} - Velvelland{% endblock title %}
+{% block head %}
+	<link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
+{% endblock head %}
 {% block content %}
 	{% comment %} TODO: make dynamic html for post pages {% endcomment %}
 	{% if thread %}

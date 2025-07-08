@@ -1,4 +1,15 @@
+/* viewer stylings */
+
 #viewer {
-	width: 90vw;
-	height: 90vh;
+	width: 50vw;
+	height: 75vh;
+}
+
+#viewer-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#view-text-content {
+	margin: 2em;
 }

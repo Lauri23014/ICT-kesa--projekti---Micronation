@@ -1,37 +1,57 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from userposts.models import Post
 
 # Create your views here.
 
-def post(request, username, post):
-	if Post.objects.get(id=post).user.username == username:
+def post(request, username, id):
+	if Post.objects.get(id=id).user.username == username:
 		thread = []
-		mainpost = Post.objects.get(id=post)
+		mainpost = Post.objects.get(id=id)
 		p = mainpost
-		while p.replying_to is not None:
-			np = Post.objects.get(id=p.replying_to.id)
+		while p.linked_post is not None:
+			np = Post.objects.get(id=p.linked_post.id)
 			thread.insert(0, np)
 			p = np
-		comments = Post.objects.filter(replying_to=post)
+		comments = Post.objects.filter(linked_post=id)
 		context = {
 			"username" : username,
 			"post" : mainpost,
 			"replies" : comments,
 			"thread" : thread
 		}
-		return render(request, "userposts/post.html", context=context)
+		return render(request, "userposts/post_detail_view.html", context=context)
 	else:
 		# TODO: 404 redirect
 		return HttpResponse("teehee")
 
 def postlist(request):
-	posts = Post.objects.order_by("-upload_datetime").all()
+	posts = Post.objects.order_by("-datetime").exclude(title=None)
 	context = {
 		"posts" : posts
 	}
-	return render(request, "userposts/post_list.html", context=context)
+	return render(request, "userposts/post_list_view.html", context=context)
 
 def get_post_date(obj : Post):
-	return obj.upload_datetime
+	return obj.datetime
+
+def add_or_remove_like(request, username, id):
+	data = {}
+
+	post = Post.objects.get(id=id)
+	print(id)
+
+	if request.method == "POST":
+		user = request.user
+		if post.likes.filter(id=user.id).exists():
+			liked = False
+			post.likes.remove(user)
+		else:
+			post.likes.add(user)
+			liked = True
+
+
+	data["count"] = post.likes.count()
+	data["liked"] = liked
+	return JsonResponse(data) 

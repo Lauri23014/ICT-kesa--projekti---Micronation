@@ -1,0 +1,6 @@
+{% comment %} TODO: make title based block for post view and replace placeholder {% endcomment %}
+<div class="profile-mini" onClick="window.location.href = '/profile/{{ user.username }}'">
+	{% load static %}
+	<img class="profile-picture" src="{% static "pfp_test.png" %}">
+	<h3>{{ user.username }}</h3>
+</div>
