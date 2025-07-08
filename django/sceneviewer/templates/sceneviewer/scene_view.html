@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<link rel="stylesheet" href='{% static "sceneviewer/style.css" %}'/>
+	<link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
 {% endblock %}
 {% block content %}
@@ -33,13 +34,18 @@
 			});
 		</script>
 
-		<div id="viewer-comments">
-			{% comment %} comments replying to post {% endcomment %}
-			{% for comment in comments %}	{% comment %} thread before post {% endcomment %}
-				<div class="mini-post-indent">
-					{% include "userposts/post_block_mini.html" with post=comment %}
-				</div>
-			{% endfor %}
+		<div id="view-text-content">
+			<h3>{{ scene.title }}</h3>
+			<p>{{ scene.description|linebreaksbr }}</p>
+			<div id="viewer-comments">
+				{% comment %} comments replying to post {% endcomment %}
+				{% for comment in comments %}	{% comment %} thread before post {% endcomment %}
+					<div class="mini-post-indent">
+						{% include "userposts/post_block_mini.html" with post=comment %}
+					</div>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
+		
 {% endblock %}
