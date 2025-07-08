@@ -6,9 +6,6 @@ from sceneviewer.models import Scene
 
 # TODO: retain/archive post/comment content on deletion?
 
-# TODO: add likes(?)
-# TODO: fields for storing amount of likes(?)
-
 def user_directory_path(instance, filename):
 	# file will be uploaded to MEDIA_ROOT/posts/username/<filename>
 	return "posts/{0}/{1}".format(instance.user.username, filename)
