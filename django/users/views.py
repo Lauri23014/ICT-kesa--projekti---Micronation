@@ -4,13 +4,16 @@ from django.contrib.auth.decorators import login_required
 from .bootstrap_forms import PasswordChangingForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
+from django.views.generic import DetailView
 
 from .bootstrap_forms import EditProfileForm
 from django.contrib import messages
 
-from django.views.generic import DetailView
+from django.views import generic
 from .models import Profile
 from django.contrib.auth.models import User
+
+from .bootstrap_forms import ProfileEditForm
 
 class ProfilePageView(DetailView):
     model = Profile
@@ -88,4 +91,20 @@ class ProfilePageView(DetailView):
     
 #will use get_context_data() if we want to show users posts etc in user profile 
 
+@login_required
+def EditProfileView(request, username):
+    
+    if request.user.username != username:
+        return redirect('index') 
 
+    profile = get_object_or_404(Profile, user__username=username)
+
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_page', username=username)
+    else:
+        form = ProfileEditForm(instance=profile)
+
+    return render(request, 'users/edit_profile.html', {'form': form})
