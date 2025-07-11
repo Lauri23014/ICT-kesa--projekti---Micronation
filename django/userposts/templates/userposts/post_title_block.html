@@ -3,7 +3,7 @@
 <article class="post-title-block">
 	<div class="title-block-h-flex">
 		<div class="title-block-like-div">
-			<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="#like-form{{ post.id }}">
+			<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="like-form-{{ post.id }}">
 				{% csrf_token %}
 				<input type="hidden" name="next" value="{{ request.path }}">
 				<button type="submit">
@@ -20,9 +20,9 @@
 	</div>
 
 	<script defer>
-		var form = document.getElementById("#like-form{{ post.id }}");
-		form.onsubmit = function(e) {
+		document.getElementById("like-form-{{ post.id }}").onsubmit = function(e) {
 			e.preventDefault();
+			let form = document.getElementById("like-form-{{ post.id }}")
 			let url = form.action;
 			let formdata = new FormData(form);
 			let counter = document.getElementById("like-counter-{{ post.id }}");

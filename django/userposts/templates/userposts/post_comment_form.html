@@ -1,0 +1,30 @@
+<form method="POST" action=" {% url "comment_post" username=post.user.username id=post.id %}" class="comment-form" id="comment-form-{{ post.id }}">
+	{% csrf_token %}
+	<input type="hidden" name="next" value="{{ request.path }}">
+	<input type="text" name="comment_text" maxlenght="255" placeholder="Type a reply!">
+	<button type="submit"><p>Submit</p></button>
+</form>
+
+<script defer>
+	document.getElementById("comment-form-{{ post.id }}").onsubmit = function(e) {
+		e.preventDefault();
+		let form = document.getElementById("comment-form-{{ post.id }}");
+		let url = form.action;
+		let formdata = new FormData(form);
+
+		let options = {
+			method: 'POST',      
+			body: formdata
+		};
+
+		fetch(url, options)
+		.then(response => response.json())
+		.then((response) => {
+			if (response.success) {
+				window.alert("Success!");
+			} else {
+				window.alert("No Success :(")
+			}
+		})
+	}
+</script>
