@@ -3,7 +3,7 @@
 		{% if post.title %}
 			{% include "userposts/title_mini.html" with post=post %}
 		{% endif %}
-		<p>{{post.text_content|linebreaksbr}}</p>
+		<p>{{ post.text_content|linebreaksbr }}</p>
 		{% if post.image_file.url != None %}<img class="post-image" src="{{ post.image_file.url }}">{% endif %}
 		<p>{{ post.datetime }}</p>
 	</div>
