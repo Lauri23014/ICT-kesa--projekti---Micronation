@@ -37,6 +37,14 @@ class PasswordChangingForm(PasswordChangeForm):
         fields = ('old_password', 'new_password1', 'new_password2')
 
 class ProfileEditForm(forms.ModelForm):
+    bio = forms.CharField(
+        required=False,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+           
+        })
+    )
+
     class Meta:
         model = Profile
-        fields = ['bio', 'profile_pic']  
+        fields = ['bio', 'profile_pic']
