@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ scene.title }} 360° view - Velvelland{% endblock title %}{{ scene.title }}
+
+{% block head %}
+	<!-- for optimal display on high DPI devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" href='{% static "sceneviewer/style.css" %}'/>
+	<link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
+{% endblock %}
+{% block content %}
+	<div id="viewer-container">
+		<!-- the viewer container must have a defined size -->
+		<div id="viewer"></div>
+		<!--Photo Sphere Viewer imports-->
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+					"@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.module.js"
+				}
+			}
+		</script>
+		<!--Photo Sphere Viewer main script, creates viewer as a child of #viewer-->
+		<script type="module">
+			import { Viewer } from '@photo-sphere-viewer/core';
+
+			const viewer = new Viewer({
+				container: document.querySelector('#viewer'),
+				panorama: '{{ scene.image_file.url }}',
+				defaultZoomLvl: 0,
+			});
+		</script>
+
+		<div id="view-text-content">
+			<h3>{{ scene.title }}</h3>
+			<p>{{ scene.description|linebreaksbr }}</p>
+			<div id="viewer-comments">
+				{% comment %} comments replying to post {% endcomment %}
+				{% for comment in comments %}	{% comment %} thread before post {% endcomment %}
+					<div class="mini-post-indent">
+						{% include "userposts/post_block.html" with post=comment selected=False %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+		
+{% endblock %}

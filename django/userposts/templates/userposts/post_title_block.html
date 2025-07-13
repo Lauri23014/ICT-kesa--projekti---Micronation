@@ -1,0 +1,53 @@
+{% comment %} TODO: make title based post block for list view {% endcomment %}
+{% load static %}
+<article class="post-title-block">
+	<div class="title-block-h-flex">
+		<div class="title-block-like-div">
+			<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="#like-form{{ post.id }}">
+				{% csrf_token %}
+				<input type="hidden" name="next" value="{{ request.path }}">
+				<button type="submit">
+					<img src={% if request.user in post.likes.all %}"{% static 'icons/heart-solid.svg' %}"{% else %}"{% static 'icons/heart.svg' %}"{% endif %} id="like-image-{{ post.id }}">
+				</button>
+			</form>
+			<p id="like-counter-{{ post.id }}">{{ post.like_count }} like{% if post.like_count != 1 %}s{% endif %}</p>
+		</div>
+		<div class="title-block-v-flex" onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'">
+			<h2>{{ post.title }}</h2>
+			<p>{{ post.user.username }}</p>
+			<p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p>
+		</div>
+	</div>
+
+	<script defer>
+		var form = document.getElementById("#like-form{{ post.id }}");
+		form.onsubmit = function(e) {
+			e.preventDefault();
+			let url = form.action;
+			let formdata = new FormData(form);
+			let counter = document.getElementById("like-counter-{{ post.id }}");
+
+			let options = {
+				method: 'POST',      
+				body: formdata
+			};
+
+			fetch(url, options)
+			.then(response => response.json())
+			.then((response) => {
+				let img = document.getElementById("like-image-{{ post.id }}");
+
+				if (response.liked) {
+					img.src = "{% static 'icons/heart-solid.svg' %}";
+				} else {
+					img.src = "{% static 'icons/heart.svg' %}";
+				}
+
+				counter.innerText = response.count+" like";
+				if (response.count != 1) {
+					counter.innerText += "s";
+				}
+			})
+		}
+	</script>
+</article>

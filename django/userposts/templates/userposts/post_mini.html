@@ -1,8 +1,0 @@
-{% if post.replying_to != None %}
-{% comment %} show reply one level up if there is one {% endcomment %}
-	<div class="mini-post-indent">
-		{% include "userposts/post_block_mini.html" with post=post.replying_to %}
-	</div>
-{% endif %}
-{% comment %} main post {% endcomment %}
-{% include "userposts/post_block_mini.html" with post=post %}

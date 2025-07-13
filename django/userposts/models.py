@@ -1,11 +1,10 @@
 from django.db import models
+from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from sceneviewer.models import Scene
 
 # TODO: retain/archive post/comment content on deletion?
-
-# TODO: add likes(?)
-# TODO: fields for storing amount of likes(?)
 
 def user_directory_path(instance, filename):
 	# file will be uploaded to MEDIA_ROOT/posts/username/<filename>
@@ -18,16 +17,30 @@ def image_attached(self):
 
 class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	replying_to = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
+	linked_post = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
+	linked_scene = models.ForeignKey(Scene, blank=True, null=True, on_delete=models.SET_NULL)
+	title = models.CharField(blank=True, null=True, max_length=127)
 	text_content = models.TextField(blank=True, null=True, max_length=255)
-	upload_datetime = models.DateTimeField(auto_now_add=True)
+	datetime = models.DateTimeField(auto_now_add=True)
 	image_file = models.ImageField(blank=True, null=True, upload_to=user_directory_path) # maybe add django-cleanup to project to clean unused user files?
+	likes = models.ManyToManyField(User, blank=True, default=None, related_name="likes")
 	active = models.BooleanField(default=False) # only active posts should be visible on site, posts default to inactive and are either automatically approved or checked by admin
 	@property
 	def comment_count(self):
-		return len(Post.objects.filter(replying_to=self.id))
+		count = 0
+		comments = Post.objects.filter(linked_post=self.id)
+		count += comments.count()
+		for comment in comments:
+			count +=comment.comment_count
+		return count
+	@property
+	def like_count(self):
+		return self.likes.count()
 	def __str__(self):
 		return self.user.username+": "+self.text_content+image_attached(self)
-	def clean(self):
-		if not self.text_content and not self.image_file:  # This will check for None or Empty
-			raise ValidationError({'text_content': 'One of text_content or image_file should be filled.'})
+	
+	class Meta:
+		constraints = [
+			models.CheckConstraint(condition=Q(title__isnull=False) ^ Q(linked_post__isnull=False) ^ Q(linked_scene__isnull=False), name="post-title-comment-constraint"),
+			models.CheckConstraint(condition=Q(text_content__isnull=False) | Q(image_file__isnull=False), name="post-content-constraint"),
+		]

@@ -11,10 +11,10 @@
     padding: 2rem;
     background-color: #1a1a1a;
     border-radius: 1em;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     text-align: center;
     color: #eee;
     position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   .profile-picture {
@@ -38,23 +38,27 @@
     border-radius: 0.5em;
     border: 1px solid #444;
     color: #ccc;
-    font-style: italic;
+    margin-bottom: 1.5rem;
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
-  .paw {
-    font-size: 2rem;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-  }
-
-  .background-paws {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 2rem;
-    opacity: 0.2;
+  .btn-edit-profile {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    background-color: #ffb6b6;
+    color: #000; /* set text to black */
+    font-weight: bold;
+    border: none;
+    border-radius: 0.6rem;
+    text-decoration: none;
+    cursor: pointer;
   }
 </style>
+
+
 
 <div class="profile-container">
   
@@ -67,9 +71,17 @@
 
   <div class="username">{{ page_user.user.username }}</div>
 
-
-  <div class="bio-box">
+   <div class="bio-box">
     {{ page_user.bio|linebreaks }}
   </div>
+
+   {% if request.user.username == page_user.user.username %}
+    <a href="{% url 'edit_profile' username=page_user.user.username %}" class="btn-edit-profile">
+       Edit Profile
+    </a>
+  {% endif %}
+
+
+ 
 </div>
 {% endblock %}

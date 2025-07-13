@@ -1,9 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}User posts feed - Velvelland{% endblock title %}
+{% block head %}
+	<link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
+{% endblock head %}
 {% block content %}
 	{% for post in posts %}
 		<div class="post-segment">
-			{% include "userposts/post_mini.html" with post=post %}
+			{% include "userposts/post_title_block.html" with post=post %}
 		</div>
 	{% endfor %}
 {% endblock content %}
