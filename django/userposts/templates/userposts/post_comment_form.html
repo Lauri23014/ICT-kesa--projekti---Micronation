@@ -1,17 +1,10 @@
 {% load static %}
 <button onClick="commentForm{{ post.id }}()"><p>test</p></button>
 
-<!--<form method="POST" action=" {% url "comment_post" username=post.user.username id=post.id %}" id="comment-form-{{ post.id }}">
-	{% csrf_token %}
-	<input type="hidden" name="next" value="{{ request.path }}">
-	<input type="text" name="comment_text" maxlenght="255" placeholder="Type a reply!">
-	<button type="submit"><p>Submit</p></button>
-</form>-->
-
 <script>
 	function commentForm{{ post.id }}() {
-		/* post you are replying to*/
-		/* profile for post */
+		// post you are replying to
+		// profile for post
 		const replyingTo = document.createElement("div");
 		replyingTo.className = "post-block";
 		const replyingToProfile = document.createElement("div");
@@ -33,7 +26,7 @@
 		replyingToName.innerText = "{{ post.user.username }}";
 		replyingToProfile.appendChild(replyingToPFP);
 		replyingToProfile.appendChild(replyingToName);
-		/* post content */
+		// post content
 		const replyingToPost = document.createElement("article");
 		replyingToPost.className = "post-content";
 		replyingToPost.onClick = "window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'";
@@ -56,9 +49,54 @@
 			replyingToPostDiv.appendChild(replyingToPostImg);
 		{% endif %}
 
-		/* reply form */
+		// reply form
+		const replyForm = document.createElement("form");
+		replyForm.method = "POST";
+		replyForm.action = "{% url "comment_post" username=post.user.username id=post.id %}";
+		replyForm.id = "comment-form-{{ post.id }}";
+		const csrftoken = getCookie('csrftoken');
+		const replyFormHiddenInput = document.createElement("input");
+		replyFormHiddenInput.type = "hidden";
+		replyFormHiddenInput.name = "next";
+		replyFormHiddenInput.value = "{{ request.path }}";
+		replyForm.appendChild(replyFormHiddenInput);
+		const replyFormTextInput = document.createElement("input");
+		replyFormTextInput.type = "text";
+		replyFormTextInput.name = "comment_text";
+		replyFormTextInput.maxlenght = "255";
+		replyFormTextInput.placeholder = "Type a reply!";
+		replyForm.appendChild(replyFormTextInput);
+		const replyFormSubmitButton = document.createElement("button");
+		replyFormSubmitButton.type = "submit";
+		replyFormSubmitButton.innerHtml = "<p>Reply</p>"
+		replyForm.appendChild(replyFormSubmitButton);
+		replyForm.onsubmit = function(e) {
+			e.preventDefault();
+			let form = document.getElementById("comment-form-{{ post.id }}");
+			let url = form.action;
+			let formdata = new FormData(form);
 
-		/* overlay and binding box */
+			let options = {
+				method: 'POST',
+				headers: {'X-CSRFToken': csrftoken},
+        		mode: 'same-origin', // Do not send CSRF token to another domain.   
+				body: formdata,
+			};
+
+			fetch(url, options)
+			.then(response => response.json())
+			.then((response) => {
+				if (response.success) {
+					let fakeclick = { target: overlay }
+					remover{{ post.id }}(fakeclick)
+					window.alert("Success!");
+				} else {
+					window.alert("No Success :(")
+				}
+			})
+		}
+
+		// overlay and binding box
 		const overlay = document.createElement("div");
 		overlay.className = "post-comment-form-overlay";
 		overlay.id = "post-comment-form-overlay-{{ post.id }}";
@@ -70,8 +108,10 @@
 		document.body.appendChild(overlay);
 		overlay.appendChild(box);
 		box.appendChild(replyingTo);
+		box.appendChild(replyForm);
 	}
 
+	// function for removing form from screen
 	function remover{{ post.id }}(click) {
 		const element = click.target;
 		if (element.classList.contains("post-comment-form-overlay")) {
@@ -79,25 +119,19 @@
 		}
 	}
 
-	/* document.getElementById("comment-form-{{ post.id }}").onsubmit = function(e) {
-		e.preventDefault();
-		let form = document.getElementById("comment-form-{{ post.id }}");
-		let url = form.action;
-		let formdata = new FormData(form);
-
-		let options = {
-			method: 'POST',      
-			body: formdata
-		};
-
-		fetch(url, options)
-		.then(response => response.json())
-		.then((response) => {
-			if (response.success) {
-				window.alert("Success!");
-			} else {
-				window.alert("No Success :(")
+	function getCookie(name) {
+		let cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			const cookies = document.cookie.split(';');
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
 			}
-		})
-	}*/
+		}
+		return cookieValue;
+	}
 </script>
