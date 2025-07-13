@@ -24,7 +24,8 @@
                             </form>
                         </li>
                          <li>
-                            <a href="/users/edit/" class="logout-button" aria-label="Edit Profile">Edit Profile</a>
+                           <a href="{% url 'profile_page' username=user.get_username %}">Profile</a>
+
                          </li>
                     {%else%}
                         <li><a href="/users/register" aria-label="User Registration">registeration</a></li>
