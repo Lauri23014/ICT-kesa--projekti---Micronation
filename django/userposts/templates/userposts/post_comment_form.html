@@ -141,8 +141,7 @@
 			box.appendChild(replyingTo);
 			box.appendChild(reply);
 		{% else %}
-		
-			window.location.href = "{% url 'login' %}";
+			window.location.href = "{% url 'login' %}?next={{ request.path }}";
 		{% endif %}
 	}
 
