@@ -1,54 +1,27 @@
 {% load static %}
-<button onClick="commentForm{{ post.id }}()"><p>test</p></button>
+<button onClick="commentForm{{ scene.id }}()"><p>test</p></button>
 
 <script>
-	function commentForm{{ post.id }}() {
+	function commentForm{{ scene.id }}() {
 		{% if request.user.is_authenticated %}
 			// post you are replying to
 			const replyingTo = document.createElement("div");
 			replyingTo.className = "post-block";
-			// profile for post
-			const replyingToProfile = document.createElement("div");
-			replyingToProfile.className = "profile-mini"
-			replyingToProfile.onClick = "window.location.href = '{% url 'profile_page' username=post.user.username %}'";
-			replyingTo.appendChild(replyingToProfile);
-			{% if post.user.profile.profile_pic %}
-				const replyingToPFP = document.createElement("img");
-				replyingToPFP.className = "profile-picture";
-				replyingToPFP.src = "/media/{{ post.user.profile.profile_pic }}";
-				replyingToPFP.alt = "Profile Picture";
-			{% else %}
-				const replyingToPFP = document.createElement("img");
-				replyingToPFP.className = "profile-picture";
-				replyingToPFP.src = "{% static 'users/images/default-avatar.jpg' %}";
-				replyingToPFP.alt = "Default Picture";
-			{% endif %}
-			const replyingToName = document.createElement("h3")
-			replyingToName.innerText = "{{ post.user.username }}";
-			replyingToProfile.appendChild(replyingToPFP);
-			replyingToProfile.appendChild(replyingToName);
 			// post content
 			const replyingToPost = document.createElement("article");
 			replyingToPost.className = "post-content";
-			replyingToPost.onClick = "window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'";
 			replyingTo.appendChild(replyingToPost);
 			const replyingToPostDiv = document.createElement("div");
 			replyingToPostDiv.className = "post-content-div";
 			replyingToPost.appendChild(replyingToPostDiv);
-			{% if post.title %}
+			{% if scene.title %}
 				const replyingToPostTitle = document.createElement("h2");
-				replyingToPostTitle.innerText = "{{ post.title }}";
+				replyingToPostTitle.innerText = "{{ scene.title }}";
 				replyingToPostDiv.appendChild(replyingToPostTitle);
 			{% endif %}
 			replyingToPostText = document.createElement("p");
-			replyingToPostText.innerText = "{{ post.text_content|linebreaksbr }}";
+			replyingToPostText.innerText = "{{ scene.description|linebreaksbr }}";
 			replyingToPostDiv.appendChild(replyingToPostText);
-			{% if post.image_file.url != None %}
-				const replyingToPostImg = document.createElement("img");
-				replyingToPostImg.className = "post-image";
-				replyingToPostImg.src = "{{ post.image_file.url }}";
-				replyingToPostDiv.appendChild(replyingToPostImg);
-			{% endif %}
 
 			// reply
 			// profile for reply
@@ -77,8 +50,8 @@
 			// reply form
 			const replyForm = document.createElement("form");
 			replyForm.method = "POST";
-			replyForm.action = "{% url "comment_post" username=post.user.username id=post.id %}";
-			replyForm.id = "comment-form-{{ post.id }}";
+			replyForm.action = "{% url "comment_scene" id=scene.id %}";
+			replyForm.id = "comment-form-{{ scene.id }}";
 			const csrftoken = getCookie('csrftoken');
 			const replyFormHiddenInput = document.createElement("input");
 			replyFormHiddenInput.type = "hidden";
@@ -97,7 +70,7 @@
 			replyForm.appendChild(replyFormSubmitButton);
 			replyForm.onsubmit = function(e) {
 				e.preventDefault();
-				let form = document.getElementById("comment-form-{{ post.id }}");
+				let form = document.getElementById("comment-form-{{ scene.id }}");
 				let url = form.action;
 				let formdata = new FormData(form);
 
@@ -113,7 +86,7 @@
 				.then((response) => {
 					if (response.success) {
 						let fakeclick = { target: overlay }
-						remover{{ post.id }}(fakeclick)
+						remover{{ scene.id }}(fakeclick)
 						window.alert("Success!");
 					} else {
 						window.alert("No Success :(")
@@ -125,8 +98,8 @@
 			// overlay and binding box
 			const overlay = document.createElement("div");
 			overlay.className = "post-comment-form-overlay";
-			overlay.id = "post-comment-form-overlay-{{ post.id }}";
-			overlay.addEventListener("click", (click) => {remover{{ post.id }}(click)});
+			overlay.id = "post-comment-form-overlay-{{ scene.id }}";
+			overlay.addEventListener("click", (click) => {remover{{ scene.id }}(click)});
 
 			const box = document.createElement("div");
 			box.className = "post-segment";
@@ -136,16 +109,15 @@
 			box.appendChild(replyingTo);
 			box.appendChild(reply);
 		{% else %}
-		
 			window.location.href = "{% url 'login' %}";
 		{% endif %}
 	}
 
 	// function for removing form from screen
-	function remover{{ post.id }}(click) {
+	function remover{{ scene.id }}(click) {
 		const element = click.target;
 		if (element.classList.contains("post-comment-form-overlay")) {
-			document.getElementById("post-comment-form-overlay-{{ post.id }}").remove();
+			document.getElementById("post-comment-form-overlay-{{ scene.id }}").remove();
 		}
 	}
 

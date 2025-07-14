@@ -79,7 +79,6 @@ def comment_post(request, username, id):
 	text_content = request.POST.get("comment_text")
 	return create_post(request, linked_post=linked_post, text_content=text_content)
 
-# TODO: link view to scene_view template
 def comment_scene(request, id): 
 	linked_scene = Scene.objects.get(id=id)
 	text_content = request.POST.get("comment_text")

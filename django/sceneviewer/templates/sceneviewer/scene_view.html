@@ -38,6 +38,7 @@
 			<h3>{{ scene.title }}</h3>
 			<p>{{ scene.description|linebreaksbr }}</p>
 			{% comment %} TODO: add commenting to scenes {% endcomment %}
+			{% include "sceneviewer/scene_comment_form.html" with scene=scene %}
 			<div id="viewer-comments">
 				{% comment %} comments replying to post {% endcomment %}
 				{% for comment in comments %}	{% comment %} thread before post {% endcomment %}
