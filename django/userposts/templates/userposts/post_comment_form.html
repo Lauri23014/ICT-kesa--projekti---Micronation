@@ -119,12 +119,9 @@
 				.then(response => response.json())
 				.then((response) => {
 					if (response.success) {
-						let fakeclick = { target: overlay }
-						removerPost{{ post.id }}(fakeclick)
-
-						window.alert("Success!");
+						window.location.href = "/profile/"+response.username+"/post/"+response.id;
 					} else {
-						window.alert("No Success :(")
+						window.alert("Creating post failed. Try again later.")
 					}
 				})
 			}

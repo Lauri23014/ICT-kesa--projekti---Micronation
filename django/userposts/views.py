@@ -64,13 +64,19 @@ def create_post(request, linked_post=None, linked_scene=None, title=None, text_c
 	post = Post(user=request.user, linked_post=linked_post, linked_scene=linked_scene, title=title, text_content=text_content, image_file=image_file)
 
 	success = True
+	id = 0
+	username = ""
 	try:
 		post.save()
+		id = post.id
+		username = post.user.username
 	except:
 		print("no post created")
 		success = False
 
 	data["success"] = success
+	data["username"] = username
+	data["id"] = id
 
 	return JsonResponse(data)
 
