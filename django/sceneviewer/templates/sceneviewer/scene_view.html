@@ -35,8 +35,7 @@
 		</script>
 
 		<div id="view-text-content">
-			<h3>{{ scene.title }}</h3>
-			<p>{{ scene.description|linebreaksbr }}</p>
+			{% include "sceneviewer/scene_block.html" with scene=scene selected=True%}
 			<div id="viewer-comments">
 				{% comment %} comments replying to post {% endcomment %}
 				{% for comment in comments %}	{% comment %} thread before post {% endcomment %}

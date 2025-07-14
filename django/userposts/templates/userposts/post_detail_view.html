@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load templatetags %}
 {% block title %}{{ username }}: {{ post.text_content }} - Velvelland{% endblock title %}
 {% block head %}
 	<link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
@@ -9,7 +10,11 @@
 	{% if thread %}
 	<div class="mini-post-indent">
 		{% for reply in thread %}	{% comment %}thread before post {% endcomment %}
-			{% include "userposts/post_block.html" with post=reply selected=False %}
+			{% if reply|classname == "Post" %}
+				{% include "userposts/post_block.html" with post=reply selected=False %}
+			{% else %}
+				{% include "sceneviewer/scene_block.html" with scene=reply selected=False%}
+			{% endif %}
 		{% endfor %}
 	</div>
 	{% endif %}

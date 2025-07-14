@@ -1,5 +1,11 @@
 /* post stylings */
 
+@property --commment-form-bg-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #e9e9e941;
+}
+
 .mini-post-indent {
 	border-left: 2px solid var(--sub-text-color);
 	margin-left: 0.5em;
@@ -14,6 +20,9 @@
 
 .post-block {
 	width: 28em;
+	max-width: calc(26.5em + 2px);
+
+	margin: 1.5em 0;
 
 	.post-content {
 		cursor: pointer;
@@ -22,10 +31,6 @@
 
 .post-title-block {
 	cursor: pointer;
-}
-
-.post-block {
-	max-width: calc(26.5em + 2px);
 }
 
 .post-image {
@@ -88,5 +93,45 @@
 	p {
 		margin: 0 0 0 0.5em;
 		line-height: 2.5em;
+	}
+}
+
+.post-comment-form-overlay {
+	@property --overlay {
+        syntax: "true | false";
+        inherits: true;
+        initial-value: "true";
+    }
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    padding: 0 0 20vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: var(--overlay-color);
+
+	.post-segment {
+		margin: auto;
+	}
+}
+
+.post-comment-button {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 3.5em;
+	border-radius: 1.75em;
+	background-color: var(--overlay-color);
+	border: 0;
+	margin: 0.5em 0;
+	padding: 0.25em;
+	
+	p {
+		margin: auto 0.5em;
+		text-align: left;
 	}
 }

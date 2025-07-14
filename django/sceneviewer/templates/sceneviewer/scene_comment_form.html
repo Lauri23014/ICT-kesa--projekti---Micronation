@@ -1,0 +1,144 @@
+{% load static %}
+<button onClick="commentFormScene{{ scene.id }}()" class="post-comment-button">
+	{% if request.user.is_authenticated %}
+		<img class="profile-picture" src="/media/{{ request.user.profile.profile_pic }}" alt="Profile Picture">
+	{% else %}
+		<img class="profile-picture" src="{% static 'users/images/default-avatar.jpg' %}" alt="Default Picture">
+	{% endif %}
+	<p>Type your reply</p>
+</button>
+
+<script>
+	function commentFormScene{{ scene.id }}() {
+		{% if request.user.is_authenticated %}
+			// post you are replying to
+			const replyingTo = document.createElement("div");
+			replyingTo.className = "post-block";
+			// post content
+			const replyingToPost = document.createElement("article");
+			replyingToPost.className = "post-content";
+			replyingTo.appendChild(replyingToPost);
+			const replyingToPostDiv = document.createElement("div");
+			replyingToPostDiv.className = "post-content-div";
+			replyingToPost.appendChild(replyingToPostDiv);
+			{% if scene.title %}
+				const replyingToPostTitle = document.createElement("h2");
+				replyingToPostTitle.innerText = "{{ scene.title }}";
+				replyingToPostDiv.appendChild(replyingToPostTitle);
+			{% endif %}
+			replyingToPostText = document.createElement("p");
+			replyingToPostText.innerText = "{{ scene.description|linebreaksbr }}";
+			replyingToPostDiv.appendChild(replyingToPostText);
+
+			// reply
+			// profile for reply
+			const reply = document.createElement("div");
+			reply.className = "post-block";
+			const replyProfile = document.createElement("div");
+			replyProfile.className = "profile-mini"
+			replyProfile.onClick = "window.location.href = '{% url 'profile_page' username=request.user.username %}'";
+			reply.appendChild(replyProfile);
+			{% if request.user.profile.profile_pic %}
+				const replyPFP = document.createElement("img");
+				replyPFP.className = "profile-picture";
+				replyPFP.src = "/media/{{ request.user.profile.profile_pic }}";
+				replyPFP.alt = "Profile Picture";
+			{% else %}
+				const replyPFP = document.createElement("img");
+				replyPFP.className = "profile-picture";
+				replyPFP.src = "{% static 'users/images/default-avatar.jpg' %}";
+				replyPFP.alt = "Default Picture";
+			{% endif %}
+			const replyName = document.createElement("h3")
+			replyName.innerText = "{{ request.user.username }}";
+			replyProfile.appendChild(replyPFP);
+			replyProfile.appendChild(replyName);
+
+			// reply form
+			const replyForm = document.createElement("form");
+			replyForm.method = "POST";
+			replyForm.action = "{% url "comment_scene" id=scene.id %}";
+			replyForm.id = "comment-form-{{ scene.id }}";
+			const csrftoken = getCookie('csrftoken');
+			const replyFormHiddenInput = document.createElement("input");
+			replyFormHiddenInput.type = "hidden";
+			replyFormHiddenInput.name = "next";
+			replyFormHiddenInput.value = "{{ request.path }}";
+			replyForm.appendChild(replyFormHiddenInput);
+			const replyFormTextInput = document.createElement("input");
+			replyFormTextInput.type = "text";
+			replyFormTextInput.name = "comment_text";
+			replyFormTextInput.maxlenght = "255";
+			replyFormTextInput.placeholder = "Type a reply!";
+			replyForm.appendChild(replyFormTextInput);
+			const replyFormSubmitButton = document.createElement("button");
+			replyFormSubmitButton.type = "submit";
+			replyFormSubmitButton.innerHtml = "<p>Reply</p>"
+			replyForm.appendChild(replyFormSubmitButton);
+			replyForm.onsubmit = function(e) {
+				e.preventDefault();
+				let form = document.getElementById("comment-form-{{ scene.id }}");
+				let url = form.action;
+				let formdata = new FormData(form);
+
+				let options = {
+					method: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.   
+					body: formdata,
+				};
+
+				fetch(url, options)
+				.then(response => response.json())
+				.then((response) => {
+					if (response.success) {
+						window.location.href = "/profile/"+response.username+"/post/"+response.id;
+					} else {
+						window.alert("Creating post failed. Try again later.")
+					}
+				})
+			}
+			reply.appendChild(replyForm);
+
+			// overlay and binding box
+			const overlay = document.createElement("div");
+			overlay.className = "post-comment-form-overlay";
+			overlay.id = "post-comment-form-overlay-{{ scene.id }}";
+			overlay.addEventListener("click", (click) => {removerScene{{ scene.id }}(click)});
+
+			const box = document.createElement("div");
+			box.className = "post-segment";
+
+			document.body.appendChild(overlay);
+			overlay.appendChild(box);
+			box.appendChild(replyingTo);
+			box.appendChild(reply);
+		{% else %}
+			window.location.href = "{% url 'login' %}";
+		{% endif %}
+	}
+
+	// function for removing form from screen
+	function removerScene{{ scene.id }}(click) {
+		const element = click.target;
+		if (element.classList.contains("post-comment-form-overlay")) {
+			document.getElementById("post-comment-form-overlay-{{ scene.id }}").remove();
+		}
+	}
+
+	function getCookie(name) {
+		let cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			const cookies = document.cookie.split(';');
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
+	}
+</script>
