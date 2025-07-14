@@ -11,11 +11,11 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var mascotIcon = L.icon({
     iconUrl: '/static/icons/mascot_ico.png',
     shadowUrl: '/static/icons/mascot_ico_shadow.png',
-    iconSize:     [40, 40],
-    shadowSize:   [40, 40],
+    iconSize:     [50, 50],
+    shadowSize:   [50, 50],
     iconAnchor:   [0, 0],
     shadowAnchor: [0, 0],
-    popupAnchor:  [20, 0]
+    popupAnchor:  [25, 0]
 });
 
 var marker = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
