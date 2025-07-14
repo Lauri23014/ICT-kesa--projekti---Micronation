@@ -1,8 +1,15 @@
 {% load static %}
-<button onClick="commentForm{{ scene.id }}()"><p>test</p></button>
+<button onClick="commentFormScene{{ scene.id }}()" class="post-comment-button">
+	{% if request.user.is_authenticated %}
+		<img class="profile-picture" src="/media/{{ request.user.profile.profile_pic }}" alt="Profile Picture">
+	{% else %}
+		<img class="profile-picture" src="{% static 'users/images/default-avatar.jpg' %}" alt="Default Picture">
+	{% endif %}
+	<p>Type your reply</p>
+</button>
 
 <script>
-	function commentForm{{ scene.id }}() {
+	function commentFormScene{{ scene.id }}() {
 		{% if request.user.is_authenticated %}
 			// post you are replying to
 			const replyingTo = document.createElement("div");
