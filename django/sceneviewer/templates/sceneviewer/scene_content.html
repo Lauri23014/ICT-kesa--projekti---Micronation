@@ -1,0 +1,6 @@
+<article {% if selected != True %}class="post-content" onClick="window.location.href = '/view/{{ scene.id }}'"{% endif %}>
+	<div class="post-content-div">
+		<h3>{{ scene.title }}</h3>
+		<p>{{ scene.description|linebreaksbr }}</p>
+	</div>
+</article>
