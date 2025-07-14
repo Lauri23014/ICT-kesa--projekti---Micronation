@@ -3,7 +3,7 @@
 @property --main-text-color {
     syntax: "<color>";
     inherits: false;
-    initial-value: #dddddd;
+    initial-value: #f0f0f0;
 }
 
 @property --link-text-color {
@@ -33,13 +33,13 @@
 @property --main-bg-color {
     syntax: "<color>";
     inherits: false;
-    initial-value: #0f0f0f;
+    initial-value: #05253a;
 }
 
 @property --sub-bg-color {
     syntax: "<color>";
     inherits: false;
-    initial-value: #000000;
+    initial-value: #021b27;
 }
 
 @property --highlight-bg-color {
@@ -54,9 +54,17 @@
     initial-value: #c0c0c069;
 }
 
+@property --bottom-text-color {
+	syntax: "<color>";
+	inherits: false;
+	initial-value: #000000;
+}
+
 body {
-	background-color: var(--sub-bg-color);
-	color: var(--main-text-color);
+	background-image: url('/static/wood-veneer-598-mm-architextures.jpg');
+	background-repeat: repeat;
+	background-attachment: fixed;
+	background-size: 10%;
 	font-family: Lora, Verdana;
 }
 
@@ -70,12 +78,13 @@ body {
 	#homepagebanner {
 		text-align: center;
 		margin: auto;
+		margin-bottom: 0;
 		padding: 1.5rem 0;
 		height: 2rem;
 		width: 20%;
 		background-color: var(--main-bg-color);
-		border-radius: 1em;
-		border: var(--highlight-text-color) 2px dashed;
+		border-top-left-radius: 1rem;
+		border-top-right-radius: 1rem;
 
 		a {
 			margin: 0;
@@ -97,21 +106,24 @@ body {
 		list-style: none;
 		height: 8em;
 		margin: auto;
+		justify-content: flex-end;
+		align-items: flex-end;
 	}
 		
 	li {
 		width: 22.5%;
-		margin: 1.5em 0 1.5em 1.5em;
 		height: 5rem;
 		background-color: var(--main-bg-color);
-		border-radius: 1em;
-		border: var(--highlight-text-color) 2px dashed;
+		margin-left: 0.5rem;
+		border-top-left-radius: 1rem;
+		border-top-right-radius: 1rem;
 		
 		a {
 			display: block;
 			text-align: center;
 			line-height: 5rem; /* height of parent container */ 
 			margin: auto;
+			margin-bottom: 0;
 		}
 	}
 }
@@ -121,25 +133,32 @@ body {
 	margin: auto;
 	overflow: hidden;
 	padding: 1em;
+	border-bottom-left-radius: 1rem;
+	border-bottom-right-radius: 1rem;
 	background-color: var(--sub-bg-color);
-	border-radius: 1em;
-	border: var(--highlight-text-color) 2px dashed;
 }
 
 #enddiv {
 	display: flex;
-	width: 100%;
+	flex-direction: column;
 	height: 8em;
 }
 
 #copyrightnotice {
 	margin: auto;
 	text-align: center;
+	color: var(--bottom-text-color);
+}
+
+#contactemail {
+	margin: auto;
+	text-align: center;
+	color: var(--bottom-text-color);
 }
 
 /* text */
 
-h1, h2, h3, p {
+h1, h2, h3, p, ul, li, form {
 	color: var(--main-text-color);
 }
 

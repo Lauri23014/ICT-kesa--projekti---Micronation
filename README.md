@@ -13,3 +13,6 @@
 # Prerequisites
 - Django v5.2.1 [(link)](https://www.djangoproject.com/)
 - django-cleanup [(link)](https://pypi.org/project/django-cleanup/)
+
+# Credits
+- Background image(https://architextures.org/textures/1057)
