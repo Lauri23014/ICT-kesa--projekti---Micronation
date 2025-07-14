@@ -93,7 +93,7 @@
 				.then((response) => {
 					if (response.success) {
 						let fakeclick = { target: overlay }
-						remover{{ scene.id }}(fakeclick)
+						removerScene{{ scene.id }}(fakeclick)
 						window.alert("Success!");
 					} else {
 						window.alert("No Success :(")
@@ -106,7 +106,7 @@
 			const overlay = document.createElement("div");
 			overlay.className = "post-comment-form-overlay";
 			overlay.id = "post-comment-form-overlay-{{ scene.id }}";
-			overlay.addEventListener("click", (click) => {remover{{ scene.id }}(click)});
+			overlay.addEventListener("click", (click) => {removerScene{{ scene.id }}(click)});
 
 			const box = document.createElement("div");
 			box.className = "post-segment";
@@ -121,7 +121,7 @@
 	}
 
 	// function for removing form from screen
-	function remover{{ scene.id }}(click) {
+	function removerScene{{ scene.id }}(click) {
 		const element = click.target;
 		if (element.classList.contains("post-comment-form-overlay")) {
 			document.getElementById("post-comment-form-overlay-{{ scene.id }}").remove();
