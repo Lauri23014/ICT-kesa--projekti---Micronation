@@ -8,13 +8,22 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 //marker
+var mascotIcon = L.icon({
+    iconUrl: '/static/icons/mascot_ico.png',
+    shadowUrl: '/static/icons/mascot_ico_shadow.png',
+    iconSize:     [40, 40],
+    shadowSize:   [40, 40],
+    iconAnchor:   [0, 0],
+    shadowAnchor: [0, 0],
+    popupAnchor:  [20, 0]
+});
 
-var marker = L.marker([60.73958103204708, 24.75605680821921], {alt:'alttext'}, {icon:'mascoticon'}).addTo(map);
+var marker = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
 
 var popup = L.popup()
     .setContent('<b>Hello world!</b><br><img src="/static/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
 
-marker.bindPopup(popup)
+marker.bindPopup(popup);
 
 function OnMarkerClick() {
     window.open("/view");
