@@ -10,10 +10,16 @@ def post(request, username, id):
 		thread = []
 		mainpost = Post.objects.get(id=id)
 		p = mainpost
-		while p.linked_post is not None:
-			np = Post.objects.get(id=p.linked_post.id)
-			thread.insert(0, np)
-			p = np
+		while p.linked_post is not None or p.linked_scene is not None:
+			np = None
+			if p.linked_post is not None:
+				np = Post.objects.get(id=p.linked_post.id)
+				thread.insert(0, np)
+				p = np
+			else:
+				np = Scene.objects.get(id=p.linked_scene.id)
+				thread.insert(0, np)
+				break
 		comments = Post.objects.filter(linked_post=id)
 		context = {
 			"username" : username,
