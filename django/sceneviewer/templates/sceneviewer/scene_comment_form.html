@@ -56,7 +56,7 @@
 
 			// reply form
 			const replyForm = document.createElement("form");
-			replyForm.method = "POST";
+			{% comment %} replyForm.method = "POST";
 			replyForm.action = "{% url "comment_scene" id=scene.id %}";
 			replyForm.id = "comment-form-{{ scene.id }}";
 			const csrftoken = getCookie('csrftoken');
@@ -92,12 +92,13 @@
 				.then(response => response.json())
 				.then((response) => {
 					if (response.success) {
-						window.location.href = "/profile/"+response.username+"/post/"+response.id;
+						window.location.href = "/profile/"+response.username+"/post/"+response.id+"#selected-post";
 					} else {
 						window.alert("Creating post failed. Try again later.")
 					}
 				})
-			}
+			} {% endcomment %}
+			{% include "userposts/post-comment-reply-form-definition.html" with post=scene scene=True%}
 			reply.appendChild(replyForm);
 
 			// overlay and binding box

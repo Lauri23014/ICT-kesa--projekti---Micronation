@@ -1,0 +1,45 @@
+replyForm.className = "post-comment-form";
+replyForm.method = "POST";
+replyForm.action = "{% if scene %}{% url "comment_scene" id=post.id %}{% else %}{% url "comment_post" username=post.user.username id=post.id %}{% endif %}";
+replyForm.id = "comment-form-{{ post.id }}";
+const csrftoken = getCookie('csrftoken');
+const replyFormHiddenInput = document.createElement("input");
+replyFormHiddenInput.type = "hidden";
+replyFormHiddenInput.name = "next";
+replyFormHiddenInput.value = "{{ request.path }}";
+replyForm.appendChild(replyFormHiddenInput);
+const replyFormTextInput = document.createElement("textarea");
+replyFormTextInput.className = "post-comment-form-text-input";
+replyFormTextInput.autocomplete = "off";
+replyFormTextInput.name = "comment_text";
+replyFormTextInput.maxlenght = "255";
+replyFormTextInput.placeholder = "Type a reply!";
+replyForm.appendChild(replyFormTextInput);
+const replyFormSubmitButton = document.createElement("button");
+replyFormSubmitButton.className = "generic-comment-button";
+replyFormSubmitButton.type = "submit";
+replyFormSubmitButton.innerHTML = "<p>Send reply</p>"
+replyForm.appendChild(replyFormSubmitButton);
+replyForm.onsubmit = function(e) {
+	e.preventDefault();
+	let form = document.getElementById("comment-form-{{ post.id }}");
+	let url = form.action;
+	let formdata = new FormData(form);
+
+	let options = {
+		method: 'POST',
+		headers: {'X-CSRFToken': csrftoken},
+		mode: 'same-origin', // Do not send CSRF token to another domain.   
+		body: formdata,
+	};
+
+	fetch(url, options)
+	.then(response => response.json())
+	.then((response) => {
+		if (response.success) {
+			window.location.href = "/profile/"+response.username+"/post/"+response.id+"#selected-post";
+		} else {
+			window.alert("Creating post failed. Try again later.")
+		}
+	})
+}

@@ -83,7 +83,7 @@
 
 			// reply form
 			const replyForm = document.createElement("form");
-			replyForm.className = "post-comment-form";
+			{% comment %} replyForm.className = "post-comment-form";
 			replyForm.method = "POST";
 			replyForm.action = "{% url "comment_post" username=post.user.username id=post.id %}";
 			replyForm.id = "comment-form-{{ post.id }}";
@@ -127,7 +127,8 @@
 						window.alert("Creating post failed. Try again later.")
 					}
 				})
-			}
+			} {% endcomment %}
+			{% include "userposts/post-comment-reply-form-definition.html" with post=post scene=False%}
 			reply.appendChild(replyForm);
 
 			// overlay and binding box
