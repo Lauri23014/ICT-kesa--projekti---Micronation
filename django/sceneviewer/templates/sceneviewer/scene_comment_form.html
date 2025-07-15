@@ -56,48 +56,6 @@
 
 			// reply form
 			const replyForm = document.createElement("form");
-			{% comment %} replyForm.method = "POST";
-			replyForm.action = "{% url "comment_scene" id=scene.id %}";
-			replyForm.id = "comment-form-{{ scene.id }}";
-			const csrftoken = getCookie('csrftoken');
-			const replyFormHiddenInput = document.createElement("input");
-			replyFormHiddenInput.type = "hidden";
-			replyFormHiddenInput.name = "next";
-			replyFormHiddenInput.value = "{{ request.path }}";
-			replyForm.appendChild(replyFormHiddenInput);
-			const replyFormTextInput = document.createElement("input");
-			replyFormTextInput.type = "text";
-			replyFormTextInput.name = "comment_text";
-			replyFormTextInput.maxlenght = "255";
-			replyFormTextInput.placeholder = "Type a reply!";
-			replyForm.appendChild(replyFormTextInput);
-			const replyFormSubmitButton = document.createElement("button");
-			replyFormSubmitButton.type = "submit";
-			replyFormSubmitButton.innerHtml = "<p>Reply</p>"
-			replyForm.appendChild(replyFormSubmitButton);
-			replyForm.onsubmit = function(e) {
-				e.preventDefault();
-				let form = document.getElementById("comment-form-{{ scene.id }}");
-				let url = form.action;
-				let formdata = new FormData(form);
-
-				let options = {
-					method: 'POST',
-					headers: {'X-CSRFToken': csrftoken},
-					mode: 'same-origin', // Do not send CSRF token to another domain.   
-					body: formdata,
-				};
-
-				fetch(url, options)
-				.then(response => response.json())
-				.then((response) => {
-					if (response.success) {
-						window.location.href = "/profile/"+response.username+"/post/"+response.id+"#selected-post";
-					} else {
-						window.alert("Creating post failed. Try again later.")
-					}
-				})
-			} {% endcomment %}
 			{% include "userposts/post-comment-reply-form-definition.html" with post=scene scene=True%}
 			reply.appendChild(replyForm);
 
