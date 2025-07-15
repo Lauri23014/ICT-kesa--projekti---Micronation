@@ -83,6 +83,7 @@
 
 			// reply form
 			const replyForm = document.createElement("form");
+			replyForm.className = "post-comment-form";
 			replyForm.method = "POST";
 			replyForm.action = "{% url "comment_post" username=post.user.username id=post.id %}";
 			replyForm.id = "comment-form-{{ post.id }}";
@@ -92,15 +93,17 @@
 			replyFormHiddenInput.name = "next";
 			replyFormHiddenInput.value = "{{ request.path }}";
 			replyForm.appendChild(replyFormHiddenInput);
-			const replyFormTextInput = document.createElement("input");
-			replyFormTextInput.type = "text";
+			const replyFormTextInput = document.createElement("textarea");
+			replyFormTextInput.className = "post-comment-form-text-input";
+			replyFormTextInput.autocomplete = "off";
 			replyFormTextInput.name = "comment_text";
 			replyFormTextInput.maxlenght = "255";
 			replyFormTextInput.placeholder = "Type a reply!";
 			replyForm.appendChild(replyFormTextInput);
 			const replyFormSubmitButton = document.createElement("button");
+			replyFormSubmitButton.className = "generic-comment-button";
 			replyFormSubmitButton.type = "submit";
-			replyFormSubmitButton.innerHtml = "<p>Reply</p>"
+			replyFormSubmitButton.innerHTML = "<p>Send reply</p>"
 			replyForm.appendChild(replyFormSubmitButton);
 			replyForm.onsubmit = function(e) {
 				e.preventDefault();
@@ -119,7 +122,7 @@
 				.then(response => response.json())
 				.then((response) => {
 					if (response.success) {
-						window.location.href = "/profile/"+response.username+"/post/"+response.id;
+						window.location.href = "/profile/"+response.username+"/post/"+response.id+"#selected-post";
 					} else {
 						window.alert("Creating post failed. Try again later.")
 					}
