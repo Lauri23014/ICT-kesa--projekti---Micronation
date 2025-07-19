@@ -3,14 +3,21 @@
 
 {% block title %}{{ page_user.user.username }}'s Profile{% endblock %}
 
+{% block head %}
+  <link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
+  <link rel="stylesheet" href='{% static "users/tabberStyle.css" %}'/>
+{% endblock head %}
 
 {% block content %}
 <style>
-      body {
-      font-family: 'Segoe UI', 'Inter', 'Lato', sans-serif;
-    }
+  {% comment %} commented out because fonts are already defined in base static/style.css {% endcomment %}
+  {% comment %} body {
+    font-family: 'Segoe UI', 'Inter', 'Lato', sans-serif;
+  } {% endcomment %}
 
-
+  {% comment %} 
+  TODO: move style definitions to .css file
+  {% endcomment %}
   .profile-page {
     background-image: url("{% static 'users/images/cat-bg.jpg' %}");
     background-size: cover;
@@ -25,15 +32,13 @@
     padding: 2rem;
     border-radius: 1.5rem;
     position: relative;
-   
   }
-
 
   .profile-card {
     position: relative;
     background-color: #1f1f1f;
-    max-width: 400px;
-    width: 100%;
+    max-width: 100%;
+    width: 400px;
     border-radius: 2rem;
     padding: 3rem 1.5rem 2rem;
     color: #fff;
@@ -92,60 +97,54 @@
     margin-top: 70px;
   }
 
-    .about-box {
-      margin-top: 1.5rem;
-    }
-
-    .about-title-box {
-    background-color: #444e53;
-      padding: 0.8rem 1rem;
-      border-radius: 1rem 1rem 0 0;
-      color: #e2e8f0;
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-align: left;
-    }
-
-    .about-bio-box {
-      background-color: #202527;
-      padding: 1rem;
-      border-radius: 0 0 1rem 1rem;
-      color: #edf2f7;
-      font-size: 1rem;
-      text-align: left;
-      line-height: 1.6;
-      max-width: 100%;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      overflow-y: auto;
-      max-height: 300px;
-          
-    }
-
-      .profile-btn span.emoji {
-    filter: grayscale(100%) brightness(50%);
+  .about-box {
+    margin-top: 1.5rem;
   }
 
+  .about-title-box {
+    background-color: #444e53;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem 1rem 0 0;
+    color: #e2e8f0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: left;
+  }
 
+  .about-bio-box {
+    background-color: #202527;
+    padding: 1rem;
+    border-radius: 0 0 1rem 1rem;
+    color: #edf2f7;
+    font-size: 1rem;
+    text-align: left;
+    line-height: 1.6;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    max-height: 300px;
+        
+  }
+
+  .profile-btn span.emoji {
+    filter: grayscale(100%) brightness(50%);
+  }
 </style>
 
 <div class="profile-page">
-
-     {% if request.user.username == page_user.user.username %}
-  <div class="btn-container">
-    <a href="{% url 'edit' %}" class="profile-btn">
-      <span class="emoji">⚙️</span> User Settings
-    </a>
-    <a href="{% url 'edit_profile' username=page_user.user.username %}" class="profile-btn">
-      <span class="emoji">✏️</span> Edit Profile
-    </a>
-  </div>
-{% endif %}
-
+  {% if request.user.username == page_user.user.username %}
+    <div class="btn-container">
+      <a href="{% url 'edit' %}" class="profile-btn">
+        <span class="emoji">⚙️</span> User Settings
+      </a>
+      <a href="{% url 'edit_profile' username=page_user.user.username %}" class="profile-btn">
+        <span class="emoji">✏️</span> Edit Profile
+      </a>
+    </div>
+  {% endif %}
   
   <div class="profile-card">
-
-    
     <div class="profile-avatar-wrapper">
       {% if page_user.profile_pic %}
         <img class="profile-pic" src="/media/{{ page_user.profile_pic }}" alt="Profile Picture">
@@ -153,23 +152,46 @@
         <img class="profile-pic" src="{% static 'users/images/headshot.png' %}" alt="Default Profile">
       {% endif %}
     </div>
-
      
     <div class="username">{{ page_user.user.username }}</div>
 
-      <div class="about-box">
-        <div class="about-title-box">
-          <div class="about-title">About Me</div>
-        </div>
-        <div class="about-bio-box">
-          {% if page_user.bio %}
-            {{ page_user.bio|linebreaks }}
-          {% elif request.user.username == page_user.user.username %}
-            <em>Tell us something about yourself...</em>
-          {% endif %}
-        </div>
+    <div class="about-box">
+      <div class="about-title-box">
+        <div class="about-title">About Me</div>
       </div>
+      <div class="about-bio-box">
+        {% if page_user.bio %}
+          {{ page_user.bio|linebreaks }}
+        {% elif request.user.username == page_user.user.username %}
+          <em>Tell us something about yourself...</em>
+        {% endif %}
+      </div>
+    </div>
 
+    <div class="tabber">
+      <button class="tab-buttons" id="user-posts-button" onClick="openTab(event, 'user-posts')">Posts</button>
+      <button class="tab-buttons" id="user-replies-button" onClick="openTab(event, 'user-replies')">Replies</button>
+    </div>
+    <div class="tabber-content" id="user-posts">
+      {% for post in posts %}
+        <div class="post-segment">
+          {% include "userposts/post_title_block.html" with post=post %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="tabber-content" id="user-replies">
+      {% for reply in replies %}
+        <div class="post-segment">
+          <div class="mini-post-indent">
+            {% include "userposts/post_block.html" with post=reply selected=False %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <script src="{% static 'users/tabber.js' %}"></script>
+    <script>
+      document.getElementById("user-posts-button").click()
+    </script>
   </div>
 </div>
 {% endblock %}
