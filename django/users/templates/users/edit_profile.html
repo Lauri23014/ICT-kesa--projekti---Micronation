@@ -41,7 +41,7 @@
         </div>
         {% endif %}
       {% endfor %}
-      <button type="submit" class="edit-profile-save-btn w-100 mt-3">
+      <button type="submit" class="edit-profile-save-btn mt-2 rounded-pill d-block mx-auto">
         Save changes
       </button>
     </form>
@@ -129,21 +129,22 @@ document.addEventListener('DOMContentLoaded', function() {
     font-size: 1rem;
   }
   .edit-profile-save-btn {
-    background: linear-gradient(90deg, #444e53 0%, #aab2b3 100%);
-    color: #fff;
+    background: #444e53 !important;
+    color: #f3f4f6 !important;
     border: none;
-    border-radius: 1.2rem;
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding: 0.7rem 0;
+    border-radius: 50rem !important;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
     transition: background 0.3s, color 0.2s, box-shadow 0.2s;
     box-shadow: 0 2px 8px rgba(60,60,60,0.07);
-    letter-spacing: 0.02em;
+    padding: 0.32rem 1.2rem;
+    min-width: 140px;
   }
   .edit-profile-save-btn:hover {
-    background: linear-gradient(90deg, #aab2b3 0%, #444e53 100%);
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(60,60,60,0.10);
+    background: #353b48 !important;
+    color: #e2e8f0 !important;
+    box-shadow: 0 4px 16px rgba(60,60,60,0.13);
   }
   .form-label, .form-text {
     color: #bfc7d5 !important;
@@ -160,5 +161,5 @@ document.addEventListener('DOMContentLoaded', function() {
     border-color: #aab2b3 !important;
     box-shadow: 0 0 0 2px #aab2b333;
   }
-</style>
+  </style>
 {% endblock %}

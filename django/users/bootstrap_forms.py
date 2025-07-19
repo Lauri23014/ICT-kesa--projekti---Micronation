@@ -13,9 +13,7 @@ class EditProfileForm(forms.ModelForm):
         model = User
         fields = ('username',)
 
-    def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['class'] = 'form-control'
+   
         
 
 
@@ -50,3 +48,4 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['bio', 'profile_pic']
+
