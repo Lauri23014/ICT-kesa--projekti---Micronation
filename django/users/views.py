@@ -58,13 +58,18 @@ def logout_view(request):
 @login_required    
 def edit_view(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user) #changing from django's default form to EditProfileForm
+        form = EditProfileForm(request.POST, instance=request.user)
+        password_form = PasswordChangingForm(user=request.user)  # Empty by default
         if form.is_valid():
             form.save()
             return redirect('index')
     else:
-        form = EditProfileForm(instance=request.user) #Editt the currently logged-in user
-    return render(request, 'users/edit_user.html', {'form': form})
+        form = EditProfileForm(instance=request.user)
+        password_form = PasswordChangingForm(user=request.user)
+    return render(request, 'users/edit_user.html', {
+        'form': form,
+        'password_form': password_form,
+    })
 
 @login_required
 def password_change(request):
@@ -108,3 +113,4 @@ def EditProfileView(request, username):
         form = ProfileEditForm(instance=profile)
 
     return render(request, 'users/edit_profile.html', {'form': form})
+

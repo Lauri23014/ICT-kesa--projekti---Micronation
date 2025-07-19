@@ -16,4 +16,5 @@ urlpatterns = [
     path('<str:username>/edit_profile/', EditProfileView, name='edit_profile'),
     
     
+    
 ]
