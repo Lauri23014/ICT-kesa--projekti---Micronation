@@ -65,7 +65,8 @@ body {
 	background-repeat: repeat;
 	background-attachment: fixed;
 	background-size: 10%;
-	font-family: Lora, Verdana;
+	font-family: 'Segoe UI', 'Inter', 'Lato', sans-serif;
+	/* font-family: Lora, Verdana; */
 }
 
 #navbar {
