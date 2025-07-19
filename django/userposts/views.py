@@ -86,6 +86,11 @@ def create_post(request, linked_post=None, linked_scene=None, title=None, text_c
 
 	return JsonResponse(data)
 
+def post_post(request, username, id):
+	title = request.POST.get("post_title")
+	text_content = request.POST.get("post_text")
+	return create_post(request, title=title, text_content=text_content)
+
 def comment_post(request, username, id):
 	linked_post = Post.objects.get(id=id)
 	text_content = request.POST.get("comment_text")
@@ -95,3 +100,21 @@ def comment_scene(request, id):
 	linked_scene = Scene.objects.get(id=id)
 	text_content = request.POST.get("comment_text")
 	return create_post(request, linked_scene=linked_scene, text_content=text_content)
+
+def remove_post(request, username, id):
+	data = {}
+	post = Post.objects.get(id=id)
+
+	success = True
+	if post is None:
+		success = False
+	elif post.user is request.user:
+		try:
+			post.delete()
+		except:
+			success = False
+	else:
+		success = False
+	
+	data["success"] = success
+	return JsonResponse(data)
