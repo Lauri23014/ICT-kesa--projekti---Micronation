@@ -1,8 +1,11 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.utils import timezone
 
 from userposts.models import Post
 from sceneviewer.models import Scene
+
+from zoneinfo import ZoneInfo
 
 # basic views
 def post(request, username, id):
@@ -117,4 +120,10 @@ def remove_post(request, username, id):
 		success = False
 	
 	data["success"] = success
+	return JsonResponse(data)
+
+def convert_post_timezone(request, username, id):
+	data = {}
+	post = Post.objects.get(id=id)
+	data["datetime_string"] = post.datetime.astimezone(ZoneInfo(request.POST.get("timezone"))).strftime("%d/%m/%Y, %H:%M:%S")
 	return JsonResponse(data)

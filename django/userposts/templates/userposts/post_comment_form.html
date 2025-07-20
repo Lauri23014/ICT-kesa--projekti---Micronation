@@ -116,7 +116,7 @@
 				let options = {
 					method: 'POST',
 					headers: {'X-CSRFToken': csrftoken},
-					mode: 'same-origin', // Do not send CSRF token to another domain.   
+					mode: 'same-origin', // Do not send CSRF token to another domain.
 					body: formdata,
 				};
 
@@ -157,20 +157,5 @@
 			document.getElementById("post-comment-form-overlay-{{ post.id }}").remove();
 		}
 	}
-
-	function getCookie(name) {
-		let cookieValue = null;
-		if (document.cookie && document.cookie !== '') {
-			const cookies = document.cookie.split(';');
-			for (let i = 0; i < cookies.length; i++) {
-				const cookie = cookies[i].trim();
-				// Does this cookie string begin with the name we want?
-				if (cookie.substring(0, name.length + 1) === (name + '=')) {
-					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-					break;
-				}
-			}
-		}
-		return cookieValue;
-	}
 </script>
+<script src="{% static "userposts/js/getCookie.js" %}"></script>
