@@ -185,3 +185,19 @@ a {
 a:visited {
 	color: var(--linkvisited-text-color);
 }
+
+.logout-button {
+    background: none;
+    border: none;
+    color: var(--main-text-color); 
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 5rem; 
+}
+
