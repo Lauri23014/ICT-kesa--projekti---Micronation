@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 	'sceneviewer',
 	'userposts',
     'django_cleanup.apps.CleanupConfig',
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [

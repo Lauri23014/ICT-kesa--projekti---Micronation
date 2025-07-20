@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .bootstrap_forms import PasswordChangingForm
+from .bootstrap_forms import PasswordChangingForm, BackgroundImageForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
 from django.views.generic import DetailView
@@ -58,13 +58,18 @@ def logout_view(request):
 @login_required    
 def edit_view(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user) #changing from django's default form to EditProfileForm
+        form = EditProfileForm(request.POST, instance=request.user)
+        password_form = PasswordChangingForm(user=request.user)  # Empty by default
         if form.is_valid():
             form.save()
             return redirect('index')
     else:
-        form = EditProfileForm(instance=request.user) #Editt the currently logged-in user
-    return render(request, 'users/edit_user.html', {'form': form})
+        form = EditProfileForm(instance=request.user)
+        password_form = PasswordChangingForm(user=request.user)
+    return render(request, 'users/edit_user.html', {
+        'form': form,
+        'password_form': password_form,
+    })
 
 @login_required
 def password_change(request):
@@ -108,3 +113,12 @@ def EditProfileView(request, username):
         form = ProfileEditForm(instance=profile)
 
     return render(request, 'users/edit_profile.html', {'form': form})
+
+@login_required
+def change_background(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = BackgroundImageForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+    return redirect('profile_page', username=request.user.username)
