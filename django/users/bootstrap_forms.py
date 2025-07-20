@@ -49,3 +49,9 @@ class ProfileEditForm(forms.ModelForm):
         model = Profile
         fields = ['bio', 'profile_pic']
 
+
+
+class BackgroundImageForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['background_image']

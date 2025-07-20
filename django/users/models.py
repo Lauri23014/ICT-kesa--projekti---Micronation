@@ -10,6 +10,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(null=True, blank=True, upload_to="profile/")
     theme_color = models.CharField(max_length=7, default='#1a1a1a')
     favorite_cat = models.CharField(max_length=100, blank=True, null=True)
+    background_image = models.ImageField(upload_to='profile_backgrounds/', blank=True, null=True)
 
 
 

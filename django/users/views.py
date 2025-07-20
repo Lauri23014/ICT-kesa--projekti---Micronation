@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .bootstrap_forms import PasswordChangingForm
+from .bootstrap_forms import PasswordChangingForm, BackgroundImageForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
 from django.views.generic import DetailView
@@ -114,3 +114,11 @@ def EditProfileView(request, username):
 
     return render(request, 'users/edit_profile.html', {'form': form})
 
+@login_required
+def change_background(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = BackgroundImageForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+    return redirect('profile_page', username=request.user.username)
