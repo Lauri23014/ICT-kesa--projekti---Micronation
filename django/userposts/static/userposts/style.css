@@ -162,10 +162,9 @@
 	outline: none !important;
 }
 
-.post-content-info-flex {
+.post-content-info-div {
 	display: flex;
 	flex-direction: row;
-	margin: 0 0 0 0.15em;
 
 	img {
 		height: 2.5em;
@@ -184,6 +183,13 @@
 		margin: 0 1em 0 0.5em;
 		line-height: 2.5em;
 	}
+}
+
+.post-content-info-flex {
+	display: flex;
+	flex-direction: row;
+	flex: 0%;
+	margin: 0 0 0 0.15em;
 }
 
 .post-content-comment-div {

@@ -33,6 +33,16 @@
 			<p id="like-counter-{{ post.id }}">{{ post.like_count }}</p>
 		</div>
 	</div>
+	{% if request.user == post.user %}
+		<div class="delete-button">
+			<form method="POST" action="{% url "remove_post_or_comment" username=post.user.username id=post.id %}" class="delete-form" id="delete-form-{{ post.id }}">
+				{% csrf_token %}
+				<button type="submit">
+					<img src="{% static 'icons/delete.svg' %}">
+				</button>
+			</form>
+		</div>
+	{% endif %}
 </div>
 
 {% if selected %}
@@ -77,10 +87,7 @@
 				img.src = "{% static 'icons/heart.svg' %}";
 			}
 
-			counter.innerText = response.count+" like";
-			if (response.count != 1) {
-				counter.innerText += "s";
-			}
+			counter.innerText = response.count;
 		})
 	}
 </script>
