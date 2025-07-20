@@ -33,13 +33,13 @@
 @property --main-bg-color {
     syntax: "<color>";
     inherits: false;
-    initial-value: #05253a;
+    initial-value: #331304;
 }
 
 @property --sub-bg-color {
     syntax: "<color>";
     inherits: false;
-    initial-value: #021b27;
+    initial-value: #1D0A02;
 }
 
 @property --highlight-bg-color {

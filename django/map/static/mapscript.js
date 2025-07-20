@@ -1,14 +1,14 @@
 //map setup
-var map = L.map('map').setView([60.73958103204708, 24.75605680821921], 13);
+let map = L.map('map').setView([60.73958103204708, 24.75605680821921], 13);
 
 //tile layer
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+    maxZoom: 25,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-//marker
-var mascotIcon = L.icon({
+//icon
+let mascotIcon = L.icon({
     iconUrl: '/static/icons/mascot_ico.png',
     shadowUrl: '/static/icons/mascot_ico_shadow.png',
     iconSize:     [50, 50],
@@ -18,15 +18,17 @@ var mascotIcon = L.icon({
     popupAnchor:  [25, 0]
 });
 
-var marker = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
+//maker1
+let marker1 = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
 
-var popup = L.popup()
+let popup1 = L.popup()
     .setContent('<b>Hello world!</b><br><img src="/static/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
 
-marker.bindPopup(popup);
+marker1.bindPopup(popup1);
 
-function OnMarkerClick() {
-    window.open("/view");
-}
+marker1.on('dblclick', OnMarkerClick);
 
-marker.on('dblclick', OnMarkerClick);
+//clicking function
+function OnMarkerClick() {    
+        window.open("/view")
+};
