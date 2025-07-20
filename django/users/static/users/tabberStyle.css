@@ -1,8 +1,8 @@
  /* Style the tabber */
 .tabber {
 	overflow: hidden;
-	border: 1px solid #ccc;
-	background-color: #f1f1f1;
+	background-color: #444e53;
+	border-radius: 1em 1em 0 0;
 }
 
 /* Style the buttons that are used to open the tabber content */
@@ -12,8 +12,14 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
-	padding: 14px 16px;
 	transition: 0.3s;
+
+	padding: 0.8em 1em;
+
+	/* copied from users/user_profile.html */
+	color: #e2e8f0;
+	font-weight: bold;
+    font-size: 1.2em;
 }
 
 /* Change background color of buttons on hover */
@@ -28,8 +34,6 @@
 
 /* Style the tabber content */
 .tabber-content {
-	display: none;
-	padding: 6px 12px;
-	border: 1px solid #ccc;
-	border-top: none;
+	background-color: #202527;
+	padding: 0.25em;
 } 
