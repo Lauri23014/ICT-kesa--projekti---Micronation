@@ -1,5 +1,5 @@
 <div class="post-block">
 	{% include "userposts/profile_mini.html" with user=post.user %}
 	{% include "userposts/post_content.html" with post=post selected=selected %}
-	{% include "userposts/post_comment_form.html" with post=post %}
+	{% include "userposts/post_comment_form.html" with post=post scene=False%}
 </div>

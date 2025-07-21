@@ -33,13 +33,13 @@
 @property --main-bg-color {
     syntax: "<color>";
     inherits: false;
-    initial-value: #05253a;
+    initial-value: #331304;
 }
 
 @property --sub-bg-color {
     syntax: "<color>";
     inherits: false;
-    initial-value: #021b27;
+    initial-value: #1D0A02;
 }
 
 @property --highlight-bg-color {
@@ -65,7 +65,8 @@ body {
 	background-repeat: repeat;
 	background-attachment: fixed;
 	background-size: 10%;
-	font-family: Lora, Verdana;
+	font-family: 'Segoe UI', 'Inter', 'Lato', sans-serif;
+	/* font-family: Lora, Verdana; */
 }
 
 body, html {
@@ -175,7 +176,7 @@ body, html {
 
 /* text */
 
-h1, h2, h3, p, ul, li, form {
+h1, h2, h3, p, ul, li, form, textarea {
 	color: var(--main-text-color);
 }
 
@@ -185,6 +186,10 @@ a {
 
 a:visited {
 	color: var(--linkvisited-text-color);
+}
+
+textarea {
+	font-family: Lora, Verdana;
 }
 
 .logout-button {
@@ -201,4 +206,3 @@ a:visited {
     text-align: center;
     line-height: 5rem; 
 }
-

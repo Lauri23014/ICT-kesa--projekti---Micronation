@@ -11,6 +11,7 @@ from django.contrib import messages
 
 from django.views import generic
 from .models import Profile
+from userposts.models import Post
 from django.contrib.auth.models import User
 
 from .bootstrap_forms import ProfileEditForm
@@ -93,6 +94,15 @@ class ProfilePageView(DetailView):
 
     def get_object(self):
         return get_object_or_404(Profile, user__username=self.kwargs['username'])
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProfilePageView,
+             self).get_context_data(*args, **kwargs)
+        # add extra fields
+        user = User.objects.get(username=self.kwargs['username'])
+        context["posts"] = Post.objects.filter(user=user).exclude(title__isnull=True)
+        context["replies"] = Post.objects.filter(user=user).exclude(title__isnull=False)
+        return context
     
 #will use get_context_data() if we want to show users posts etc in user profile 
 

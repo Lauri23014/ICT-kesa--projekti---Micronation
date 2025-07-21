@@ -1,6 +1,6 @@
 {% load static %}
-<button onClick="commentFormPost{{ post.id }}()" class="post-comment-button">
-	{% if request.user.is_authenticated %}
+<button onClick="commentForm{% if scene %}Scene{% else %}Post{% endif %}{{ post.id }}()" class="post-comment-button">
+	{% if request.user.profile.profile_pic %}
 		<img class="profile-picture" src="/media/{{ request.user.profile.profile_pic }}" alt="Profile Picture">
 	{% else %}
 		<img class="profile-picture" src="{% static 'users/images/default-avatar.jpg' %}" alt="Default Picture">
@@ -9,35 +9,37 @@
 </button>
 
 <script>
-	function commentFormPost{{ post.id }}() {
+	function commentForm{% if scene %}Scene{% else %}Post{% endif %}{{ post.id }}() {
 		{% if request.user.is_authenticated %}
 			// post you are replying to
 			const replyingTo = document.createElement("div");
 			replyingTo.className = "post-block";
 			// profile for post
-			const replyingToProfile = document.createElement("div");
-			replyingToProfile.className = "profile-mini"
-			replyingToProfile.onClick = "window.location.href = '{% url 'profile_page' username=post.user.username %}'";
-			replyingTo.appendChild(replyingToProfile);
-			{% if post.user.profile.profile_pic %}
-				const replyingToPFP = document.createElement("img");
-				replyingToPFP.className = "profile-picture";
-				replyingToPFP.src = "/media/{{ post.user.profile.profile_pic }}";
-				replyingToPFP.alt = "Profile Picture";
-			{% else %}
-				const replyingToPFP = document.createElement("img");
-				replyingToPFP.className = "profile-picture";
-				replyingToPFP.src = "{% static 'users/images/default-avatar.jpg' %}";
-				replyingToPFP.alt = "Default Picture";
+			{% if not scene %}
+				const replyingToProfile = document.createElement("div");
+				replyingToProfile.className = "profile-mini"
+				replyingToProfile.onClick = "window.location.href = '{% url 'profile_page' username=post.user.username %}'";
+				replyingTo.appendChild(replyingToProfile);
+				{% if post.user.profile.profile_pic %}
+					const replyingToPFP = document.createElement("img");
+					replyingToPFP.className = "profile-picture";
+					replyingToPFP.src = "/media/{{ post.user.profile.profile_pic }}";
+					replyingToPFP.alt = "Profile Picture";
+				{% else %}
+					const replyingToPFP = document.createElement("img");
+					replyingToPFP.className = "profile-picture";
+					replyingToPFP.src = "{% static 'users/images/default-avatar.jpg' %}";
+					replyingToPFP.alt = "Default Picture";
+				{% endif %}
+				const replyingToName = document.createElement("h3")
+				replyingToName.innerText = "{{ post.user.username }}";
+				replyingToProfile.appendChild(replyingToPFP);
+				replyingToProfile.appendChild(replyingToName);
 			{% endif %}
-			const replyingToName = document.createElement("h3")
-			replyingToName.innerText = "{{ post.user.username }}";
-			replyingToProfile.appendChild(replyingToPFP);
-			replyingToProfile.appendChild(replyingToName);
 			// post content
 			const replyingToPost = document.createElement("article");
 			replyingToPost.className = "post-content";
-			replyingToPost.onClick = "window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'";
+			replyingToPost.onClick = "window.location.href = {% if scene %}'view/post.id'{% else %}'/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'{% endif %}";
 			replyingTo.appendChild(replyingToPost);
 			const replyingToPostDiv = document.createElement("div");
 			replyingToPostDiv.className = "post-content-div";
@@ -48,9 +50,9 @@
 				replyingToPostDiv.appendChild(replyingToPostTitle);
 			{% endif %}
 			replyingToPostText = document.createElement("p");
-			replyingToPostText.innerText = "{{ post.text_content|linebreaksbr }}";
+			replyingToPostText.innerText = "{% if scene %}{{ post.description|linebreaksbr }}{% else %}{{ post.text_content|linebreaksbr }}{% endif %}";
 			replyingToPostDiv.appendChild(replyingToPostText);
-			{% if post.image_file.url != None %}
+			{% if not scene and post.image_file.url != None %}
 				const replyingToPostImg = document.createElement("img");
 				replyingToPostImg.className = "post-image";
 				replyingToPostImg.src = "{{ post.image_file.url }}";
@@ -83,8 +85,9 @@
 
 			// reply form
 			const replyForm = document.createElement("form");
+			replyForm.className = "post-comment-form";
 			replyForm.method = "POST";
-			replyForm.action = "{% url "comment_post" username=post.user.username id=post.id %}";
+			replyForm.action = "{% if scene %}{% url "comment_scene" id=post.id %}{% else %}{% url "comment_post" username=post.user.username id=post.id %}{% endif %}";
 			replyForm.id = "comment-form-{{ post.id }}";
 			const csrftoken = getCookie('csrftoken');
 			const replyFormHiddenInput = document.createElement("input");
@@ -92,15 +95,17 @@
 			replyFormHiddenInput.name = "next";
 			replyFormHiddenInput.value = "{{ request.path }}";
 			replyForm.appendChild(replyFormHiddenInput);
-			const replyFormTextInput = document.createElement("input");
-			replyFormTextInput.type = "text";
+			const replyFormTextInput = document.createElement("textarea");
+			replyFormTextInput.className = "post-comment-form-text-input";
+			replyFormTextInput.autocomplete = "off";
 			replyFormTextInput.name = "comment_text";
 			replyFormTextInput.maxlenght = "255";
 			replyFormTextInput.placeholder = "Type a reply!";
 			replyForm.appendChild(replyFormTextInput);
 			const replyFormSubmitButton = document.createElement("button");
+			replyFormSubmitButton.className = "generic-comment-button";
 			replyFormSubmitButton.type = "submit";
-			replyFormSubmitButton.innerHtml = "<p>Reply</p>"
+			replyFormSubmitButton.innerHTML = "<p>Send reply</p>"
 			replyForm.appendChild(replyFormSubmitButton);
 			replyForm.onsubmit = function(e) {
 				e.preventDefault();
@@ -111,7 +116,7 @@
 				let options = {
 					method: 'POST',
 					headers: {'X-CSRFToken': csrftoken},
-					mode: 'same-origin', // Do not send CSRF token to another domain.   
+					mode: 'same-origin', // Do not send CSRF token to another domain.
 					body: formdata,
 				};
 
@@ -119,7 +124,7 @@
 				.then(response => response.json())
 				.then((response) => {
 					if (response.success) {
-						window.location.href = "/profile/"+response.username+"/post/"+response.id;
+						window.location.href = "/profile/"+response.username+"/post/"+response.id+"#selected-post";
 					} else {
 						window.alert("Creating post failed. Try again later.")
 					}
@@ -152,20 +157,5 @@
 			document.getElementById("post-comment-form-overlay-{{ post.id }}").remove();
 		}
 	}
-
-	function getCookie(name) {
-		let cookieValue = null;
-		if (document.cookie && document.cookie !== '') {
-			const cookies = document.cookie.split(';');
-			for (let i = 0; i < cookies.length; i++) {
-				const cookie = cookies[i].trim();
-				// Does this cookie string begin with the name we want?
-				if (cookie.substring(0, name.length + 1) === (name + '=')) {
-					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-					break;
-				}
-			}
-		}
-		return cookieValue;
-	}
 </script>
+<script src="{% static "userposts/js/getCookie.js" %}"></script>
