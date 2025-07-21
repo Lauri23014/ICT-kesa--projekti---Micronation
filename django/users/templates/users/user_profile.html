@@ -294,6 +294,31 @@
         {% endif %}
       </div>
     </div>
+
+    <div class="tabber">
+      <button class="tab-buttons" id="user-posts-button" onClick="openTab(event, 'user-posts')">Posts</button>
+      <button class="tab-buttons" id="user-replies-button" onClick="openTab(event, 'user-replies')">Replies</button>
+    </div>
+    <div class="tabber-content" id="user-posts">
+      {% for post in posts %}
+        <div class="post-segment">
+          {% include "userposts/post_title_block.html" with post=post %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="tabber-content" id="user-replies">
+      {% for reply in replies %}
+        <div class="post-segment">
+          <div class="mini-post-indent">
+            {% include "userposts/post_block.html" with post=reply selected=False %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <script src="{% static 'users/tabber.js' %}"></script>
+    <script>
+      document.getElementById("user-posts-button").click()
+    </script>
   </div>
 </div>
 
