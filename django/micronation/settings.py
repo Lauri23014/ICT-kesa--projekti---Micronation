@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 	'userposts',
     'django_cleanup.apps.CleanupConfig',
     "widget_tweaks",
+    'about'
 ]
 
 MIDDLEWARE = [
