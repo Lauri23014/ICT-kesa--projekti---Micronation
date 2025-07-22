@@ -3,6 +3,13 @@
 #viewer {
 	width: 50vw;
 	height: 75vh;
+	max-height: fit-content;
+}
+
+#viewer-img {
+	width: 100%;
+	object-fit: contain;
+	border-radius: 1em;
 }
 
 #viewer-container {

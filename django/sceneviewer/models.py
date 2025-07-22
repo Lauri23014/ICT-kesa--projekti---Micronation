@@ -10,5 +10,6 @@ class Scene(models.Model):
 	upload_datetime = models.DateTimeField(auto_now_add=True)
 	update_datetime = models.DateTimeField(auto_now=True)
 	image_file = models.ImageField(upload_to=user_directory_path)
+	is_360 = models.BooleanField()
 	def __str__(self):
 		return self.title

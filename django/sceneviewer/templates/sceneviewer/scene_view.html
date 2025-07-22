@@ -12,27 +12,33 @@
 {% endblock %}
 {% block content %}
 	<div id="viewer-container">
-		<!-- the viewer container must have a defined size -->
-		<div id="viewer"></div>
-		<!--Photo Sphere Viewer imports-->
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
-					"@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.module.js"
+		{% if is_360 %}
+			<!-- the viewer container must have a defined size -->
+			<div id="viewer"></div>
+			<!--Photo Sphere Viewer imports-->
+			<script type="importmap">
+				{
+					"imports": {
+						"three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+						"@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.module.js"
+					}
 				}
-			}
-		</script>
-		<!--Photo Sphere Viewer main script, creates viewer as a child of #viewer-->
-		<script type="module">
-			import { Viewer } from '@photo-sphere-viewer/core';
+			</script>
+			<!--Photo Sphere Viewer main script, creates viewer as a child of #viewer-->
+			<script type="module">
+				import { Viewer } from '@photo-sphere-viewer/core';
 
-			const viewer = new Viewer({
-				container: document.querySelector('#viewer'),
-				panorama: '{{ scene.image_file.url }}',
-				defaultZoomLvl: 0,
-			});
-		</script>
+				const viewer = new Viewer({
+					container: document.querySelector('#viewer'),
+					panorama: '{{ scene.image_file.url }}',
+					defaultZoomLvl: 0,
+				});
+			</script>
+		{% else %}
+			<div id="viewer">
+				<img id="viewer-img" src="{{ scene.image_file.url }}">
+			</div>
+		{% endif %}
 
 		<div id="view-text-content">
 			{% include "sceneviewer/scene_block.html" with scene=scene selected=True%}
@@ -46,5 +52,4 @@
 			</div>
 		</div>
 	</div>
-		
 {% endblock %}
