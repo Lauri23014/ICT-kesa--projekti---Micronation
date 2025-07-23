@@ -9,8 +9,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 //icon
 let mascotIcon = L.icon({
-    iconUrl: '/static/icons/mascot_ico.png',
-    shadowUrl: '/static/icons/mascot_ico_shadow.png',
+    iconUrl: '/static/map/icons/mascot_ico.png',
+    shadowUrl: '/static/map/icons/mascot_ico_shadow.png',
     iconSize:     [50, 50],
     shadowSize:   [50, 50],
     iconAnchor:   [0, 0],
@@ -22,7 +22,7 @@ let mascotIcon = L.icon({
 let marker1 = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
 
 let popup1 = L.popup()
-    .setContent('<b>Hello world!</b><br><img src="/static/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
+    .setContent('<b>Hello world!</b><br><img src="/static/map/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
 
 marker1.bindPopup(popup1);
 
@@ -32,7 +32,7 @@ marker1.on('dblclick', OnMarkerClick);
 let marker2 = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
 
 let popup2 = L.popup()
-    .setContent('<b>Hello world!</b><br><img src="/static/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
+    .setContent('<b>Hello world!</b><br><img src="/static/map/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
 
 marker2.bindPopup(popup2);
 
