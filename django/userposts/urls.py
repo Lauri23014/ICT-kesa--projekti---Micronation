@@ -11,5 +11,5 @@ urlpatterns = [
 	path("profile/<username>/post/<id>/comment", login_required(views.comment_post), name="comment_post"),
 	path("profile/<username>/post/<id>/timezone", views.convert_post_timezone, name="convert_post_timezone"),
 	path("view/<id>/comment", login_required(views.comment_scene), name="comment_scene"),
-	path("timeline", views.postlist, name="list_of_posts")
+	path("timeline", views.postlist, name="timeline")
 ]
