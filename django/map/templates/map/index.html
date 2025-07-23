@@ -35,33 +35,24 @@
             shadowSize:   [50, 50],
             iconAnchor:   [25, 25],
             shadowAnchor: [25, 25],
-            popupAnchor:  [25, 0]
+            popupAnchor:  [0, -15]
         });
 
-        //maker1
-        let marker1 = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
+        {% for scene in scenes %}
+            //marker
+            let marker{{ scene.id }} = L.marker([{{ scene.latitude }}, {{ scene.longitude }}], {icon:mascotIcon}, {alt:'{{ scene.title }} map marker.'}).addTo(map);
 
-        let popup1 = L.popup()
-            .setContent('<b>Hello world!</b><br><img src="/static/map/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
+            let popup{{ scene.id }} = L.popup().setContent('<b>{{ scene.title }}</b><br><img src="{{ scene.thumbnail.url }}" alt="{{ scene.title }} thumbnail." style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>{{ scene.description|truncatechars:100|linebreaksbr }}<hr>Click me twice to view a scene.');
 
-        marker1.bindPopup(popup1);
+            marker{{ scene.id }}.bindPopup(popup{{ scene.id }});
 
-        marker1.on('dblclick', OnMarkerClick);
+            marker{{ scene.id }}.on('dblclick', OnMarkerClick{{ scene.id }});
 
-        //maker2
-        let marker2 = L.marker([60.73958103204708, 24.75605680821921], {icon:mascotIcon}, {alt:'alttext'}).addTo(map);
-
-        let popup2 = L.popup()
-            .setContent('<b>Hello world!</b><br><img src="/static/map/testthumbnail.jpg" alt="thumbnail" style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>I am a popup. Click me twice to view a scene.');
-
-        marker2.bindPopup(popup2);
-
-        marker2.on('dblclick', OnMarkerClick);
-
-        //clicking function
-        function OnMarkerClick() {    
-                window.open("/view/1")
-        };
+            //clicking function
+            function OnMarkerClick{{ scene.id }}() {    
+                    window.open("{% url 'scene' id=scene.id %}")
+            };
+        {% endfor %}
     </script>
 
     <a href="https://www.openstreetmap.org/fixthemap">Having an issue with the map?</a>
