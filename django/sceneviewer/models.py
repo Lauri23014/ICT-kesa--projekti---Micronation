@@ -11,5 +11,7 @@ class Scene(models.Model):
 	update_datetime = models.DateTimeField(auto_now=True)
 	image_file = models.ImageField(upload_to=user_directory_path)
 	is_360 = models.BooleanField()
+	latitude = models.FloatField()
+	longitude = models.FloatField()
 	def __str__(self):
 		return self.title
