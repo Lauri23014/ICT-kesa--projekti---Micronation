@@ -12,7 +12,7 @@
 {% endblock %}
 {% block content %}
 	<div id="viewer-container">
-		{% if is_360 %}
+		{% if scene.is_360 %}
 			<!-- the viewer container must have a defined size -->
 			<div id="viewer"></div>
 			<!--Photo Sphere Viewer imports-->
