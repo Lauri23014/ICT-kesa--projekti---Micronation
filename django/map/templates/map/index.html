@@ -4,7 +4,7 @@
 {% block title %}Front Page{% endblock %}
 {% block head %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static "mapstyle.css" %}">
+    <link rel="stylesheet" href="{% static "map/style.css" %}">
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -16,6 +16,44 @@
     <h2>Map</h2>
     <div id="map">
     </div>
-    <script src="{% static "mapscript.js" %}"></script>
+
+    <script>
+        //map setup
+        let map = L.map('map').setView([60.73958103204708, 24.75605680821921], 13);
+
+        //tile layer
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 25,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        //icon
+        let mascotIcon = L.icon({
+            iconUrl: '{% static "/map/icons/mascot_ico.png" %}',
+            shadowUrl: '{% static "/map/icons/mascot_ico_shadow.png" %}',
+            iconSize:     [50, 50],
+            shadowSize:   [50, 50],
+            iconAnchor:   [25, 25],
+            shadowAnchor: [25, 25],
+            popupAnchor:  [0, -15]
+        });
+
+        {% for scene in scenes %}
+            //marker
+            let marker{{ scene.id }} = L.marker([{{ scene.latitude }}, {{ scene.longitude }}], {icon:mascotIcon}, {alt:'{{ scene.title }} map marker.'}).addTo(map);
+
+            let popup{{ scene.id }} = L.popup().setContent('<b>{{ scene.title }}</b><br><img src="{{ scene.thumbnail.url }}" alt="{{ scene.title }} thumbnail." style="height:125px;width:auto;max-width:220px;display:block;margin-left:auto;margin-right:auto;padding:5px;"><br>{{ scene.description|truncatechars:100|linebreaksbr }}<hr>Click me twice to view a scene.');
+
+            marker{{ scene.id }}.bindPopup(popup{{ scene.id }});
+
+            marker{{ scene.id }}.on('dblclick', OnMarkerClick{{ scene.id }});
+
+            //clicking function
+            function OnMarkerClick{{ scene.id }}() {    
+                    window.open("{% url 'scene' id=scene.id %}")
+            };
+        {% endfor %}
+    </script>
+
     <a href="https://www.openstreetmap.org/fixthemap">Having an issue with the map?</a>
 {% endblock %}

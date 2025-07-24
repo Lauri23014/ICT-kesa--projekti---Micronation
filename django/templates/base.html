@@ -11,25 +11,31 @@
     </head>
     <body>
         <nav id="navbar">
-            <a id="homepagebanner" href="/map">link to home</a>
-            <ul id="navlinks">
-                <li><a href="/about_us" aria-label="about_us">About Us</a></li>
-                <li><a href="/timeline">User Posts</a></li>
-                {% if user.is_authenticated %}
-                    <li>
-                        <form action="/users/logout/" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
-                        </form>
-                    </li>
-                    <li>
-                        <a href="{% url 'profile_page' username=user.get_username %}">Profile</a>
-                    </li>
-                {% else %}
-                    <li><a href="/users/register" aria-label="User Registration">Registration</a></li>
-                    <li><a href="/users/login" aria-label="User Login">Login</a></li>
-                {% endif %}
-            </ul>
+            <div id="navlogo"></div>
+            <h1 id="homepagebanner"><a href="{% url 'map' %}">link to home</a></h1>
+            <div id="navbarpad"></div>
+            <div id="navlinks">
+                <ul>
+                    <li><a href="{% url 'about' %}" aria-label="about_us">About Us</a></li>
+                    <li><a href="{% url 'timeline' %}">user posts</a></li>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
+                            </form>
+                        </li>
+                         <li>
+                           <a href="{% url 'profile_page' username=user.get_username %}">Profile</a>
+
+                         </li>
+                    {%else%}
+                        <li><a href="{% url 'register' %}" aria-label="User Registration">registeration</a></li>
+                        <li><a href="{% url 'login' %}" aria-label="User Login">Login</a></li>
+                        
+                    {%endif%}
+                </ul>
+            </div>
         </nav>
 
         <div id="content">

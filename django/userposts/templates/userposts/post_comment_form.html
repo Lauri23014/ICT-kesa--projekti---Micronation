@@ -50,7 +50,7 @@
 				replyingToPostDiv.appendChild(replyingToPostTitle);
 			{% endif %}
 			replyingToPostText = document.createElement("p");
-			replyingToPostText.innerText = "{% if scene %}{{ post.description|linebreaksbr }}{% else %}{{ post.text_content|linebreaksbr }}{% endif %}";
+			replyingToPostText.innerHTML = "{% if scene %}{{ post.description|linebreaksbr }}{% else %}{{ post.text_content|linebreaksbr }}{% endif %}";
 			replyingToPostDiv.appendChild(replyingToPostText);
 			{% if not scene and post.image_file.url != None %}
 				const replyingToPostImg = document.createElement("img");
