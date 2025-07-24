@@ -1,55 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         {% load static %}
-        
-        <link rel="stylesheet" href='{% static "style.css" %}'/>
+        <link rel="stylesheet" href="{% static 'sceneviewer/navbar.css' %}">
+        <script src="{% static 'sceneviewer/navbar.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'style.css' %}"/>
         <title>{% block title %}My amazing site{% endblock %}</title>
         {% block head %}{% endblock %}
     </head>
-
     <body>
         <nav id="navbar">
-            <div id="navlogo"></div>
-            <h1 id="homepagebanner"><a href="/map">link to home</a></h1>
-            <div id="navbarpad"></div>
-            <div id="navlinks">
-                <ul>
-                    <li><a href="/about_us" aria-label="about_us">About Us</a></li>
-                    <li><a href="/timeline">user posts</a></li>
-                    {% if user.is_authenticated %}
-                        <li>
-                            <form action="/users/logout/" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
-                            </form>
-                        </li>
-                         <li>
-                           <a href="{% url 'profile_page' username=user.get_username %}">Profile</a>
-
-                         </li>
-                    {%else%}
-                        <li><a href="/users/register" aria-label="User Registration">registeration</a></li>
-                        <li><a href="/users/login" aria-label="User Login">Login</a></li>
-                        
-                    {%endif%}
-                </ul>
-            </div>
+            <a id="homepagebanner" href="/map">link to home</a>
+            <ul id="navlinks">
+                <li><a href="/about_us" aria-label="about_us">About Us</a></li>
+                <li><a href="/timeline">User Posts</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <form action="/users/logout/" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="{% url 'profile_page' username=user.get_username %}">Profile</a>
+                    </li>
+                {% else %}
+                    <li><a href="/users/register" aria-label="User Registration">Registration</a></li>
+                    <li><a href="/users/login" aria-label="User Login">Login</a></li>
+                {% endif %}
+            </ul>
         </nav>
 
         <div id="content">
-
             {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
                     <li class="{{ message.tags }}">
-                        <img src="{% static 'users/images/welcomecat-test.jpg' %}" alt="cat" class="cat-icon"/>
                         {{ message }}
                     </li>
-                {% endfor %}
+                    {% endfor %}
                 </ul>
             {% endif %}
-
             {% block content %}{% endblock %}
         </div>
 
