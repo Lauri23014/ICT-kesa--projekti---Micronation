@@ -4,29 +4,32 @@
 {% block title %}{{ username }}: {{ post.text_content }} - Velvelland{% endblock title %}
 {% block head %}
 	<link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
+	<script src="{% static "userposts/js/getCookie.js" %}"></script>
 {% endblock head %}
 {% block content %}
 	{% comment %} TODO: make dynamic html for post pages {% endcomment %}
-	{% if thread %}
-	<div class="mini-post-indent">
-		{% for reply in thread %}	{% comment %}thread before post {% endcomment %}
-			{% if reply|classname == "Post" %}
+	<div class="post-segment-thin">
+		{% if thread %}
+		<div class="mini-post-indent">
+			{% for reply in thread %}	{% comment %}thread before post {% endcomment %}
+				{% if reply|classname == "Post" %}
+					{% include "userposts/post_block.html" with post=reply selected=False %}
+				{% else %}
+					{% include "sceneviewer/scene_block.html" with scene=reply selected=False%}
+				{% endif %}
+			{% endfor %}
+		</div>
+		{% endif %}
+		
+
+		{% comment %} actual post {% endcomment %}
+		{% include "userposts/post_block.html" with post=post selected=True %}
+
+		{% comment %} comments replying to post {% endcomment %}
+		{% for reply in replies %}	{% comment %} thread before post {% endcomment %}
+			<div class="mini-post-indent">
 				{% include "userposts/post_block.html" with post=reply selected=False %}
-			{% else %}
-				{% include "sceneviewer/scene_block.html" with scene=reply selected=False%}
-			{% endif %}
+			</div>
 		{% endfor %}
 	</div>
-	{% endif %}
-	
-
-	{% comment %} actual post {% endcomment %}
-	{% include "userposts/post_block.html" with post=post selected=True %}
-
-	{% comment %} comments replying to post {% endcomment %}
-	{% for reply in replies %}	{% comment %} thread before post {% endcomment %}
-		<div class="mini-post-indent">
-			{% include "userposts/post_block.html" with post=reply selected=False %}
-		</div>
-	{% endfor %}
 {% endblock content %}

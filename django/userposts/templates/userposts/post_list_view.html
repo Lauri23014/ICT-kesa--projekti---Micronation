@@ -3,6 +3,7 @@
 {% block title %}User posts feed - Velvelland{% endblock title %}
 {% block head %}
 	<link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
+	<script src="{% static "userposts/js/getCookie.js" %}"></script>
 {% endblock head %}
 {% block content %}
 	{% for post in posts %}
