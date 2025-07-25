@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  min-height: calc(100vh - 14em - 2em); /* "100vh - 14em" adjusted based on #content in base style.css */
   padding: 2rem;
   border-radius: 1.5rem;
   position: relative;
@@ -16,7 +16,7 @@
 .profile-card {
   position: relative;
   background-color: #1f1f1f;
-  max-width: 320px;      /* was 350px */
+  max-width: 320px; /* was 350px */
   width: 100%;
   border-radius: 2rem;
   padding: 2.2rem 1rem 1.2rem; /* less padding */
