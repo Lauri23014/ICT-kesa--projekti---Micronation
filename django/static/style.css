@@ -73,8 +73,6 @@ body, html {
     margin: 0 !important;
 }
 
-
-
 #navbar {
     position: fixed !important;
     top: 0;
@@ -84,8 +82,8 @@ body, html {
     margin: 0 !important;
     border-radius: 0 !important;
     z-index: 10000;
-    background: #331304 !important; 
-    border-bottom: 4px solid #1D0A02 !important; 
+    background: var(--main-bg-color) !important; 
+    border-bottom: 4px solid var(--sub-bg-color) !important; 
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
