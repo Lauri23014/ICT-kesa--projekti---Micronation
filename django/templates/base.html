@@ -4,15 +4,16 @@
     <head>
         {% load static %}
         <link rel="stylesheet" href="{% static 'sceneviewer/navbar.css' %}">
-        <script src="{% static 'sceneviewer/navbar.js' %}"></script>
+        {% comment %} commented out for now {% endcomment %}
+        {% comment %} <script src="{% static 'sceneviewer/navbar.js' %}"></script> {% endcomment %}
         <link rel="stylesheet" href="{% static 'style.css' %}"/>
         <title>{% block title %}My amazing site{% endblock %}</title>
         {% block head %}{% endblock %}
     </head>
     <body>
         <nav id="navbar">
-            <!-- gonna comment this out for now <div id="navlogo"></div> -->
-
+            {% comment %} gonna comment this out for now {% endcomment %}
+            {% comment %} <div id="navlogo"></div> {% endcomment %}
             <a id="homepagebanner" href="{% url 'map' %}">link to home</a>
             <div id="navbarpad"></div>
             <div id="navlinks">
@@ -28,13 +29,11 @@
                         </li>
                          <li>
                            <a href="{% url 'profile_page' username=user.get_username %}">Profile</a>
-
                          </li>
-                    {%else%}
+                    {% else %}
                         <li><a href="{% url 'register' %}" aria-label="User Registration">registeration</a></li>
                         <li><a href="{% url 'login' %}" aria-label="User Login">Login</a></li>
-                        
-                    {%endif%}
+                    {% endif %}
                 </ul>
             </div>
         </nav>
