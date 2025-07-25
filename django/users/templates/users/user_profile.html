@@ -11,7 +11,7 @@
 {% block content %}
 
 <div class="profile-page"
-    style="background-image: url('{% if page_user.background_image %}/media/{{ page_user.background_image }}{% else %}{% static 'users/images/mascotdoodles_luna(1).png' %}{% endif %}');">
+    style="background-image: url('{% if page_user.background_image %}/media/{{ page_user.background_image }}{% else %}{% static 'users/images/background_doodles.png' %}{% endif %}');">
   {% if request.user.username == page_user.user.username %}
     <button id="edit-bg-btn" class="profile-bg-edit-btn" type="button" title="Change Background">
       <span class="emoji">🖼️</span>
