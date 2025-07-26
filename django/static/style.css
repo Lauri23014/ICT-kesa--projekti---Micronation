@@ -116,7 +116,7 @@ body, html {
 
 #homepagebanner {
     background: none !important;
-    color: #f0e6d2 !important; 
+    color: #ffffff !important; 
     font-size: 2rem !important;
     font-family: 'Segoe UI', 'Arial', sans-serif !important;
     text-decoration: none !important;
@@ -135,6 +135,7 @@ body, html {
 #navlinks {
     margin: 0 !important;
     padding: 0 !important;
+	font-family: 'Segoe UI', 'Arial', sans-serif !important;
 }
 
 #navlinks ul {
@@ -155,27 +156,21 @@ body, html {
 }
 
 #navlinks ul li a {
-    color: #f0e6d2 !important; 
-    text-transform: uppercase !important;
-    letter-spacing: 5px !important;
-    font-family: Futura, Trebuchet MS, Arial, sans-serif !important;
     font-size: 1em !important;
-    text-decoration: none !important;
-    padding: 1em 0 !important;
-    background: none !important;
-    border-radius: 0 !important;
-    transition: color 0.2s, background 0.2s;
+  padding: 0.6em 0.8em !important;
+  border-radius: 0.3em !important;
+  transition: background 0.2s, color 0.2s;
 }
 
 #navlinks ul li a:hover {
-    color: #fff !important;
-    background: #a65c38 !important; 
-    box-shadow: 0px 4px 0px 0px #7a3b1d !important;
+  background-color: #7f4c31 !important; /* soft brown */
+  color: #fff !important;
+  box-shadow: none !important;
 }
 
 .paw img {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     display: block;
 }
 
@@ -282,4 +277,64 @@ textarea {
     width: 100%;
     text-align: center;
     line-height: 5rem; 
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+ 
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: var(--main-text-color);
+  border: none;
+  padding: 0.5em 0.8em;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 0.3em;
+  transition: background 0.2s ease;
+}
+
+.dropbtn:hover {
+  background-color: #7f4c31;
+  color: #fff;
+}
+
+.dropdown-content {
+  position: absolute;
+  right: 0;
+  background-color: #331304;
+  min-width: 140px;
+  border-radius: 0.3em;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  z-index: 10001;
+  display: none;
+}
+
+.dropdown-content a {
+  
+  display: block;
+  padding: 0.6em 1em;
+  font-size: 0.95em;
+  text-decoration: none;
+  color: #f0e6d2;
+  transition: background 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #7f4c31;
+  color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#navlinks ul li a,
+.dropbtn,
+.dropdown-content a {
+    text-transform: none !important;
+    font-family: 'Segoe UI', 'Arial', sans-serif !important;
 }

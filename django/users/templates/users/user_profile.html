@@ -16,14 +16,7 @@
     <button id="edit-bg-btn" class="profile-bg-edit-btn" type="button" title="Change Background">
       <span class="emoji">🖼️</span>
     </button>
-    <div class="btn-container">
-      <a href="{% url 'edit' %}" class="profile-btn">
-        <span class="emoji">⚙️</span> User Settings
-      </a>
-      <a href="{% url 'edit_profile' username=page_user.user.username %}" class="profile-btn">
-        <span class="emoji">✏️</span> Edit Profile
-      </a>
-    </div>
+   
   {% endif %}
 
   
