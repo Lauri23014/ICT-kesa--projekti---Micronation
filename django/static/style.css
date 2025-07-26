@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
+:root {
+  --profile-bg: #4B4B58;
+  --profile-card-bg: #4C4343;
+  --profile-card-text: #ffffff;
+  --profile-accent: #BB6F6F;
+  --profile-btn-bg: #aab2b3;
+  --profile-btn-text: #313a42;
+  --profile-btn-hover-bg: #cbd5e0;
+  --profile-segment-bg: #6A687A;
+  --profile-segment-text: #ffffff;
+  --profile-modal-bg: #877878;
+  --profile-modal-text: #ffffff;
+  --profile-bio-bg: #4C4343;
+  --profile-modal-hover: #8B4141;
+}
+
+
+
 @property --main-text-color {
     syntax: "<color>";
     inherits: false;

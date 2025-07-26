@@ -1,17 +1,3 @@
-:root {
-  --profile-bg: #4B4B58;
-  --profile-card-bg: #4C4343;
-  --profile-card-text: #ffffff;
-  --profile-accent: #BB6F6F;
-  --profile-btn-bg: #aab2b3;         /* lighter button background */
-  --profile-btn-text: #313a42;       /* dark button text for contrast */
-  --profile-btn-hover-bg: #cbd5e0;   /* even lighter on hover */
-  --profile-segment-bg: #6A687A;
-  --profile-segment-text: #ffffff;
-  --profile-modal-bg: #877878;
-  --profile-modal-text: #ffffff;
-  --profile-bio-bg: #4C4343;
-}
 
 
 
@@ -247,7 +233,7 @@
   margin-top: 1.2rem;
   margin-right: 0.7rem;
   background: var(--profile-accent);
-  color: var(--profile-btn-text);
+  color: var(--profile-card-text);
   border: none;
   border-radius: 0.7rem;
   font-weight: 600;
@@ -259,7 +245,7 @@
 }
 
 #bg-modal .profile-btn:hover {
-  background: var(--profile-btn-hover-bg);
+  background: var(--profile-modal-hover);
   color: var(--profile-card-text);
 }
 
