@@ -24,12 +24,12 @@
 
 /* Change background color of buttons on hover */
 .tabber button:hover {
-  	background-color: #ddd;
+  	background-color: #8B4141;
 }
 
 /* Create an active/current tablink class */
 .tabber button.active {
-  	background-color: #ccc;
+  	background-color: #8B4141;
 }
 
 /* Style the tabber content */
