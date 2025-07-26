@@ -37,7 +37,7 @@
   border-radius: 2rem;
   padding: 2.2rem 1rem 1.2rem;
   margin: 1rem 0;
-  color: var(--profile-card-text);
+  color: var(--main-text-color);
   text-align: center;
   box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
@@ -46,7 +46,7 @@
   border-radius: 0.5rem;
   margin-bottom: 0.4rem;
   font-size: 0.85rem;
-  color: var(--profile-segment-text);
+  color: var(--main-text-color);
 }
 
 .title-block-like-div, .title-block-comment-div {
@@ -95,7 +95,7 @@
 .profile-btn,
 .profile-btn:visited  {
   background-color: var(--profile-btn-bg);
-  color: var(--profile-btn-text);
+  color: var(--main-text-color);
   padding: 0.4rem 0.9rem;
   border-radius: 0.7rem;
   text-decoration: none;
@@ -129,7 +129,7 @@
   align-items: center;
   display: flex;
   background-color: var(--profile-btn-bg);
-  color: var(--profile-btn-text);
+  color: var(--main-text-color);
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -163,7 +163,7 @@
   background-color: var(--profile-accent);
   padding: 0.8rem 1rem;
   border-radius: 1rem 1rem 0 0;
-  color: var(--profile-card-text);
+  color: var(--main-text-color);
    font-family: 'Segoe UI', 'Arial', sans-serif;
   font-weight: bold;
   font-size: 1.2rem;
@@ -174,7 +174,7 @@
   background-color: var(--profile-bio-bg);
   padding: 1rem;
   border-radius: 0 0 1rem 1rem;
-  color: var(--profile-card-text);
+  color: var(--main-text-color);
     font-family: 'Segoe UI', 'Arial', sans-serif;
   font-size: 1rem;
   text-align: left;
@@ -210,7 +210,7 @@
   padding: 2.2rem 2rem 1.5rem;
   border-radius: 1.2rem;
   min-width: 320px;
-  color: var(--profile-modal-text);
+  color: var(--main-text-color);
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
   animation: popIn 0.22s;
   position: relative;
@@ -224,12 +224,12 @@
 #bg-modal .modal-content label {
   font-size: 1.1rem;
   font-weight: 500;
-  color: var(--profile-card-text);
+  color: var(--main-text-color);
 }
 
 #bg-modal input[type="file"] {
   margin-top: 1.2rem;
-  color: var(--profile-card-text);
+  color: var(--main-text-color);
   background: var(--profile-card-bg);
   border: 1px solid var(--profile-accent);
   border-radius: 0.5rem;
@@ -241,7 +241,7 @@
   margin-top: 1.2rem;
   margin-right: 0.7rem;
   background: var(--profile-accent);
-  color: var(--profile-card-text);
+  color: var(--main-text-color);
   border: none;
   border-radius: 0.7rem;
   font-weight: 600;
@@ -254,7 +254,7 @@
 
 #bg-modal .profile-btn:hover {
   background: var(--profile-modal-hover);
-  color: var(--profile-card-text);
+  color: var(--main-text-color);
 }
 
 #bg-modal .close-modal {
