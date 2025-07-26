@@ -2,21 +2,32 @@
 {% load static %}
 <article class="post-title-block">
 	<div class="title-block-h-flex">
-		<div class="title-block-like-div">
-			<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="like-form-{{ post.id }}">
-				{% csrf_token %}
-				<input type="hidden" name="next" value="{{ request.path }}">
-				<button type="submit">
-					<img src={% if request.user in post.likes.all %}"{% static 'icons/heart-solid.svg' %}"{% else %}"{% static 'icons/heart.svg' %}"{% endif %} id="like-image-{{ post.id }}">
-				</button>
-			</form>
-			<p id="like-counter-{{ post.id }}">{{ post.like_count }} like{% if post.like_count != 1 %}s{% endif %}</p>
+		<div class="title-block-info-div">
+			<div class="title-block-like-div">
+				<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="like-form-{{ post.id }}">
+					{% csrf_token %}
+					<input type="hidden" name="next" value="{{ request.path }}">
+					<button type="submit">
+						<img class="invert" id="like-image-{{ post.id }}" src={% if request.user in post.likes.all %}"{% static 'icons/heart-solid.svg' %}"{% else %}"{% static 'icons/heart.svg' %}"{% endif %} >
+					</button>
+				</form>
+				<p id="like-counter-{{ post.id }}">{{ post.like_count }}</p>
+			</div>
+			<div class="title-block-comment-div">
+				<img src="{% static 'icons/comment.svg' %}" class="invert">
+				<p>{{ post.comment_count }}</p>
+			</div>
 		</div>
-		<div class="title-block-v-flex" onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'">
-			<h2>{{ post.title }}</h2>
-			<p>{{ post.user.username }}</p>
-			<p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p>
-		</div>
+		
+		<a class="title-block-content-wrap" href="/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post">
+			<img class="title-block-preview-img{% if not post.image_file %} invert{% endif %}" src="{% if post.image_file %}{{ post.image_file.url }}{% else %}{% static 'icons/text_post.svg' %}{% endif %}">
+
+			<div class="title-block-v-flex">
+				<h2>{{ post.title }}</h2>
+				<p>{{ post.user.username }}</p>
+				{% comment %} <p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p> {% endcomment %}
+			</div>
+		</a>
 	</div>
 
 	<script defer>
@@ -43,10 +54,7 @@
 					img.src = "{% static 'icons/heart.svg' %}";
 				}
 
-				counter.innerText = response.count+" like";
-				if (response.count != 1) {
-					counter.innerText += "s";
-				}
+				counter.innerText = response.count;
 			})
 		}
 	</script>

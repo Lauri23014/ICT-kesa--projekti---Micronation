@@ -60,6 +60,11 @@
     initial-value: #000000;
 }
 
+.invert {
+    /* for inverting black svg's */
+    filter: invert(90%);
+}
+
 body {
     background-image: url('/static/wood-veneer-598-mm-architextures.jpg');
     background-repeat: repeat;
@@ -218,6 +223,8 @@ body, html {
 
 h1, h2, h3, p, ul, li, form {
     color: var(--main-text-color);
+    word-wrap: break-word;
+	hyphens: auto;
 }
 
 a {
