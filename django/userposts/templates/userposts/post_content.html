@@ -1,67 +1,69 @@
 {% load static %}
-<article {% if selected != True %}class="post-content" onClick="window.location.href = '/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post'"{% else %}id="selected-post"{% endif %}>
-	<div class="post-content-div">
-		{% if post.title %}
-			{% include "userposts/title_mini.html" with post=post %}
-		{% endif %}
-		<p>{{ post.text_content|linebreaksbr }}</p>
-		{% if post.image_file.url != None %}<img class="post-image" src="{{ post.image_file.url }}">{% endif %}
-		{% if selected %}
-			<p class="datetime-text" id="selected-post-datetime">{{ post.datetime }} UTC</p>
-			<form method="POST" action="{% url "convert_post_timezone" username=post.user.username id=post.id %}" id="timezone-form">
-				<input type="hidden" id="timezone-input" name="timezone" value="">
-			</form>
+{% if selected != True %}<a href="/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post">{% endif %}
+	<article {% if selected != True %}class="post-content"{% else %}id="selected-post"{% endif %}>
+		<div class="post-content-div">
+			{% if post.title %}
+				{% include "userposts/title_mini.html" with post=post %}
+			{% endif %}
+			{% if selected %}<p>{{ post.text_content|urlize|linebreaksbr }}</p>{% else %}<p>{{ post.text_content|linebreaksbr }}</p>{% endif %}
+			{% if post.image_file.url != None %}<img class="post-image" src="{{ post.image_file.url }}">{% endif %}
+			{% if selected %}
+				<p class="datetime-text" id="selected-post-datetime">{{ post.datetime }} UTC</p>
+				<form method="POST" action="{% url "convert_post_timezone" username=post.user.username id=post.id %}" id="timezone-form">
+					<input type="hidden" id="timezone-input" name="timezone" value="">
+				</form>
+			{% endif %}
+		</div>
+	</article>
+	<div class="post-content-info-div">
+		<div class="post-content-info-flex">
+			<div class="post-content-comment-div">
+				<button>
+					<img class="invert" src="{% static 'icons/comment.svg' %}">
+				</button>
+				<p id="comment-counter-{{ post.id }}">{{ post.comment_count }}</p>
+			</div>
+			<div class="post-content-like-div">
+				<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="like-form-{{ post.id }}">
+					{% csrf_token %}
+					<input type="hidden" name="next" value="{{ request.path }}">
+					<button type="submit">
+						<img class="invert" id="like-image-{{ post.id }}" src={% if request.user in post.likes.all %}"{% static 'icons/heart-solid.svg' %}"{% else %}"{% static 'icons/heart.svg' %}"{% endif %} >
+					</button>
+				</form>
+				<p id="like-counter-{{ post.id }}">{{ post.like_count }}</p>
+			</div>
+		</div>
+		{% if request.user == post.user %}
+			<div class="delete-button">
+				<form method="POST" action="{% url "remove_post_or_comment" username=post.user.username id=post.id %}" class="delete-form" id="delete-form-{{ post.id }}">
+					{% csrf_token %}
+					<button type="submit">
+						<img class="invert" src="{% static 'icons/delete.svg' %}">
+					</button>
+				</form>
+			</div>
 		{% endif %}
 	</div>
-</article>
-<div class="post-content-info-div">
-	<div class="post-content-info-flex">
-		<div class="post-content-comment-div">
-			<button>
-				<img src="{% static 'icons/comment.svg' %}">
-			</button>
-			<p id="comment-counter-{{ post.id }}">{{ post.comment_count }}</p>
-		</div>
-		<div class="post-content-like-div">
-			<form method="POST" action="{% url "add_or_remove_like" username=post.user.username id=post.id %}" class="like-form" id="like-form-{{ post.id }}">
-				{% csrf_token %}
-				<input type="hidden" name="next" value="{{ request.path }}">
-				<button type="submit">
-					<img src={% if request.user in post.likes.all %}"{% static 'icons/heart-solid.svg' %}"{% else %}"{% static 'icons/heart.svg' %}"{% endif %} id="like-image-{{ post.id }}">
-				</button>
-			</form>
-			<p id="like-counter-{{ post.id }}">{{ post.like_count }}</p>
-		</div>
-	</div>
-	{% if request.user == post.user %}
-		<div class="delete-button">
-			<form method="POST" action="{% url "remove_post_or_comment" username=post.user.username id=post.id %}" class="delete-form" id="delete-form-{{ post.id }}">
-				{% csrf_token %}
-				<button type="submit">
-					<img src="{% static 'icons/delete.svg' %}">
-				</button>
-			</form>
-		</div>
+
+	{% if selected %}
+		<script>
+			var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			document.getElementById("timezone-input").value = timezone;
+
+			fetch(document.getElementById("timezone-form").action, {
+				method: "POST",
+				headers: {'X-CSRFToken': getCookie('csrftoken')},
+				mode: 'same-origin', // Do not send CSRF token to another domain.
+				body: new FormData(document.getElementById("timezone-form"))
+			})
+			.then(response => response.json())
+			.then((response) => {
+				document.getElementById("selected-post-datetime").innerText = response.datetime_string
+			})
+		</script>
 	{% endif %}
-</div>
-
-{% if selected %}
-	<script>
-		var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-		document.getElementById("timezone-input").value = timezone;
-
-		fetch(document.getElementById("timezone-form").action, {
-			method: "POST",
-			headers: {'X-CSRFToken': getCookie('csrftoken')},
-			mode: 'same-origin', // Do not send CSRF token to another domain.
-			body: new FormData(document.getElementById("timezone-form"))
-		})
-		.then(response => response.json())
-		.then((response) => {
-			document.getElementById("selected-post-datetime").innerText = response.datetime_string
-		})
-	</script>
-{% endif %}
+{% if selected != True %}</a>{% endif %}
 
 <script defer>
 	document.getElementById("like-form-{{ post.id }}").onsubmit = function(e) {
