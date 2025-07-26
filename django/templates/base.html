@@ -15,10 +15,16 @@
         <nav id="navbar">
             {% comment %} gonna comment this out for now {% endcomment %}
             {% comment %} <div id="navlogo"></div> {% endcomment %}
-            <a id="homepagebanner" href="{% url 'map' %}">link to home</a>
+            <div id="nav-homepaw">
+    <a id="homepagebanner" href="{% url 'map' %}">link to home</a>
+    <span class="paw">
+        <img src="{% static 'icons/catpaw2.svg' %}" alt="Cat Paw" width="40" height="40">
+    </span>
+</div>
             <div id="navbarpad"></div>
             <div id="navlinks">
                 <ul>
+                 
                     <li><a href="{% url 'about' %}" aria-label="about_us">About Us</a></li>
                     <li><a href="{% url 'timeline' %}">user posts</a></li>
                     {% if user.is_authenticated %}

@@ -119,8 +119,14 @@ body, html {
     padding: 0 !important;
     border: none !important;
     box-shadow: none !important;
+	font-size: 1.3em;
 }
 
+#nav-homepaw {
+    display: flex;
+    align-items: center;
+    gap: 0.5em; 
+}
 #navlinks {
     margin: 0 !important;
     padding: 0 !important;
@@ -162,6 +168,11 @@ body, html {
     box-shadow: 0px 4px 0px 0px #7a3b1d !important;
 }
 
+.paw img {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
 
 .paw, .paw-icon {
     display: flex !important;

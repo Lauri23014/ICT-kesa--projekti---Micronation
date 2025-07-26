@@ -41,8 +41,8 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #fff;
-  background: #a65c38;
-  box-shadow: 0px 4px 0px 0px #7a3b1d;
+  background-color: #5a2a1c;
+box-shadow: 0 0 4px #d28d7d;
 }
 
 .paw {
