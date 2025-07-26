@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{ page_user.user.username }}'s Profile{% endblock %}
+{% block title %}{{ page_user.user.username }}'s Profile - Velwelland{% endblock %}
 {% block head %}
   <link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
   <link rel="stylesheet" href='{% static "users/tabberStyle.css" %}'/>
@@ -11,7 +11,7 @@
 {% block content %}
 
 <div class="profile-page"
-    style="background-image: url('{% if page_user.background_image %}/media/{{ page_user.background_image }}{% else %}{% static 'users/images/mascotdoodles_luna(1).png' %}{% endif %}');">
+    style="background-image: url('{% if page_user.background_image %}/media/{{ page_user.background_image }}{% else %}{% static 'users/images/background_doodles.png' %}{% endif %}');">
   {% if request.user.username == page_user.user.username %}
     <button id="edit-bg-btn" class="profile-bg-edit-btn" type="button" title="Change Background">
       <span class="emoji">🖼️</span>
@@ -42,52 +42,54 @@
     </div>
   </div>
 
-  <div class="profile-card">
-    <div class="profile-avatar-wrapper">
-      {% if page_user.profile_pic %}
-        <img class="profile-pic" src="/media/{{ page_user.profile_pic }}" alt="Profile Picture">
-      {% else %}
-        <img class="profile-pic" src="{% static 'users/images/headshot.png' %}" alt="Default Profile">
-      {% endif %}
-    </div>
-    <div class="username">{{ page_user.user.username }}</div>
-    <div class="about-box">
-      <div class="about-title-box">
-        <div class="about-title">About Me</div>
-      </div>
-      <div class="about-bio-box">
-        {% if page_user.bio %}
-          {{ page_user.bio|linebreaks }}
-        {% elif request.user.username == page_user.user.username %}
-          <em>Tell us something about yourself...</em>
+  <div class="profile-card-scroller">
+    <div class="profile-card">
+      <div class="profile-avatar-wrapper">
+        {% if page_user.profile_pic %}
+          <img class="profile-pic" src="/media/{{ page_user.profile_pic }}" alt="Profile Picture">
+        {% else %}
+          <img class="profile-pic" src="{% static 'users/images/headshot.png' %}" alt="Default Profile">
         {% endif %}
       </div>
-    </div>
+      <div class="username">{{ page_user.user.username }}</div>
+      <div class="about-box">
+        <div class="about-title-box">
+          <div class="about-title">About Me</div>
+        </div>
+        <div class="about-bio-box">
+          {% if page_user.bio %}
+            {{ page_user.bio|linebreaks }}
+          {% elif request.user.username == page_user.user.username %}
+            <em>Tell us something about yourself...</em>
+          {% endif %}
+        </div>
+      </div>
 
-    <div class="tabber">
-      <button class="tab-buttons" id="user-posts-button" onClick="openTab(event, 'user-posts')">Posts</button>
-      <button class="tab-buttons" id="user-replies-button" onClick="openTab(event, 'user-replies')">Replies</button>
-    </div>
-    <div class="tabber-content" id="user-posts">
-      {% for post in posts %}
-        <div class="post-segment">
-          {% include "userposts/post_title_block.html" with post=post %}
-        </div>
-      {% endfor %}
-    </div>
-    <div class="tabber-content" id="user-replies">
-      {% for reply in replies %}
-        <div class="post-segment">
-          <div class="mini-post-indent">
-            {% include "userposts/post_block.html" with post=reply selected=False %}
+      <div class="tabber">
+        <button class="tab-buttons" id="user-posts-button" onClick="openTab(event, 'user-posts')">Posts</button>
+        <button class="tab-buttons" id="user-replies-button" onClick="openTab(event, 'user-replies')">Replies</button>
+      </div>
+      <div class="tabber-content" id="user-posts">
+        {% for post in posts %}
+          <div class="post-segment">
+            {% include "userposts/post_title_block.html" with post=post %}
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="tabber-content" id="user-replies">
+        {% for reply in replies %}
+          <div class="post-segment">
+            <div class="mini-post-indent">
+              {% include "userposts/post_block.html" with post=reply selected=False %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <script src="{% static 'users/tabber.js' %}"></script>
+      <script>
+        document.getElementById("user-posts-button").click()
+      </script>
     </div>
-    <script src="{% static 'users/tabber.js' %}"></script>
-    <script>
-      document.getElementById("user-posts-button").click()
-    </script>
   </div>
 </div>
 

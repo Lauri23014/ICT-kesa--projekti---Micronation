@@ -1,7 +1,6 @@
 from copy import copy
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import redirect, render
-from django.utils import timezone
 
 from userposts.models import Post
 from sceneviewer.models import Scene
@@ -35,8 +34,7 @@ def post_detail_view(request, username, id):
 		}
 		return render(request, "userposts/post_detail_view.html", context=context)
 	else:
-		# TODO: 404 redirect
-		return HttpResponse("teehee")
+		raise Http404("Post could not be found.")
 
 def postlist(request):
 	posts = Post.objects.order_by("-datetime").exclude(title=None)

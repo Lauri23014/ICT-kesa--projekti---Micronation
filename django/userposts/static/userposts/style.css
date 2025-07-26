@@ -14,21 +14,21 @@
 
 .mini-post-indent {
 	border-left: 2px solid var(--sub-text-color);
-	margin-left: 0.5em;
+	margin: 1.5em 0 1.5em 1.35em;
 	padding-left: 1em;
 
-	.post-block-mini {
-		width: 25em;
+	.post-block {
+		width: 31.45em;
 		margin: 0;
 		padding: 0;
 	}
 }
 
 .post-block {
-	width: 28em;
+	width: 34em;
 	max-width: 100%;
 	text-align: left;
-	margin: 1.5em 0;
+	margin: 1.5em auto;
 
 	.post-content {
 		cursor: pointer;
@@ -36,8 +36,6 @@
 }
 
 .post-title-block {
-	width: 28em;
-	max-width: 100%;
 	cursor: pointer;
 	text-align: left;
 }
@@ -73,6 +71,14 @@
 	padding: 1em;
 }
 
+.post-segment-thin {
+	background-color: var(--main-bg-color);
+	border-radius: 1em;
+	margin: 0.5em auto;
+	padding: 1em;
+	width: fit-content;
+}
+
 .title-block-h-flex {
 	display: flex;
 	flex-direction: row;
@@ -81,7 +87,7 @@
 .title-block-v-flex {
 	display: flex;
 	flex-direction: column;
-	width: 20em;
+	width: calc(100% - 5em);
 }
 
 .title-block-like-div {

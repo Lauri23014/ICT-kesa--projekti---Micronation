@@ -8,7 +8,7 @@
 	<p>Type your reply</p>
 </button>
 
-<script>
+<script defer>
 	function commentForm{% if scene %}Scene{% else %}Post{% endif %}{{ post.id }}() {
 		{% if request.user.is_authenticated %}
 			// post you are replying to
@@ -158,4 +158,3 @@
 		}
 	}
 </script>
-<script src="{% static "userposts/js/getCookie.js" %}"></script>
