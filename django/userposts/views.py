@@ -124,7 +124,7 @@ def remove_post(request, username, id):
 			return redirect("scene", id=next_id)
 		else:
 			post.delete()
-			return redirect("list_of_posts")
+			return redirect("timeline")
 
 def convert_post_timezone(request, username, id):
 	data = {}

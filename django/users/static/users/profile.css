@@ -43,12 +43,20 @@
 }
 
 .post-segment {
-  
   border-radius: 0.5rem;
   margin-bottom: 0.4rem;
-  padding: 0.25rem 0.4rem;
   font-size: 0.85rem;
   color: var(--profile-segment-text);
+}
+
+.title-block-like-div, .title-block-comment-div {
+	img {
+		height: 2rem;
+	}
+
+  p {
+    line-height: 1.9rem;
+  }
 }
 
 .post-segment h2,
