@@ -46,7 +46,7 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, f"Welcome back, {user.username}!")
-            return redirect("index")
+            return redirect('/')
     else:
         form = AuthenticationForm()
     return render(request, "users/login.html", {"form": form})     
@@ -54,7 +54,7 @@ def login_view(request):
 def logout_view(request):
     if request.method == "POST":
         logout(request)
-        return redirect("index") #should be later changed to another page
+        return redirect('/') #should be later changed to another page
     
 @login_required    
 def edit_view(request):
@@ -63,7 +63,7 @@ def edit_view(request):
         password_form = PasswordChangingForm(user=request.user)  # Empty by default
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('/')
     else:
         form = EditProfileForm(instance=request.user)
         password_form = PasswordChangingForm(user=request.user)
@@ -80,7 +80,7 @@ def password_change(request):
             user = form.save()
             update_session_auth_hash(request, user)  #Prevents logout
             messages.success(request, "Password changed successfully.")
-            return redirect('index') 
+            return redirect('/')
         else:
             messages.error(request, "Please correct the errors below.")
     else:
@@ -110,7 +110,7 @@ class ProfilePageView(DetailView):
 def EditProfileView(request, username):
     
     if request.user.username != username:
-        return redirect('index') 
+        return redirect('/') 
 
     profile = get_object_or_404(Profile, user__username=username)
 

@@ -1,7 +1,7 @@
  /* Style the tabber */
 .tabber {
 	overflow: hidden;
-	background-color: #444e53;
+	background-color: #615656;
 	border-radius: 1em 1em 0 0;
 }
 
@@ -35,7 +35,7 @@
 /* Style the tabber content */
 
 .tabber-content {
-	background-color: #202527;
+	background-color: #877878;
 	padding: 0.25em;
 
 	max-height: 200px;      /* Limiting height */
@@ -46,10 +46,10 @@
 
 .tabber-content::-webkit-scrollbar {
     width: 6px;
-    background: #23272f;
+    background: #615656;
 }
 .tabber-content::-webkit-scrollbar-thumb {
     background: #b8b8b8;
     border-radius: 4px;
-    border: 1px solid #444e53;
+    border: 1px solid #615656;
 }
