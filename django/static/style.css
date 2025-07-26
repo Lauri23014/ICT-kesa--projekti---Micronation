@@ -65,7 +65,7 @@ body {
     background-repeat: repeat;
     background-attachment: fixed;
     background-size: 10%;
-    font-family: Lora, Verdana;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
 body, html {
@@ -95,7 +95,7 @@ body, html {
     background: none !important;
     color: #f0e6d2 !important; 
     font-size: 2rem !important;
-    font-family: Lora, Verdana, sans-serif !important;
+    font-family: 'Segoe UI', 'Arial', sans-serif !important;
     text-decoration: none !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -229,7 +229,7 @@ a:visited {
 }
 
 textarea {
-    font-family: Lora, Verdana;
+    font-family: 'Segoe UI', 'Arial', sans-serif; 
     color: var(--main-text-color);
 }
 
