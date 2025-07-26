@@ -1,7 +1,7 @@
  /* Style the tabber */
 .tabber {
 	overflow: hidden;
-	background-color: #615656;
+	background-color: #BB6F6F;
 	border-radius: 1em 1em 0 0;
 }
 
@@ -35,7 +35,7 @@
 /* Style the tabber content */
 
 .tabber-content {
-	background-color: #877878;
+	background-color: #A18F8F;
 	padding: 0.25em;   
     border-radius: 0 0 1em 1em;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);

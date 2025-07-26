@@ -1,17 +1,18 @@
 :root {
-  --profile-bg: #4B4B58;           
-  --profile-card-bg: #4C4343;      
-  --profile-card-text: #ffffff;    
-  --profile-accent: #615656;       
-  --profile-btn-bg: #4C4343;       
-  --profile-btn-text: #ffffff;     
-  --profile-btn-hover-bg: #5E5E6E; 
-  --profile-segment-bg: #6A687A;   
-  --profile-segment-text: #ffffff; 
-  --profile-modal-bg: #877878;     
-  --profile-modal-text: #ffffff;   
-  --profile-bio-bg: #877878;       
+  --profile-bg: #4B4B58;
+  --profile-card-bg: #4C4343;
+  --profile-card-text: #ffffff;
+  --profile-accent: #BB6F6F;
+  --profile-btn-bg: #aab2b3;         /* lighter button background */
+  --profile-btn-text: #313a42;       /* dark button text for contrast */
+  --profile-btn-hover-bg: #cbd5e0;   /* even lighter on hover */
+  --profile-segment-bg: #6A687A;
+  --profile-segment-text: #ffffff;
+  --profile-modal-bg: #877878;
+  --profile-modal-text: #ffffff;
+  --profile-bio-bg: #4C4343;
 }
+
 
 
 
