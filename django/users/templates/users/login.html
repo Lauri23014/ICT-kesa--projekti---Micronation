@@ -14,7 +14,7 @@
     <div class="text-center mb-4">
       <h2 class="login-title">User Login</h2>
     </div>
-    <form class="form-with-validation" action="/users/login/" method="post" autocomplete="off">
+    <form class="form-with-validation" action="{% url 'login' %}" method="post" autocomplete="off">
       {% csrf_token %}
       {% for field in form %}
         <div class="mb-3 position-relative">
