@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 :root {
-  --profile-bg: #6A564E;
-  --profile-card-bg: #6A564E;
-  --profile-accent: #463934;
+  --profile-bg:#463934;
+  --profile-card-bg: #463934;
+  --profile-accent: #6A564E;
   --profile-btn-bg: #aab2b3;
   --profile-btn-text: #313a42;
   --profile-btn-hover-bg: #cbd5e0;
   --profile-segment-bg: #6A687A;
   --profile-modal-bg: #877878;
-  --profile-bio-bg: #6A564E;
-  --profile-modal-hover:#463934; 
+  --profile-bio-bg: #463934;
+  --profile-modal-hover:  #6A564E;
   --border-form-color: #91807a;
   --border-form-color-active: #ebf5f7;
 
