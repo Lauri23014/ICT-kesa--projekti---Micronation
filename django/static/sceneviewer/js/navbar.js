@@ -4,6 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleBtn.addEventListener("click", function () {
     navLinks.classList.toggle("visible");
+    toggleBtn.classList.toggle("active");
   });
 });
-
