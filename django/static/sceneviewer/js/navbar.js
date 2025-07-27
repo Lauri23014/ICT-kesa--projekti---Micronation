@@ -1,5 +1,9 @@
-  document.getElementById("paw-trigger").onclick = function () {
-    document.querySelectorAll("#navlinks ul li").forEach(function (li) {
-      li.classList.toggle("visible");
-    });
-  };
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleBtn = document.getElementById("navbar-toggle");
+  const navLinks = document.querySelector("#navlinks ul");
+
+  toggleBtn.addEventListener("click", function () {
+    navLinks.classList.toggle("visible");
+  });
+});
+

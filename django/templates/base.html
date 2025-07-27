@@ -1,74 +1,66 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'sceneviewer/navbar.css' %}">
-        {% comment %} commented out for now {% endcomment %}
-        {% comment %} <script src="{% static 'sceneviewer/navbar.js' %}"></script> {% endcomment %}
-        <link rel="stylesheet" href="{% static 'style.css' %}"/>
-        <title>{% block title %}Velwelland - The Crafters' Nation!{% endblock %}</title>
-        {% block head %}{% endblock %}
-    </head>
-    <body>
-        <nav id="navbar">
-            {% comment %} gonna comment this out for now {% endcomment %}
-            {% comment %} <div id="navlogo"></div> {% endcomment %}
-            <div id="nav-homepaw">
-                <span class="paw">
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'sceneviewer/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
+  <script defer src="{% static 'sceneviewer/navbar.js' %}"></script>
+  <title>{% block title %}Velwelland - The Crafters' Nation!{% endblock %}</title>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <nav id="navbar">
+    <div id="nav-homepaw">
+      <button id="navbar-toggle" aria-label="Toggle Menu">
+        ☰
+      </button>
+      <span class="paw">
         <img src="{% static 'icons/catpaw2.svg' %}" alt="Cat Paw" width="100" height="100">
-    </span>
-    <a id="homepagebanner" href="{% url 'map' %}">Velwelland</a>
-    
-</div>
-            <div id="navbarpad"></div>
-            
-            <div id="navlinks">
-                <ul>
-                 
-                    <li><a href="{% url 'about' %}" aria-label="about_us">About Us</a></li>
-                    <li><a href="{% url 'timeline' %}">user posts</a></li>
-                    {% if user.is_authenticated %}
-                       <li class="dropdown">
-        <a href="{% url 'profile_page' username=user.get_username %}" class="dropbtn">Profile ▼</a>
-        <div class="dropdown-content">
+      </span>
+      <a id="homepagebanner" href="{% url 'map' %}">Velwelland</a>
+    </div>
+    <div id="navlinks">
+      <ul>
+        <li><a href="{% url 'about' %}" aria-label="about_us">About Us</a></li>
+        <li><a href="{% url 'timeline' %}">user posts</a></li>
+        {% if user.is_authenticated %}
+        <li class="dropdown">
+          <a href="{% url 'profile_page' username=user.get_username %}" class="dropbtn">Profile ▼</a>
+          <div class="dropdown-content">
             <a href="{% url 'edit_profile' username=user.get_username %}">Edit Profile</a>
             <a href="{% url 'edit' %}">Settings</a>
-        </div>
-    </li>
-    <li>
-        <form action="{% url 'logout' %}" method="post">
+          </div>
+        </li>
+        <li>
+          <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="logout-button" aria-label="User Logout">Logout</button>
-        </form>
-    </li>
-                    {% else %}
-                        <li><a href="{% url 'register' %}" aria-label="User Registration">registeration</a></li>
-                        <li><a href="{% url 'login' %}" aria-label="User Login">Login</a></li>
-                    {% endif %}
+          </form>
+        </li>
+        {% else %}
+        <li><a href="{% url 'register' %}" aria-label="User Registration">registeration</a></li>
+        <li><a href="{% url 'login' %}" aria-label="User Login">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
 
-                    
-                </ul>
-            </div>
-        </nav>
+  <div id="content">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
 
-        <div id="content">
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li class="{{ message.tags }}">
-                        {{ message }}
-                    </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            {% block content %}{% endblock %}
-        </div>
-
-        <div id="enddiv">
-            <p id="copyrightnotice">© micronation ryhmä en tiiä mitä pitäis tarkemmin laittaa 2025</p>
-            <p id="contactemail">*Contact Email Here*</p>
-        </div>
-    </body>
+  <div id="enddiv">
+    <p id="copyrightnotice">© micronation ryhmä en tiiä mitä pitäis tarkemmin laittaa 2025</p>
+    <p id="contactemail">*Contact Email Here*</p>
+  </div>
+</body>
 </html>
