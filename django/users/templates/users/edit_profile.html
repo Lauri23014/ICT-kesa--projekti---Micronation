@@ -17,7 +17,7 @@
       {% csrf_token %}
       <div class="mb-3 text-center">
         <img id="profile-pic-preview"
-             src="{% if form.profile_pic.value %}{{ form.profile_pic.value.url }}{% else %}{% static 'users/images/default_profile.png' %}{% endif %}"
+             src="{% if form.profile_pic.value %}{{ form.profile_pic.value.url }}{% else %}{% static 'users/images/headshot.png' %}{% endif %}"
              alt="Profile picture"
              class="edit-profile-pic mb-2">
         <div>

@@ -33,7 +33,7 @@ def register_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid(): #form validation
             login(request, form.save())
-            return redirect("index")  #can be changed later to redirect to home page 
+            return redirect("/")  #can be changed later to redirect to home page 
     else:
         form = UserCreationForm()  
 
