@@ -1,7 +1,7 @@
  /* Style the tabber */
 .tabber {
 	overflow: hidden;
-	background-color: #BB6F6F;
+	background-color: #463934;
 	border-radius: 1em 1em 0 0;
 }
 
@@ -24,12 +24,12 @@
 
 /* Change background color of buttons on hover */
 .tabber button:hover {
-  	background-color: #8B4141;
+  	background-color: #91807a;
 }
 
 /* Create an active/current tablink class */
 .tabber button.active {
-  	background-color: #8B4141;
+  	background-color: #91807a;
 }
 
 /* Style the tabber content */

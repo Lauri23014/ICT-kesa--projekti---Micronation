@@ -101,15 +101,15 @@ document.addEventListener('DOMContentLoaded', function() {
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
-    border: 3px solid var(--profile-accent);
+    border: 3px solid var( --border-form-color);
     background: #fff;
     transition: box-shadow 0.2s;
     box-shadow: 0 2px 8px rgba(60,60,60,0.07);
   }
   .edit-profile-upload-btn {
     display: inline-block;
-    background: var(--profile-btn-bg);
-    color: var(--profile-btn-text);
+    background: var(--profile-accent);
+    color: var(--profile-card-text);
     padding: 0.5rem 1.3rem;
     border-radius: 1.2rem;
     font-weight: 600;
@@ -119,10 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     margin-top: 0.7rem;
     border: none;
   }
-  .edit-profile-upload-btn:hover {
-    background: var(--profile-btn-hover-bg);
-    color: var(--profile-card-text);
-  }
+
   .edit-profile-label {
     color: var(--profile-segment-text);
     font-weight: 500;
@@ -161,5 +158,11 @@ document.addEventListener('DOMContentLoaded', function() {
     border-color: var(--profile-btn-bg) !important;
     box-shadow: 0 0 0 2px var(--profile-btn-bg);
   }
+
+  textarea[name="bio"] {
+  min-height: 10em !important;   
+  height: 10em !important;
+  resize: vertical;            
+}
 </style>
 {% endblock %}

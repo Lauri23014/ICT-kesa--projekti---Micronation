@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 :root {
-  --profile-bg: #4B4B58;
-  --profile-card-bg: #4C4343;
-  --profile-accent: #BB6F6F;
+  --profile-bg: #6A564E;
+  --profile-card-bg: #6A564E;
+  --profile-accent: #463934;
   --profile-btn-bg: #aab2b3;
   --profile-btn-text: #313a42;
   --profile-btn-hover-bg: #cbd5e0;
   --profile-segment-bg: #6A687A;
   --profile-modal-bg: #877878;
-  --profile-bio-bg: #4C4343;
-  --profile-modal-hover: #8B4141;
+  --profile-bio-bg: #6A564E;
+  --profile-modal-hover:#463934; 
+  --border-form-color: #91807a;
+  --border-form-color-active: #ebf5f7;
 
   --main-text-color: #f0f0f0;
   --link-text-color: #6681da;
@@ -363,3 +365,26 @@ textarea {
    color: var(--main-text-color) !important;
 }
 
+input,
+textarea,
+select,
+input.form-control,
+textarea.form-control,
+select.form-control {
+  border: 2px solid var(--border-form-color) !important;  
+  border-radius: 0.6rem !important;
+  background: var(--profile-bio-bg) !important;
+  color: var(--main-text-color) !important;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+  border-color: var(--border-form-color) !important;      
+  box-shadow: none !important;
+  outline: none !important;
+}

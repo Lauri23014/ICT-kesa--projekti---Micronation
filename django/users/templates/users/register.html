@@ -100,7 +100,7 @@
   input.form-control, textarea.form-control, select.form-control {
     background: var(--profile-bio-bg) !important;
     color: var(--profile-card-text) !important;
-    border: 1px solid var(--profile-accent) !important;
+    border: 1px solid var(--border-form-color) !important;
     border-radius: 0.6rem !important;
     padding: 0.6rem 1rem !important;
     padding-left: 2.5rem !important;
@@ -111,8 +111,8 @@
   input.form-control:focus, textarea.form-control:focus, select.form-control:focus {
     background: var(--profile-card-bg) !important;
     color: var(--profile-card-text) !important;
-    border-color: var(--profile-btn-bg) !important;
-    box-shadow: 0 0 0 2px var(--profile-btn-bg);
+   border-color:var(--border-form-color-active) !important;
+    box-shadow: 0 0 0 2px #b0a99f40; 
   }
 </style>
 {% endblock %}
