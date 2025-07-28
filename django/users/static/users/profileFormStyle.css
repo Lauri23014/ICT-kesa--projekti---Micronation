@@ -1,0 +1,23 @@
+input,
+textarea,
+select,
+input.form-control,
+textarea.form-control,
+select.form-control {
+  border: 2px solid var(--border-form-color) !important;  
+  border-radius: 0.6rem !important;
+  background: var(--profile-bio-bg) !important;
+  color: var(--main-text-color) !important;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+  border-color: var(--border-form-color) !important;      
+  box-shadow: none !important;
+  outline: none !important;
+}
