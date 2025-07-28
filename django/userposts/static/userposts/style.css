@@ -266,8 +266,19 @@
 	background-color: var(--overlay-color);
 }
 
+.post-form-title-input {
+	min-height: 3em;
+	margin: 0.25em 0.25em 1em;
+	text-align: left;
+	background-color: #00000000;
+	border: 0;
+	resize: none;
+	font-size: large;
+	field-sizing: normal;
+}
+
 .post-comment-form-text-input {
-	height: 10em;
+	min-height: 10em;
 	margin: 0.25em 0.25em 0;
 	text-align: left;
 	background-color: #00000000;
@@ -275,7 +286,7 @@
 	resize: none;
 }
 
-.post-comment-form-text-input:focus {
+.post-form-title-input:focus, .post-comment-form-text-input:focus {
 	outline: none !important;
 }
 

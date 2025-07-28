@@ -287,7 +287,7 @@ a:visited {
   color: var(--linkvisited-text-color);
 }
 
-textarea {
+input, textarea {
   font-family: 'Segoe UI', 'Arial', sans-serif;
   color: var(--main-text-color);
 }

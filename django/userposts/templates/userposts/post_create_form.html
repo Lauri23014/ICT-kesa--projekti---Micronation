@@ -1,0 +1,140 @@
+<!--TODO: make a form for creating a proper post--> 
+{% load static %}
+<button onClick="postForm()" class="post-create-button hoverable-button">
+	{% if request.user.profile.profile_pic %}
+		<img class="profile-picture" src="/media/{{ request.user.profile.profile_pic }}" alt="Profile Picture">
+	{% else %}
+		<img class="profile-picture" src="{% static 'users/images/default-avatar.jpg' %}" alt="Default Picture">
+	{% endif %}
+	<p>Create Post</p>
+</button>
+
+<script defer>
+	function postForm() {
+		{% if request.user.is_authenticated %}
+			// reply
+			// profile for reply
+			const reply = document.createElement("div");
+			reply.className = "post-block";
+			const replyProfile = document.createElement("div");
+			replyProfile.className = "profile-mini"
+			replyProfile.onClick = "window.location.href = '{% url 'profile_page' username=request.user.username %}'";
+			reply.appendChild(replyProfile);
+			{% if request.user.profile.profile_pic %}
+				const replyPFP = document.createElement("img");
+				replyPFP.className = "profile-picture";
+				replyPFP.src = "/media/{{ request.user.profile.profile_pic }}";
+				replyPFP.alt = "Profile Picture";
+			{% else %}
+				const replyPFP = document.createElement("img");
+				replyPFP.className = "profile-picture";
+				replyPFP.src = "{% static 'users/images/default-avatar.jpg' %}";
+				replyPFP.alt = "Default Picture";
+			{% endif %}
+			const replyName = document.createElement("h3")
+			replyName.innerText = "{{ request.user.username }}";
+			replyProfile.appendChild(replyPFP);
+			replyProfile.appendChild(replyName);
+
+			// post form
+			const postForm = document.createElement("form");
+			postForm.className = "post-comment-form";
+			postForm.method = "POST";
+			postForm.enctype = "multipart/form-data";
+			postForm.action = "{% url 'create_post'%}";
+			postForm.id = "comment-form-{{ post.id }}";
+			const csrftoken = getCookie('csrftoken');
+			const postFormHiddenInput = document.createElement("input");
+			postFormHiddenInput.type = "hidden";
+			postFormHiddenInput.name = "next";
+			postFormHiddenInput.value = "{{ request.path }}";
+			postForm.appendChild(postFormHiddenInput);
+			const postFormIndent = document.createElement("div");
+			postFormIndent.className = "post-comment-form-indent";
+			postForm.appendChild(postFormIndent);
+			const postFormTitleInput = document.createElement("input");
+			postFormTitleInput.type = "text";
+			postFormTitleInput.className = "post-form-title-input";
+			postFormTitleInput.autocomplete = "off";
+			postFormTitleInput.name = "post_title";
+			postFormTitleInput.maxLength = "127";
+			postFormTitleInput.placeholder = "Add a title to your post!";
+			postFormTitleInput.required = true;
+			postFormIndent.appendChild(postFormTitleInput);
+			const postFormTextInput = document.createElement("textarea");
+			postFormTextInput.className = "post-comment-form-text-input";
+			postFormTextInput.autocomplete = "off";
+			postFormTextInput.name = "post_text";
+			postFormTextInput.maxLength = "255";
+			postFormTextInput.placeholder = "Type text here!";
+			postFormTextInput.required = true;
+			postFormIndent.appendChild(postFormTextInput);
+			const postFormImageInputLabel = document.createElement("label");
+			postFormImageInputLabel.for = "image_file";
+			postFormIndent.appendChild(postFormImageInputLabel);
+			const postFormImageInput = document.createElement("input");
+			postFormImageInput.type = "file";
+			postFormImageInput.accept = "image/*";
+			postFormImageInput.name = "image_file";
+			postFormImageInput.style = "display: none;"
+			postFormImageInputLabel.appendChild(postFormImageInput);
+			postFormImageInputLabel.className = "post-comment-form-image-label";
+			const postFormImageInputImage = document.createElement("img");
+			postFormImageInputImage.src = "{% static 'icons/image-attach.svg' %}";
+			postFormImageInputImage.className = "post-icon hoverable-icon invert";
+			postFormImageInputLabel.appendChild(postFormImageInputImage);
+			const postFormSubmitButton = document.createElement("button");
+			postFormSubmitButton.className = "generic-comment-button hoverable-button";
+			postFormSubmitButton.type = "submit";
+			postFormSubmitButton.innerHTML = "<p>Send reply</p>"
+			postForm.appendChild(postFormSubmitButton);
+			postForm.onsubmit = function(e) {
+				e.preventDefault();
+				let form = document.getElementById("comment-form-{{ post.id }}");
+				let url = form.action;
+				let formdata = new FormData(form);
+
+				let options = {
+					method: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					body: formdata,
+				};
+
+				fetch(url, options)
+				.then(response => response.json())
+				.then((response) => {
+					if (response.success) {
+						window.location.href = "/profile/"+response.username+"/post/"+response.id+"#selected-post";
+					} else {
+						window.alert("Creating post failed. Try again later.")
+					}
+				})
+			}
+			reply.appendChild(postForm);
+
+			// overlay and binding box
+			const overlay = document.createElement("div");
+			overlay.className = "post-comment-form-overlay";
+			overlay.id = "post-comment-form-overlay-{{ post.id }}";
+			overlay.addEventListener("click", (click) => {removerPost{{ post.id }}(click)});
+
+			const box = document.createElement("div");
+			box.className = "post-segment";
+
+			document.body.appendChild(overlay);
+			overlay.appendChild(box);
+			box.appendChild(reply);
+		{% else %}
+			window.location.href = "{% url 'login' %}?next={{ request.path }}";
+		{% endif %}
+	}
+
+	// function for removing form from screen
+	function removerPost{{ post.id }}(click) {
+		const element = click.target;
+		if (element.classList.contains("post-comment-form-overlay")) {
+			document.getElementById("post-comment-form-overlay-{{ post.id }}").remove();
+		}
+	}
+</script>

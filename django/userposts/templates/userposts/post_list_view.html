@@ -6,6 +6,7 @@
 	<script src="{% static "userposts/js/getCookie.js" %}"></script>
 {% endblock head %}
 {% block content %}
+	{% include "userposts/post_create_form.html" %}
 	<div class="post-title-block-container">
 		{% for post in posts %}
 			<div class="post-segment">
