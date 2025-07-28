@@ -47,5 +47,5 @@ class Post(models.Model):
 	class Meta:
 		constraints = [
 			# models.CheckConstraint(condition=Q(title__isnull=False) ^ Q(linked_post__isnull=False) ^ Q(linked_scene__isnull=False), name="post-title-comment-constraint"),
-			models.CheckConstraint(condition=Q(text_content__isnull=False) | Q(image_file__isnull=False), name="post-content-constraint"),
+			models.CheckConstraint(condition=Q(text_content__isnull=True) | Q(image_file__isnull=True), name="post-content-constraint"),
 		]

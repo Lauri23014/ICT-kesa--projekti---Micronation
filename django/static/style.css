@@ -48,7 +48,7 @@ body {
   height: 4em;
   background: var(--main-bg-color);
   border-bottom: 4px solid var(--sub-bg-color);
-  z-index: 10000;
+  /* z-index: 10000; commented out so that navbar doesn't cover up comment forms*/
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -9,6 +9,8 @@ from sceneviewer.views import scene_view
 
 from zoneinfo import ZoneInfo
 
+from  django.core.files.images import ImageFile
+
 # basic views
 def post_detail_view(request, username, id):
 	if Post.objects.get(id=id).user.username == username:
@@ -71,17 +73,17 @@ def add_or_remove_like(request, username, id):
 def create_post(request, linked_post=None, linked_scene=None, title=None, text_content=None, image_file=None):
 	data = {}
 
-	post = Post(user=request.user, linked_post=linked_post, linked_scene=linked_scene, title=title, text_content=text_content, image_file=image_file)
+	post = Post(user=request.user, linked_post=linked_post, linked_scene=linked_scene, title=title, text_content=text_content, image_file=ImageFile(image_file))
 
 	success = True
 	id = 0
 	username = ""
 	try:
+		post.clean()
 		post.save()
 		id = post.id
 		username = post.user.username
-	except:
-		print("no post created")
+	except Exception as e:
 		success = False
 
 	data["success"] = success
@@ -93,17 +95,20 @@ def create_post(request, linked_post=None, linked_scene=None, title=None, text_c
 def post_post(request, username, id):
 	title = request.POST.get("post_title")
 	text_content = request.POST.get("post_text")
-	return create_post(request, title=title, text_content=text_content)
+	image_file = request.FILES["image_file"]
+	return create_post(request, title=title, text_content=text_content, image_file=image_file)
 
 def comment_post(request, username, id):
 	linked_post = Post.objects.get(id=id)
 	text_content = request.POST.get("comment_text")
-	return create_post(request, linked_post=linked_post, text_content=text_content)
+	image_file = request.FILES["image_file"]
+	return create_post(request, linked_post=linked_post, text_content=text_content, image_file=image_file)
 
 def comment_scene(request, id): 
 	linked_scene = Scene.objects.get(id=id)
 	text_content = request.POST.get("comment_text")
-	return create_post(request, linked_scene=linked_scene, text_content=text_content)
+	image_file = request.FILES["image_file"]
+	return create_post(request, linked_scene=linked_scene, text_content=text_content, image_file=image_file)
 
 def remove_post(request, username, id):
 	post = Post.objects.get(id=id)

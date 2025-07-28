@@ -87,6 +87,7 @@
 			const replyForm = document.createElement("form");
 			replyForm.className = "post-comment-form";
 			replyForm.method = "POST";
+			replyForm.enctype = "multipart/form-data";
 			replyForm.action = "{% if scene %}{% url "comment_scene" id=post.id %}{% else %}{% url "comment_post" username=post.user.username id=post.id %}{% endif %}";
 			replyForm.id = "comment-form-{{ post.id }}";
 			const csrftoken = getCookie('csrftoken');
@@ -102,6 +103,15 @@
 			replyFormTextInput.maxlenght = "255";
 			replyFormTextInput.placeholder = "Type a reply!";
 			replyForm.appendChild(replyFormTextInput);
+			const replyFormImageInput = document.createElement("input");
+			replyFormImageInput.type = "file";
+			replyFormImageInput.accept = "image/*";
+			replyFormImageInput.name = "image_file";
+			replyForm.appendChild(replyFormImageInput);
+			const replyFormImageInputLabel = document.createElement("label");
+			replyFormImageInputLabel.for = "image_file";
+			replyFormImageInputLabel.className = "post-comment-form-image-label";
+			replyForm.appendChild(replyFormImageInputLabel);
 			const replyFormSubmitButton = document.createElement("button");
 			replyFormSubmitButton.className = "generic-comment-button";
 			replyFormSubmitButton.type = "submit";
