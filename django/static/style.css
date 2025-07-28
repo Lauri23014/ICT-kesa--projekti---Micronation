@@ -24,10 +24,13 @@
   --highlight-bg-color: #dddddd4d;
   --overlay-color: #c0c0c069;
   --bottom-text-color: #000000;
+  
+  --button-color: #c0c0c069;
+  --button-color-inverse: #3f3f3f69;
 }
 
 .invert {
-  filter: invert(90%);
+  filter: invert(100%);
 }
 
 body {
