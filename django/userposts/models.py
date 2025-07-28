@@ -39,13 +39,8 @@ class Post(models.Model):
 	def __str__(self):
 		return self.user.username+": "+self.text_content+image_attached(self)
 	
-	def clean(self):
-		if (self.title is not None) ^ (self.linked_post is not None) ^ (self.linked_scene is not None):
-			return	ValidationError("Post can only have one of title, linked_post, linked_scene")
-		return super().clean()
-	
 	class Meta:
 		constraints = [
-			# models.CheckConstraint(condition=Q(title__isnull=False) ^ Q(linked_post__isnull=False) ^ Q(linked_scene__isnull=False), name="post-title-comment-constraint"),
-			models.CheckConstraint(condition=Q(text_content__isnull=True) | Q(image_file__isnull=True), name="post-content-constraint"),
+			models.CheckConstraint(condition=(~Q(title__exact="") ^ Q(linked_post__isnull=False)) | (Q(linked_post__isnull=False) ^ Q(linked_scene__isnull=False)), name="post-title-comment-constraint"),
+			models.CheckConstraint(condition=(~Q(text_content__exact="")), name="post-content-constraint"),
 		]

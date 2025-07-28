@@ -106,8 +106,9 @@
 			replyFormTextInput.className = "post-comment-form-text-input";
 			replyFormTextInput.autocomplete = "off";
 			replyFormTextInput.name = "comment_text";
-			replyFormTextInput.maxlenght = "255";
+			replyFormTextInput.maxLength = "255";
 			replyFormTextInput.placeholder = "Type a reply!";
+			replyFormTextInput.required = true;
 			replyFormIndent.appendChild(replyFormTextInput);
 			const replyFormImageInputLabel = document.createElement("label");
 			replyFormImageInputLabel.for = "image_file";

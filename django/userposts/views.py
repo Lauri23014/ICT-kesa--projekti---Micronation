@@ -73,7 +73,10 @@ def add_or_remove_like(request, username, id):
 def create_post(request, linked_post=None, linked_scene=None, title=None, text_content=None, image_file=None):
 	data = {}
 
-	post = Post(user=request.user, linked_post=linked_post, linked_scene=linked_scene, title=title, text_content=text_content, image_file=ImageFile(image_file))
+	if image_file is not None:
+		image_file = ImageFile(image_file)
+
+	post = Post(user=request.user, linked_post=linked_post, linked_scene=linked_scene, title=title, text_content=text_content, image_file=image_file)
 
 	success = True
 	id = 0
@@ -92,22 +95,22 @@ def create_post(request, linked_post=None, linked_scene=None, title=None, text_c
 
 	return JsonResponse(data)
 
-def post_post(request, username, id):
+def post_post(request):
 	title = request.POST.get("post_title")
 	text_content = request.POST.get("post_text")
-	image_file = request.FILES["image_file"]
+	image_file = image_file_or_none(request.FILES)
 	return create_post(request, title=title, text_content=text_content, image_file=image_file)
 
 def comment_post(request, username, id):
 	linked_post = Post.objects.get(id=id)
 	text_content = request.POST.get("comment_text")
-	image_file = request.FILES["image_file"]
+	image_file = image_file_or_none(request.FILES)
 	return create_post(request, linked_post=linked_post, text_content=text_content, image_file=image_file)
 
 def comment_scene(request, id): 
 	linked_scene = Scene.objects.get(id=id)
 	text_content = request.POST.get("comment_text")
-	image_file = request.FILES["image_file"]
+	image_file = image_file_or_none(request.FILES)
 	return create_post(request, linked_scene=linked_scene, text_content=text_content, image_file=image_file)
 
 def remove_post(request, username, id):
@@ -136,3 +139,9 @@ def convert_post_timezone(request, username, id):
 	post = Post.objects.get(id=id)
 	data["datetime_string"] = post.datetime.astimezone(ZoneInfo(request.POST.get("timezone"))).strftime("%d/%m/%Y, %H:%M:%S")
 	return JsonResponse(data)
+
+def image_file_or_none(request_files):
+	if request_files:
+		return ImageFile(request_files["image_file"])
+	else:
+		return None
