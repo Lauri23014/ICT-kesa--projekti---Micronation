@@ -275,6 +275,8 @@ body {
   width: calc(90% + 2em);
   min-height: calc(100vh - 10em);
   margin: 6em auto 0;
+  margin-bottom: 4em;
+
   padding: 1em;
   box-sizing: border-box;
   border-radius: 1em;
@@ -307,6 +309,43 @@ input, textarea, button {
   font-family: 'Segoe UI', 'Arial', sans-serif;
   color: var(--main-text-color);
 }
+
+#site-footer {
+  background-color: rgba(20, 15, 10, 0.4); 
+  color: #f0e6d2;
+  font-family: 'Lora', serif;
+  font-size: 0.9em;
+  padding: 1em 0;
+  text-align: center;
+  backdrop-filter: blur(2px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
+  flex-wrap: wrap;
+}
+
+.footer-row a {
+  color: #c8b6a5;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-row a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-separator {
+  color: #a1887f;
+  font-weight: bold;
+}
+
+
 
 /* --- Responsiivisuus mobiilissa --- */
 @media (max-width: 700px) {
