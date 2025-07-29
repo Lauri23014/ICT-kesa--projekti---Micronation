@@ -23,6 +23,7 @@
   margin: 0 auto;
   padding: 25px 12.5%;
   width: 50%;
+  min-width: calc(300px + 12.5%);
   height: calc(100% + 1rem - 2px);
   overflow-y: scroll;
   scrollbar-width: none;
