@@ -336,6 +336,27 @@
 	margin:  0.25em auto;
 }
 
+.post-list-h-div {
+	display: flex;
+	flex-direction: row;
+}
+
+.timeline-about {
+	width: 22em;
+	padding: 0 1em;
+	text-align: center;
+}
+
+.post-create-button {
+	display: flex;
+	margin: 0 auto;
+	
+	p {
+		width: 8em;
+		height: 1em;
+	}
+}
+
 .hoverable-icon, .hoverable-button {
 	transition: all 0.1s ease-in-out;
 }
