@@ -3,10 +3,19 @@
 
 {% block title %}About Us - Velwelland{% endblock %}
 {% block head %}
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static "about/style.css" %}">
 {% endblock %}
 
 {% block content %}
     <h1>About Us</h1>
-    <p>Here's some introductory text. And here's some more.</p>
+    <h2>Velwelland</h2>
+    <p>Velwelland aka. the dominion of Velwelland is a micronation located in Riihimäki dedicated to creative and handcraft.
+    <br><br>Below is the flag (to the left) and the coat of arms (to the right) of Velwelland.</p>
+    <div id="flag_coat_container">
+        <img src="{% static "about/velwelland_flag.png" %}" alt="The flag of Velwelland" width="496" height="248">
+        <img src="{% static "about/velwelland_coatofarms.png" %}" alt="The coat of arms of Velwelland" width="248" height="248">
+    </div>
+    <h2>Vel Well Crafter</h2>
+    <p>The Vel Well is the mascot of Velwelland. The Vel Well Crafter is a black and white cat and the guiding figure of Velwelland. They are a symbol of storytelling, resiliance, humor and skill. Their motto: "Even paws are no obstacle to craft."</p>
 {% endblock %}
