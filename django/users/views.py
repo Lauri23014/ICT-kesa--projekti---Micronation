@@ -100,8 +100,8 @@ class ProfilePageView(DetailView):
              self).get_context_data(*args, **kwargs)
         # add extra fields
         user = User.objects.get(username=self.kwargs['username'])
-        context["posts"] = Post.objects.filter(user=user).exclude(title__isnull=True)
-        context["replies"] = Post.objects.filter(user=user).exclude(title__isnull=False)
+        context["posts"] = Post.objects.filter(user=user).exclude(title__isnull=True).order_by("-datetime")
+        context["replies"] = Post.objects.filter(user=user).exclude(title__isnull=False).order_by("-datetime")
         return context
     
 #will use get_context_data() if we want to show users posts etc in user profile 
