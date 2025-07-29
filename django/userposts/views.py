@@ -43,7 +43,7 @@ def get_post_like_count(post : Post):
 
 def postlist(request):
 	# posts = sorted(Post.objects.exclude(title=None), key=get_post_popularity, reverse=True)
-	posts = Post.objects.order_by("-datetime").exclude(title=None)
+	posts = Post.objects.exclude(title=None).order_by("-datetime")
 	context = {
 		"posts" : posts
 	}
