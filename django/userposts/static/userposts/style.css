@@ -364,22 +364,3 @@
 		height: 1em;
 	}
 }
-
-.hoverable-icon, .hoverable-button {
-	transition: all 0.1s ease-in-out;
-}
-
-.hoverable-button:hover {
-	filter: brightness(110%);
-}
-
-.hoverable-icon:hover {
-	border-radius: 50%;
-	height: 2em;
-	padding: 0.25em;
-	background-color: var(--button-color);
-}
-
-.invert.hoverable-icon:hover {
-	background-color: var(--button-color-inverse);
-}

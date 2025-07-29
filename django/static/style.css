@@ -33,6 +33,25 @@
   filter: invert(100%);
 }
 
+.hoverable-icon, .hoverable-button {
+	transition: all 0.1s ease-in-out;
+}
+
+.hoverable-button:hover {
+	filter: brightness(110%);
+}
+
+.hoverable-icon:hover {
+	border-radius: 50%;
+	height: 2em;
+	padding: 0.25em;
+	background-color: var(--button-color);
+}
+
+.invert.hoverable-icon:hover {
+	background-color: var(--button-color-inverse);
+}
+
 body {
   background-image: url('/static/wood-veneer-598-mm-architextures.jpg');
   background-repeat: repeat;
@@ -114,7 +133,6 @@ body {
   color: var(--main-text-color);
   text-shadow: 1px 1px #000;
 }
-
 
 #navlinks {
   margin: 0;
@@ -285,7 +303,7 @@ a:visited {
   color: var(--linkvisited-text-color);
 }
 
-input, textarea {
+input, textarea, button {
   font-family: 'Segoe UI', 'Arial', sans-serif;
   color: var(--main-text-color);
 }
@@ -363,4 +381,34 @@ input, textarea {
 #navlinks ul li a:hover,
 #navlinks ul li a:active {
    color: var(--main-text-color);
+}
+
+.button-small {
+  background: var(--profile-accent);
+  border: none;
+  border-radius: 50rem !important;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  transition: background 0.3s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(60,60,60,0.07);
+  padding: 0.32rem 1.2rem;
+}
+
+.button-large {
+  display: inline-block;
+  background: var(--profile-accent);
+  padding: 0.5rem 1.3rem;
+  border-radius: 1.2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 0.7rem;
+  border: none;
+}
+
+.button-cancel {
+  border: 2px solid var(--profile-accent);
+  background: transparent !important;
 }

@@ -13,27 +13,31 @@
 <div class="register-bg">
   <div class="register-card">
     <div class="text-center mb-4">
-      <h2 class="register-title">Register</h2>
+      <h2 class="register-title">Sign Up</h2>
     </div>
     <form class="form-with-validation" action="{% url 'register' %}" method="post" autocomplete="off">
       {% csrf_token %}
       {% for field in form %}
         <div class="mb-3 position-relative">
           <label for="{{ field.id_for_label }}" class="form-label register-label">{{ field.label }}</label>
-          {% if "user" in field.name %}
-            <i class="bi bi-person register-icon"></i>
-          {% elif "email" in field.name %}
-            <i class="bi bi-envelope register-icon"></i>
-          {% elif "password" in field.name %}
-            <i class="bi bi-lock register-icon"></i>
-          {% endif %}
-          {{ field|add_class:"form-control ps-5" }}
+          <div class="input-icon 
+            {% if "user" in field.name %}
+              add-user-icon
+            {% elif "email" in field.name %}
+              add-email-icon
+            {% elif "password" in field.name %}
+              add-lock-icon
+            {% endif %}
+          ">
+            {{ field|add_class:"form-control ps-5" }}
+          </div>
+
           {% for error in field.errors %}
             <div class="text-danger small">{{ error }}</div>
           {% endfor %}
         </div>
       {% endfor %}
-      <button class="register-submit-btn mt-3 rounded-pill d-block mx-auto px-5" type="submit">Sign up</button>
+      <button class="button-large hoverable-button mt-3 rounded-pill d-block mx-auto px-5" type="submit">Sign up</button>
     </form>
   </div>
 </div>

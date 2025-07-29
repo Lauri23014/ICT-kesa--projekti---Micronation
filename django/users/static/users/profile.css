@@ -229,7 +229,7 @@
 }
 
 #bg-modal input[type="file"] {
-  margin-top: 1.2rem;
+  margin: 1.2rem 0;
   color: var(--main-text-color);
   background: var(--profile-card-bg);
   border: 1px solid var(--profile-accent);

@@ -4,11 +4,16 @@ select,
 input.form-control,
 textarea.form-control,
 select.form-control {
-  border: 2px solid var(--border-form-color) !important;  
-  border-radius: 0.6rem !important;
+  border: none;  
+  /* border-radius: 0.6rem !important; */
   background: var(--profile-bio-bg) !important;
   color: var(--main-text-color) !important;
   box-shadow: none !important;
+}
+
+div.input-icon, .profile-form-field {
+  border: 2px solid var(--border-form-color) !important;  
+  border-radius: 0.6rem;
 }
 
 input:focus,
@@ -57,50 +62,23 @@ select.form-control:focus {
   transition: box-shadow 0.2s;
   box-shadow: 0 2px 8px rgba(60,60,60,0.07);
 }
-.edit-profile-upload-btn {
-  display: inline-block;
-  background: var(--profile-accent);
-  color: var(--profile-card-text);
-  padding: 0.5rem 1.3rem;
-  border-radius: 1.2rem;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  margin-top: 0.7rem;
-  border: none;
-}
 
 .edit-profile-label {
   color: var(--profile-segment-text);
   font-weight: 500;
   font-size: 1rem;
 }
-.edit-profile-save-btn {
-  background: var(--profile-accent) !important;
-  color: var(--profile-card-text) !important;
-  border: none;
-  border-radius: 50rem !important;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-  transition: background 0.3s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(60,60,60,0.07);
-  padding: 0.32rem 1.2rem;
-  min-width: 140px;
-}
+
 .form-label, .form-text {
   color: var(--profile-segment-text) !important;
 }
 input, textarea, select {
   background: var(--profile-bio-bg) !important;
-  color: var(--profile-card-text) !important;
-  border: 1px solid var(--profile-accent) !important;
+  /* border: 1px solid var(--profile-accent) !important; */
   border-radius: 0.6rem !important;
 }
 input:focus, textarea:focus, select:focus {
   background: var(--profile-card-bg) !important;
-  color: var(--profile-card-text) !important;
   border-color: var(--profile-btn-bg) !important;
   box-shadow: 0 0 0 2px var(--profile-btn-bg);
 }
@@ -130,13 +108,11 @@ textarea[name="bio"] {
   display: inline;
 }
 .edit-profile-password-link:hover {
-  color: var(--profile-card-text);
   text-decoration: underline;
 }
 .edit-profile-save-btn,
 .edit-profile-save-btn.btn-sm {
   background: var(--profile-accent) !important;
-  color: var(--profile-card-text) !important;
   border: none;
   border-radius: 50rem !important;
   font-weight: 600;
@@ -154,7 +130,6 @@ textarea[name="bio"] {
 }
 .edit-profile-save-btn:hover, .edit-profile-save-btn.btn-sm:hover {
   background: var(--profile-modal-hover) !important;
-  color: var(--profile-card-text) !important;
   box-shadow: 0 4px 16px rgba(60,60,60,0.13);
 }
 .modal-dialog.modal-sm {
@@ -198,7 +173,6 @@ textarea[name="bio"] {
   max-width: 420px;
   width: 100%;
   padding: 2.5rem 2rem;
-  color: var(--profile-card-text);
   backdrop-filter: blur(2px);
 }
 .login-title {
@@ -226,29 +200,37 @@ textarea[name="bio"] {
   pointer-events: none;
   z-index: 2;
 }
-.login-submit-btn {
-  background: var(--profile-accent);
-  color: var(--profile-card-text);
-  border: none;
-  border-radius: 50rem !important;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-  transition: background 0.3s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(60,60,60,0.07);
-  padding: 0.5rem 2.5rem;
-  min-width: 180px;
+
+.input-icon {
+  display: flex;
+  flex-direction: row;
+
+  input {
+    padding-left: 0 !important;
+  }
 }
-.login-submit-btn:hover {
-  background: var(--profile-modal-hover);
-  color: var(--profile-card-text);
-  box-shadow: 0 4px 16px rgba(60,60,60,0.13);
+
+.input-icon::before {
+  font-family: bootstrap-icons !important;
+  width: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  color: var(--profile-btn-bg);
+  font-size: 1.2rem;
+  pointer-events: none;
+  z-index: 2;
 }
-input.form-control:focus {
-  background: var(--profile-card-bg) !important;
-  color: var(--profile-card-text) !important;
-  border-color: var(--border-form-color-active) !important;
-  box-shadow: 0 0 0 2px var(--profile-btn-bg);
+
+.add-user-icon::before {
+  content: "\F4E1";
+}
+
+.add-email-icon::before {
+  content: "\F32E";
+}
+
+.add-lock-icon::before {
+  content: "\F44F";
 }
 
 /* register.html */
@@ -266,7 +248,6 @@ input.form-control:focus {
   max-width: 420px;
   width: 100%;
   padding: 2.5rem 2rem;
-  color: var(--profile-card-text);
   backdrop-filter: blur(2px);
 }
 .register-title {
@@ -293,38 +274,16 @@ input.form-control:focus {
   pointer-events: none;
   z-index: 2;
 }
-.register-submit-btn {
-  background: var(--profile-accent);
-  color: var(--profile-card-text);
-  border: none;
-  border-radius: 50rem !important;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-  transition: background 0.3s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(60,60,60,0.07);
-  padding: 0.5rem 2.5rem;
-  min-width: 180px;
-}
-.register-submit-btn:hover {
-  background: var(--profile-modal-hover);
-  color: var(--profile-card-text);
-  box-shadow: 0 4px 16px rgba(60,60,60,0.13);
-}
+
 input.form-control, textarea.form-control, select.form-control {
   background: var(--profile-bio-bg) !important;
-  color: var(--profile-card-text) !important;
-  border: 1px solid var(--border-form-color) !important;
   border-radius: 0.6rem !important;
-  padding: 0.6rem 1rem !important;
-  padding-left: 2.5rem !important;
+  padding: 0.6rem 1rem;
   height: 2.5rem !important;
   box-sizing: border-box;
   line-height: 1.5 !important;
 }
 input.form-control:focus, textarea.form-control:focus, select.form-control:focus {
   background: var(--profile-card-bg) !important;
-  color: var(--profile-card-text) !important;
-  border-color:var(--border-form-color-active) !important;
-  box-shadow: 0 0 0 2px #b0a99f40; 
+  box-shadow: 0 0 0 2px var(--profile-btn-bg);
 }

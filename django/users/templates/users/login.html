@@ -21,20 +21,24 @@
       {% for field in form %}
         <div class="mb-3 position-relative">
           <label for="{{ field.id_for_label }}" class="form-label login-label">{{ field.label }}</label>
-          {% if "user" in field.name %}
-            <i class="bi bi-person login-icon"></i>
-          {% elif "email" in field.name %}
-            <i class="bi bi-envelope login-icon"></i>
-          {% elif "password" in field.name %}
-            <i class="bi bi-lock login-icon"></i>
-          {% endif %}
-          {{ field|add_class:"form-control ps-5" }}
+          <div class="input-icon 
+            {% if "user" in field.name %}
+              add-user-icon
+            {% elif "email" in field.name %}
+              add-email-icon
+            {% elif "password" in field.name %}
+              add-lock-icon
+            {% endif %}
+          ">
+            {{ field|add_class:"form-control ps-5" }}
+          </div>
+          
           {% for error in field.errors %}
             <div class="text-danger small">{{ error }}</div>
           {% endfor %}
         </div>
       {% endfor %}
-      <button class="login-submit-btn mt-3 rounded-pill d-block mx-auto px-5" type="submit">Login</button>
+      <button class="button-large hoverable-button mt-3 rounded-pill d-block mx-auto px-5" type="submit">Login</button>
     </form>
   </div>
 </div>

@@ -5,7 +5,8 @@
 {% block head %}
   <link rel="stylesheet" href='{% static "userposts/style.css" %}'/>
   <link rel="stylesheet" href='{% static "users/tabberStyle.css" %}'/>
-   <link rel="stylesheet" href='{% static "users/profile.css" %}'/>
+  <link rel="stylesheet" href='{% static "users/profile.css" %}'/>
+  <link rel="stylesheet" href="{% static 'users/profileFormStyle.css' %}">
 {% endblock head %}
 
 {% block content %}
@@ -28,8 +29,8 @@
         <label for="bg-upload">Select new background:</label>
         <input type="file" name="background_image" id="bg-upload" accept="image/*" required>
         <div>
-          <button type="submit" class="profile-btn">Save</button>
-          <button type="button" class="profile-btn" id="cancel-bg-modal">Cancel</button>
+          <button type="submit" class="button-small hoverable-button">Save</button>
+          <button type="button" class="button-small hoverable-button button-cancel" id="cancel-bg-modal">Cancel</button>
         </div>
       </form>
     </div>
