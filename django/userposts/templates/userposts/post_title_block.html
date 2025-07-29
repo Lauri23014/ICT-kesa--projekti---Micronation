@@ -22,7 +22,7 @@
 		<a class="title-block-content-wrap" href="/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post">
 			<img class="title-block-preview-img{% if not post.image_file %} invert{% endif %}" src="{% if post.image_file %}{{ post.image_file.url }}{% else %}{% static 'icons/text_post.svg' %}{% endif %}">
 
-			<div class="title-block-v-flex">
+			<div class="title-block-text">
 				<h2>{{ post.title }}</h2>
 				<p>{{ post.user.username }}</p>
 				{% comment %} <p>{{ post.comment_count }} comment{% if post.comment_count != 1 %}s{% endif %}</p> {% endcomment %}
