@@ -25,7 +25,7 @@
     <div id="navlinks">
       <ul>
         <li><a href="{% url 'about' %}" aria-label="about_us">About Us</a></li>
-        <li><a href="{% url 'timeline' %}">user posts</a></li>
+        <li><a href="{% url 'timeline' %}">Noticeboard</a></li>
         {% if user.is_authenticated %}
         <li class="dropdown">
           <a href="{% url 'profile_page' username=user.get_username %}" class="dropbtn">Profile ▼</a>

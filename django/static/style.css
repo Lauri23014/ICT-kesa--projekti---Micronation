@@ -51,7 +51,7 @@ body {
   height: 4em;
   background: var(--main-bg-color);
   border-bottom: 4px solid var(--sub-bg-color);
-  /* z-index: 10000; commented out so that navbar doesn't cover up comment forms*/
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -252,8 +252,6 @@ body {
 .paw img:hover {
   animation: shake 0.4s ease-in-out;
 }
-
-
 
 #content {
   width: calc(90% + 2em);
