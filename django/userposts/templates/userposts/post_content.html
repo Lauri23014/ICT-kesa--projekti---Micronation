@@ -1,5 +1,5 @@
 {% load static %}
-{% if selected != True %}<a href="/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post">{% endif %}
+{% if selected is False %}<a href="/profile/{{ post.user.username }}/post/{{ post.id }}#selected-post">{% endif %}
 	<article {% if selected != True %}class="post-content"{% else %}id="selected-post"{% endif %}>
 		<div class="post-content-div">
 			{% if post.title %}
@@ -34,7 +34,7 @@
 				<p id="like-counter-{{ post.id }}">{{ post.like_count }}</p>
 			</div>
 		</div>
-		{% if request.user == post.user %}
+		{% if request.user == post.user and selected%}
 			<div class="delete-button">
 				<form method="POST" action="{% url "remove_post_or_comment" username=post.user.username id=post.id %}" class="delete-form" id="delete-form-{{ post.id }}">
 					{% csrf_token %}
