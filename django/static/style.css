@@ -362,5 +362,5 @@ input, textarea {
 #navlinks ul li a:visited,
 #navlinks ul li a:hover,
 #navlinks ul li a:active {
-   color: var(--main-text-color) !important;
+   color: var(--main-text-color);
 }
