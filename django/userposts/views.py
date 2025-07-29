@@ -1,11 +1,10 @@
 from copy import copy
+from datetime import datetime, timezone
 from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import redirect, render
 
 from userposts.models import Post
 from sceneviewer.models import Scene
-
-from sceneviewer.views import scene_view
 
 from zoneinfo import ZoneInfo
 
@@ -27,7 +26,8 @@ def post_detail_view(request, username, id):
 				np = Scene.objects.get(id=p.linked_scene.id)
 				thread.insert(0, np)
 				break
-		comments = Post.objects.filter(linked_post=id)
+
+		comments = sorted(Post.objects.filter(linked_post=id), key=get_post_like_count, reverse=True)
 		context = {
 			"username" : username,
 			"post" : mainpost,
@@ -37,16 +37,24 @@ def post_detail_view(request, username, id):
 		return render(request, "userposts/post_detail_view.html", context=context)
 	else:
 		raise Http404("Post could not be found.")
+	
+def get_post_like_count(post : Post):
+	return post.like_count
 
 def postlist(request):
+	# posts = sorted(Post.objects.exclude(title=None), key=get_post_popularity, reverse=True)
 	posts = Post.objects.order_by("-datetime").exclude(title=None)
 	context = {
 		"posts" : posts
 	}
 	return render(request, "userposts/post_list_view.html", context=context)
 
-def get_post_date(obj : Post):
-	return obj.datetime
+def get_post_date(post : Post):
+	return post.datetime
+
+def get_post_popularity(post : Post):
+	time_since = datetime.now(timezone.utc) - get_post_date(post)
+	return get_post_like_count(post) / (time_since.total_seconds() * 24*60*60) # like count / days since post was made
 
 # view for adding or removing likes
 def add_or_remove_like(request, username, id):
