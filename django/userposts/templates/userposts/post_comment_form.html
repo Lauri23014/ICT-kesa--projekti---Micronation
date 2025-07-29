@@ -1,5 +1,5 @@
 {% load static %}
-<button onClick="commentForm{% if scene %}Scene{% else %}Post{% endif %}{{ post.id }}()" class="post-comment-button">
+<button onClick="commentForm{% if scene %}Scene{% else %}Post{% endif %}{{ post.id }}()" class="post-comment-button hoverable-button">
 	{% if request.user.profile.profile_pic %}
 		<img class="profile-picture" src="/media/{{ request.user.profile.profile_pic }}" alt="Profile Picture">
 	{% else %}
@@ -12,8 +12,11 @@
 	function commentForm{% if scene %}Scene{% else %}Post{% endif %}{{ post.id }}() {
 		{% if request.user.is_authenticated %}
 			// post you are replying to
+			const postIndent = document.createElement("div");
+			postIndent.className = "mini-post-indent mini-post-indent-comment";
 			const replyingTo = document.createElement("div");
-			replyingTo.className = "post-block";
+			replyingTo.className = "post-block post-block-comment";
+			postIndent.appendChild(replyingTo);
 			// profile for post
 			{% if not scene %}
 				const replyingToProfile = document.createElement("div");
@@ -87,6 +90,7 @@
 			const replyForm = document.createElement("form");
 			replyForm.className = "post-comment-form";
 			replyForm.method = "POST";
+			replyForm.enctype = "multipart/form-data";
 			replyForm.action = "{% if scene %}{% url "comment_scene" id=post.id %}{% else %}{% url "comment_post" username=post.user.username id=post.id %}{% endif %}";
 			replyForm.id = "comment-form-{{ post.id }}";
 			const csrftoken = getCookie('csrftoken');
@@ -95,15 +99,33 @@
 			replyFormHiddenInput.name = "next";
 			replyFormHiddenInput.value = "{{ request.path }}";
 			replyForm.appendChild(replyFormHiddenInput);
+			const replyFormIndent = document.createElement("div");
+			replyFormIndent.className = "post-comment-form-indent";
+			replyForm.appendChild(replyFormIndent);
 			const replyFormTextInput = document.createElement("textarea");
 			replyFormTextInput.className = "post-comment-form-text-input";
 			replyFormTextInput.autocomplete = "off";
 			replyFormTextInput.name = "comment_text";
-			replyFormTextInput.maxlenght = "255";
+			replyFormTextInput.maxLength = "255";
 			replyFormTextInput.placeholder = "Type a reply!";
-			replyForm.appendChild(replyFormTextInput);
+			replyFormTextInput.required = true;
+			replyFormIndent.appendChild(replyFormTextInput);
+			const replyFormImageInputLabel = document.createElement("label");
+			replyFormImageInputLabel.for = "image_file";
+			replyFormIndent.appendChild(replyFormImageInputLabel);
+			const replyFormImageInput = document.createElement("input");
+			replyFormImageInput.type = "file";
+			replyFormImageInput.accept = "image/*";
+			replyFormImageInput.name = "image_file";
+			replyFormImageInput.style = "display: none;"
+			replyFormImageInputLabel.appendChild(replyFormImageInput);
+			replyFormImageInputLabel.className = "post-comment-form-image-label";
+			const replyFormImageInputImage = document.createElement("img");
+			replyFormImageInputImage.src = "{% static 'icons/image-attach.svg' %}";
+			replyFormImageInputImage.className = "post-icon hoverable-icon invert";
+			replyFormImageInputLabel.appendChild(replyFormImageInputImage);
 			const replyFormSubmitButton = document.createElement("button");
-			replyFormSubmitButton.className = "generic-comment-button";
+			replyFormSubmitButton.className = "generic-comment-button hoverable-button";
 			replyFormSubmitButton.type = "submit";
 			replyFormSubmitButton.innerHTML = "<p>Send reply</p>"
 			replyForm.appendChild(replyFormSubmitButton);
@@ -143,7 +165,7 @@
 
 			document.body.appendChild(overlay);
 			overlay.appendChild(box);
-			box.appendChild(replyingTo);
+			box.appendChild(postIndent);
 			box.appendChild(reply);
 		{% else %}
 			window.location.href = "{% url 'login' %}?next={{ request.path }}";

@@ -24,10 +24,13 @@
   --highlight-bg-color: #dddddd4d;
   --overlay-color: #c0c0c069;
   --bottom-text-color: #000000;
+  
+  --button-color: #c0c0c069;
+  --button-color-inverse: #3f3f3f69;
 }
 
 .invert {
-  filter: invert(90%);
+  filter: invert(100%);
 }
 
 body {
@@ -48,7 +51,7 @@ body {
   height: 4em;
   background: var(--main-bg-color);
   border-bottom: 4px solid var(--sub-bg-color);
-  z-index: 10000;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -250,8 +253,6 @@ body {
   animation: shake 0.4s ease-in-out;
 }
 
-
-
 #content {
   width: calc(90% + 2em);
   min-height: calc(100vh - 10em);
@@ -284,7 +285,7 @@ a:visited {
   color: var(--linkvisited-text-color);
 }
 
-textarea {
+input, textarea {
   font-family: 'Segoe UI', 'Arial', sans-serif;
   color: var(--main-text-color);
 }

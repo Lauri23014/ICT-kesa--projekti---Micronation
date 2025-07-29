@@ -24,6 +24,12 @@
 	}
 }
 
+.mini-post-indent-comment {
+	margin-top: 1.35em;
+	margin-bottom: 1em;
+	padding-bottom: 0.25em;
+}
+
 .post-block {
 	width: 34em;
 	max-width: 100%;
@@ -32,6 +38,10 @@
 
 	.post-content {
 		cursor: pointer;
+
+		h2 {
+			margin-top: 0.25em;
+		}
 
 		a {
 			text-decoration: underline;
@@ -48,10 +58,21 @@
 	}
 }
 
+.post-block-comment {
+	padding: 0.5em;
+
+	.post-content {
+		padding: 0 1em;
+	}
+
+	h2 {
+		font-size: 1.25em;
+	}
+}
+
 .post-title-block {
 	min-height: 7em;
-	margin: 1em;
-	cursor: pointer;
+	margin: 1em calc(0.5vw + 0.5em);
 	text-align: left;
 }
 
@@ -96,6 +117,7 @@
 
 .post-title-block-container {
 	width: 50%;
+	min-width: 22em;
 	margin: auto;
 }
 
@@ -104,10 +126,9 @@
 	flex-direction: row;
 }
 
-.title-block-v-flex {
-	display: flex;
-	flex-direction: column;
-	width: calc(100% - 12em);
+.title-block-text {
+	width: calc(100% - 10vw - 2em);
+	min-width: calc(100% - 9em);
 	min-height: 7em;
 	
 	h2, p, a {
@@ -151,6 +172,7 @@
 		height: 3em;
 		background-color: #00000000;
 		border: 0;
+		cursor: pointer;
 	}
 
 	p {
@@ -163,12 +185,15 @@
 
 .title-block-content-wrap {
 	display: flex;
+	width: calc(100% - 4em);
 	flex: 100%;
 	text-decoration: none;
 }
 
 .title-block-preview-img {
-	height: 7em;
+	height: 10vw;
+	max-height: 7em;
+	min-height: 5em;
 	aspect-ratio: 1;
 	object-fit: cover;
 	margin: 0 1em;
@@ -176,12 +201,7 @@
 }
 
 .post-comment-form-overlay {
-	@property --overlay {
-        syntax: "true | false";
-        inherits: true;
-        initial-value: "true";
-    }
-    display: flex;
+	display: flex;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -190,11 +210,18 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
+    z-index: 100;
     background-color: var(--overlay-color);
+
+	@property --overlay {
+        syntax: "true | false";
+        inherits: true;
+        initial-value: "true";
+    }
 
 	.post-segment {
 		margin: auto;
+		padding: 1.25em;
 	}
 }
 
@@ -204,7 +231,7 @@
 	width: 100%;
 	height: 3.5em;
 	border-radius: 1.75em;
-	background-color: var(--overlay-color);
+	background-color: var(--button-color);
 	border: 0;
 	margin: 0.5em 0;
 	padding: 0.25em;
@@ -217,12 +244,11 @@
 
 .generic-comment-button {
 	width: 8em;
-	height: 3em;
 	height: 3.5em;
 	border-radius: 1.75em;
-	background-color: var(--overlay-color);
+	background-color: var(--button-color);
 	border: 0;
-	margin: 0.5em auto;
+	margin: 2.25em auto 0;
 	padding: 0.25em;
 
 	p {
@@ -233,29 +259,48 @@
 .post-comment-form {
 	display: flex;
 	flex-direction: column;
+	margin: 1em;
+}
+
+.post-comment-form-indent {
+	display: flex;
+	flex-direction: column;
+	padding: 0.5em;
+	border-radius: 1em;
+	background-color: var(--overlay-color);
+}
+
+.post-form-title-input {
+	min-height: 3em;
+	margin: 0.25em 0.25em 1em;
+	text-align: left;
+	background-color: #00000000;
+	border: 0;
+	resize: none;
+	font-size: large;
+	field-sizing: normal;
 }
 
 .post-comment-form-text-input {
-	height: 10em;
+	min-height: 10em;
+	margin: 0.25em 0.25em 0;
 	text-align: left;
-	margin: 1em;
 	background-color: #00000000;
 	border: 0;
 	resize: none;
 }
 
-.post-comment-form-text-input:focus {
+.post-form-title-input:focus, .post-comment-form-text-input:focus {
 	outline: none !important;
+}
+
+.post-comment-form-image-label {
+	margin-left: 0.25em;
 }
 
 .post-content-info-div {
 	display: flex;
 	flex-direction: row;
-
-	img {
-		height: 2.5em;
-		margin:  0.25em auto;
-	}
 
 	button {
 		height: 3em;
@@ -290,3 +335,51 @@
 	flex-direction: row;
 }
 
+.post-icon {
+	height: 2.5em;
+	margin:  0.25em auto;
+}
+
+.post-list-h-div {
+	display: flex;
+	flex-direction: column;
+}
+
+.timeline-about {
+	width: 60%;
+	min-width: 22em;
+	margin: 0.5em auto 0;
+	padding: 0.25em 1em 1.5em;
+	text-align: center;
+	background-color: var(--main-bg-color);
+	border-radius: 1em;
+}
+
+.post-create-button {
+	display: flex;
+	margin: 0 auto;
+	
+	p {
+		width: 8em;
+		height: 1em;
+	}
+}
+
+.hoverable-icon, .hoverable-button {
+	transition: all 0.1s ease-in-out;
+}
+
+.hoverable-button:hover {
+	filter: brightness(110%);
+}
+
+.hoverable-icon:hover {
+	border-radius: 50%;
+	height: 2em;
+	padding: 0.25em;
+	background-color: var(--button-color);
+}
+
+.invert.hoverable-icon:hover {
+	background-color: var(--button-color-inverse);
+}
