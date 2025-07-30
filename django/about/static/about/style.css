@@ -1,7 +1,18 @@
+#about_container_main {
+    display: flex;
+    justify-content: center;
+}
+
+#about_container_sub {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+
 #flag_coat_container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
-    width: 50%;
 }

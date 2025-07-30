@@ -8,29 +8,33 @@
 {% endblock %}
 
 {% block content %}
-    <h1>About Us</h1>
-    <h2>Velwelland</h2>
-    <p>
-        Velwelland aka. the dominion of Velwelland is a micronation located in Riihimäki.
-        Velwelland is a place dedicated to creativity, storytelling and handcraft, where people are free to express themselves through craft and explore crafts of others.
-        <br><br>Below is the flag (to the left) and the coat of arms (to the right) of Velwelland.
-    </p>
-    <div id="flag_coat_container">
-        <img src="{% static "about/velwelland_flag.png" %}" alt="The flag of Velwelland" width="496" height="286">
-        <img src="{% static "about/velwelland_coatofarms.png" %}" alt="The coat of arms of Velwelland" width="286" height="286">
+    <div id="about_container_main">
+        <div id="about_container_sub">
+            <h1>About Us</h1>
+            <h2>Velwelland</h2>
+            <p>
+                Velwelland aka. the dominion of Velwelland is a micronation located in Riihimäki.
+                Velwelland is a place dedicated to creativity, storytelling and handcraft, where people are free to express themselves through craft and explore crafts of others.
+                <br><br>Below is the flag (to the left) and the coat of arms (to the right) of Velwelland.
+            </p>
+            <div id="flag_coat_container">
+                <img src="{% static "about/velwelland_flag.png" %}" alt="The flag of Velwelland" width="496" height="286">
+                <img src="{% static "about/velwelland_coatofarms.png" %}" alt="The coat of arms of Velwelland" width="286" height="286">
+            </div>
+            <br>
+            <h3>What is a micronation?</h3>
+            <p>
+                A microntation is a political entity that claims independency and sovereignty, but lacks legal recognition from world governments or international organizations.
+                While some micronations are seccessionist, most merely seek to just mimic sovereignty rather to seek out actual international recognition.
+            </p>
+            <a href="https://en.wikipedia.org/wiki/Micronation">(Source)<br></a>
+            <br>
+            <h2>Vel Well Crafter</h2>
+            <img src="{% static "about/background_doodles.png" %}" alt="various drawing of the Vel Well Crafter" width="640" height="501">
+            <p>
+                The Vel Well is the mascot of Velwelland. They are a black and white cat and the guiding figure of Velwelland. 
+                They are a symbol of storytelling, resiliance, humor and skill. Their motto: "Even paws are no obstacle to craft" reflects that in Velwelland everyone is free to craft.
+            </p>
+        </div>
     </div>
-    <br>
-    <h3>What is a micronation?</h3>
-    <p>
-        A microntation is a political entity that claims independency and sovereignty, but lacks legal recognition from world governments or international organizations.
-        While some micronations are seccessionist, most merely seek to just mimic sovereignty rather to seek out actual international recognition.<br>
-    </p>
-    <a href="https://en.wikipedia.org/wiki/Micronation">(Source)<br></a>
-    <br>
-    <h2>Vel Well Crafter</h2>
-    <img src="{% static "about/background_doodles.png" %}" alt="various drawing of the Vel Well Crafter" width="640" height="501">
-    <p>
-        The Vel Well is the mascot of Velwelland. They are a black and white cat and the guiding figure of Velwelland. 
-        They are a symbol of storytelling, resiliance, humor and skill. Their motto: "Even paws are no obstacle to craft" reflects that in Velwelland everyone is free to craft.
-    </p>
 {% endblock %}
