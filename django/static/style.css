@@ -13,6 +13,11 @@
   --profile-modal-hover:  #6A564E;
   --border-form-color: #91807a;
   --border-form-color-active: #ebf5f7;
+  --navlink-hover: #7f4c31;
+  --site-footer-color:#f0e6d2;
+  --site-footer-bg:rgba(20, 15, 10, 0.4);
+  --site-footer-border-top: rgba(255, 255, 255, 0.1);
+
 
   --main-text-color: #f0f0f0;
   --link-text-color: #6681da;
@@ -100,7 +105,7 @@ body {
 #navbar-toggle span {
   width: 100%;
   height: 3px;
-  background-color: #f0e6d2;
+  background-color: var(--site-footer-color);
   border-radius: 2px;
   transition: all 0.3s linear;
   position: relative;
@@ -131,7 +136,7 @@ body {
  text-decoration: none;
 
   color: var(--main-text-color);
-  text-shadow: 1px 1px #000;
+  
 }
 
 #navlinks {
@@ -167,8 +172,8 @@ body {
 }
 
 #navlinks ul li a:hover {
-  background-color: #7f4c31;
-  color: #fff;
+  background-color: var(--navlink-hover);
+  color: var(--highlight-text-color);
   box-shadow: none;
 }
 
@@ -204,8 +209,8 @@ body {
 }
 
 .dropbtn:hover {
-  background-color: #7f4c31;
-  color: #fff;
+  background-color: var(--navlink-hover);
+  color: var(--highlight-text-color);
 }
 
 .dropdown-content {
@@ -225,17 +230,24 @@ body {
   padding: 0.6em 1em;
   font-size: 0.95em;
   text-decoration: none;
-  color: #f0e6d2;
+  color: var(--site-footer-color);
   transition: background 0.2s ease;
 }
 
 .dropdown-content a:hover {
-  background-color: #7f4c31;
-  color: white;
+  background-color: var(--navlink-hover);
+  color: var(--highlight-text-color);
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.dropdown-arrow {
+  font-size: 0.6em;
+   margin-left: 0.2em;
+  vertical-align: middle;
+ 
 }
 
 .paw {
@@ -310,19 +322,19 @@ a:visited {
 }
 
 input, textarea, button {
-  font-family: 'Segoe UI', 'Arial', sans-serif;
+ 
   color: var(--main-text-color);
 }
 
 #site-footer {
-  background-color: rgba(20, 15, 10, 0.4); 
-  color: #f0e6d2;
-  font-family: 'Lora', serif;
+  background-color: var(--site-footer-bg); 
+  color: var(--site-footer-color);
+ 
   font-size: 0.9em;
   padding: 1em 0;
   text-align: center;
   backdrop-filter: blur(2px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--site-footer-border-top);
 }
 
 .footer-row {
@@ -340,7 +352,7 @@ input, textarea, button {
 }
 
 .footer-row a:hover {
-  color: #ffffff;
+  color: var(--highlight-text-color);
   text-decoration: underline;
 }
 

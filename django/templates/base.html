@@ -28,7 +28,9 @@
         <li><a href="{% url 'timeline' %}">Noticeboard</a></li>
         {% if user.is_authenticated %}
         <li class="dropdown">
-          <a href="{% url 'profile_page' username=user.get_username %}" class="dropbtn">Profile ▼</a>
+         <a href="{% url 'profile_page' username=user.get_username %}" class="dropbtn">
+        Profile <span class="dropdown-arrow">▼</span>
+        </a>
           <div class="dropdown-content">
             <a href="{% url 'edit_profile' username=user.get_username %}">Edit Profile</a>
             <a href="{% url 'edit' %}">Settings</a>
