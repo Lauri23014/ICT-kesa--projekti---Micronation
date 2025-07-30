@@ -301,6 +301,10 @@ h1, h2, h3, p, ul, li, form {
   hyphens: auto;
 }
 
+a {
+  color: var(--link-text-color);
+}
+
 a:visited {
   color: var(--linkvisited-text-color);
 }
