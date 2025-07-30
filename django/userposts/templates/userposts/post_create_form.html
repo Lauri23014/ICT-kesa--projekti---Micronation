@@ -141,4 +141,8 @@
 			}
 		}
 	</script>
+{% else %}
+	<button onClick="window.location.href='{% url 'login' %}'" class="generic-comment-button post-create-button button-large hoverable-button">
+		<span>Login</span>
+	</button>
 {% endif %}
