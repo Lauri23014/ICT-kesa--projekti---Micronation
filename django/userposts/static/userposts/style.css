@@ -243,17 +243,8 @@
 }
 
 .generic-comment-button {
-	width: 8em;
-	height: 3.5em;
-	border-radius: 1.75em;
-	background-color: var(--button-color);
-	border: 0;
+	min-width: fit-content;
 	margin: 2.25em auto 0;
-	padding: 0.25em;
-
-	p {
-		margin: auto;
-	}
 }
 
 .post-comment-form {
@@ -365,3 +356,19 @@
 	}
 }
 
+.post-form {
+	position: relative;
+	min-width: 50vw;
+	padding: 10vh 0;
+
+	.post-segment {
+		width: fit-content;
+	}
+}
+
+.post-form-scroll {
+	height: 100vh;
+	margin: auto;
+	overflow-y: scroll;
+	scrollbar-width: none;
+}

@@ -125,9 +125,9 @@
 			replyFormImageInputImage.className = "post-icon hoverable-icon invert";
 			replyFormImageInputLabel.appendChild(replyFormImageInputImage);
 			const replyFormSubmitButton = document.createElement("button");
-			replyFormSubmitButton.className = "generic-comment-button hoverable-button";
+			replyFormSubmitButton.className = "generic-comment-button button-large hoverable-button";
 			replyFormSubmitButton.type = "submit";
-			replyFormSubmitButton.innerHTML = "<p>Send reply</p>"
+			replyFormSubmitButton.innerHTML = "<span>Send reply</span>"
 			replyForm.appendChild(replyFormSubmitButton);
 			replyForm.onsubmit = function(e) {
 				e.preventDefault();
@@ -163,8 +163,15 @@
 			const box = document.createElement("div");
 			box.className = "post-segment";
 
+			const scroll = document.createElement("div");
+			scroll.className = "post-form-scroll";
+			const scrollBox = document.createElement("div");
+			scrollBox.className = "post-form";
+
 			document.body.appendChild(overlay);
-			overlay.appendChild(box);
+			overlay.appendChild(scroll);
+			scroll.appendChild(scrollBox);
+			scrollBox.appendChild(box)
 			box.appendChild(postIndent);
 			box.appendChild(reply);
 		{% else %}

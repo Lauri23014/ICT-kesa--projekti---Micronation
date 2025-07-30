@@ -1,8 +1,8 @@
 {% load static %}
 
 {% if request.user.is_authenticated %}
-	<button onClick="postForm()" class="post-create-button generic-comment-button hoverable-button">
-		<p>Create Post</p>
+	<button onClick="postForm()" class="generic-comment-button post-create-button button-large hoverable-button">
+		<span>Create Post</span>
 	</button>
 
 	<script defer>
@@ -80,9 +80,9 @@
 				postFormImageInputImage.className = "post-icon hoverable-icon invert";
 				postFormImageInputLabel.appendChild(postFormImageInputImage);
 				const postFormSubmitButton = document.createElement("button");
-				postFormSubmitButton.className = "generic-comment-button hoverable-button";
+				postFormSubmitButton.className = "generic-comment-button button-large hoverable-button";
 				postFormSubmitButton.type = "submit";
-				postFormSubmitButton.innerHTML = "<p>Create post</p>"
+				postFormSubmitButton.innerHTML = "<span>Create post</span>"
 				postForm.appendChild(postFormSubmitButton);
 				postForm.onsubmit = function(e) {
 					e.preventDefault();
@@ -118,8 +118,15 @@
 				const box = document.createElement("div");
 				box.className = "post-segment";
 
+				const scroll = document.createElement("div");
+				scroll.className = "post-form-scroll";
+				const scrollBox = document.createElement("div");
+				scrollBox.className = "post-form";
+
 				document.body.appendChild(overlay);
-				overlay.appendChild(box);
+				overlay.appendChild(scroll);
+				scroll.appendChild(scrollBox);
+				scrollBox.appendChild(box)
 				box.appendChild(post);
 			{% else %}
 				window.location.href = "{% url 'login' %}?next={{ request.path }}";
