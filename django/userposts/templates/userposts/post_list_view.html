@@ -10,7 +10,9 @@
 		<div class="timeline-about">
 			<h2>Welcome to the noticeboard!</h2>
 			<p>At the noticeboard, you and your fellow crafters and artists can make posts showing off your works, or talk about events!</p>
-			{% include "userposts/post_create_form.html" %}
+			{% if posts|length > 0 %}
+				{% include "userposts/post_create_form.html" %}
+			{% endif %}
 		</div>
 		<div class="post-title-block-container">
 			{% for post in posts %}
@@ -18,6 +20,9 @@
 					{% include "userposts/post_title_block.html" with post=post %}
 				</div>
 			{% endfor %}
+			{% if posts|length == 0 %}
+				{% include "userposts/no_posts_timeline.html" %}
+			{% endif %}
 		</div>
 	</div>
 {% endblock content %}
