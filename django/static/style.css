@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 :root {
-  --profile-bg:#463934;
-  --profile-card-bg: #463934;
-  --profile-accent: #6A564E;
+  --profile-accent: #69534b;
   --profile-btn-bg: #aab2b3;
   --profile-btn-text: #313a42;
   --profile-btn-hover-bg: #cbd5e0;
@@ -18,14 +16,14 @@
   --site-footer-bg:rgba(20, 15, 10, 0.4);
   --site-footer-border-top: rgba(255, 255, 255, 0.1);
 
-
   --main-text-color: #f0f0f0;
   --link-text-color: #6681da;
   --linkvisited-text-color: #a266da;
   --sub-text-color: #c0c0c0;
   --highlight-text-color: #ffffff;
-  --main-bg-color: #331304;
-  --sub-bg-color: #1D0A02;
+  --main-bg-color: #473226;
+  --secondary-bg-color: #3b2921;
+  --sub-bg-color: #221711;
   --highlight-bg-color: #dddddd4d;
   --overlay-color: #c0c0c069;
   --bottom-text-color: #000000;

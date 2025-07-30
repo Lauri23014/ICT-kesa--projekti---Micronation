@@ -6,7 +6,7 @@ textarea.form-control,
 select.form-control {
   border: none;  
   /* border-radius: 0.6rem !important; */
-  background: var(--profile-bio-bg) !important;
+  background: var(--main-bg-color) !important;
   color: var(--main-text-color) !important;
   box-shadow: none !important;
 }
@@ -36,7 +36,7 @@ select.form-control:focus {
   padding: 3rem 0;
 }
 .edit-profile-card {
-  background: var(--profile-card-bg);
+  background: var(--secondary-bg-color);
   border-radius: 1.5rem;
   box-shadow: 0 8px 32px rgba(30,30,40,0.18);
   max-width: 520px;
@@ -73,12 +73,12 @@ select.form-control:focus {
   color: var(--profile-segment-text) !important;
 }
 input, textarea, select {
-  background: var(--profile-bio-bg) !important;
+  background: var(--main-bg-color) !important;
   /* border: 1px solid var(--profile-accent) !important; */
   border-radius: 0.6rem !important;
 }
 input:focus, textarea:focus, select:focus {
-  background: var(--profile-card-bg) !important;
+  background: var(--secondary-bg-color) !important;
   border-color: var(--profile-btn-bg) !important;
   box-shadow: 0 0 0 2px var(--profile-btn-bg);
 }
@@ -137,7 +137,7 @@ textarea[name="bio"] {
 }
 .modal-content {
   border-radius: 1.2rem;
-  background: var(--profile-card-bg) !important;
+  background: var(--secondary-bg-color) !important;
   color: var(--main-text-color) !important;
 }
 .modal-header, .modal-footer {
@@ -167,7 +167,7 @@ textarea[name="bio"] {
   padding: 3rem 0;
 }
 .login-card {
-  background: var(--profile-card-bg);
+  background: var(--secondary-bg-color);
   border-radius: 1.5rem;
   box-shadow: 0 8px 32px rgba(30,30,40,0.18);
   max-width: 420px;
@@ -242,7 +242,7 @@ textarea[name="bio"] {
   padding: 3rem 0;
 }
 .register-card {
-  background: var(--profile-card-bg);
+  background: var(--secondary-bg-color);
   border-radius: 1.5rem;
   box-shadow: 0 8px 32px rgba(30,30,40,0.18);
   max-width: 420px;
@@ -276,7 +276,7 @@ textarea[name="bio"] {
 }
 
 input.form-control, textarea.form-control, select.form-control {
-  background: var(--profile-bio-bg) !important;
+  background: var(--main-bg-color) !important;
   border-radius: 0.6rem !important;
   padding: 0.6rem 1rem;
   height: 2.5rem !important;
@@ -284,6 +284,6 @@ input.form-control, textarea.form-control, select.form-control {
   line-height: 1.5 !important;
 }
 input.form-control:focus, textarea.form-control:focus, select.form-control:focus {
-  background: var(--profile-card-bg) !important;
+  background: var(--secondary-bg-color) !important;
   box-shadow: 0 0 0 2px var(--profile-btn-bg);
 }

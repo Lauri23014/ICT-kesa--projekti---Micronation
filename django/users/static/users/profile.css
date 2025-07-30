@@ -31,7 +31,7 @@
 
 .profile-card {
   position: relative;
-  background-color: var(--profile-card-bg);
+  background-color: var(--secondary-bg-color);
   max-width: 34em;
   width: calc(90% - 1em);
   height: fit-content;
@@ -48,6 +48,7 @@
   margin-bottom: 0.4rem;
   font-size: 0.85rem;
   color: var(--main-text-color);
+  border: solid 2px var(--profile-accent);
 }
 
 .title-block-like-div, .title-block-comment-div {
@@ -72,7 +73,7 @@
   top: -25px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--profile-card-bg);
+  background-color: var(--secondary-bg-color);
   border-radius: 50%;
   padding: 13px;
 }
@@ -172,7 +173,7 @@
 }
 
 .about-bio-box {
-  background-color: var(--profile-bio-bg);
+  background-color: var(--main-bg-color);
   padding: 1rem;
   border-radius: 0 0 1rem 1rem;
   color: var(--main-text-color);
@@ -231,7 +232,7 @@
 #bg-modal input[type="file"] {
   margin: 1.2rem 0;
   color: var(--main-text-color);
-  background: var(--profile-card-bg);
+  background: var(--secondary-bg-color);
   border: 1px solid var(--profile-accent);
   border-radius: 0.5rem;
   padding: 0.5rem;
